@@ -1,0 +1,15 @@
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.csproj.AssemblyReference.cache
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.AssemblyInfoInputs.cache
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.AssemblyInfo.cs
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.csproj.CoreCompileInputs.cache
+D:\Afallite\AffalitePL\AffaliteBL\bin\Debug\net8.0\AffaliteBL.deps.json
+D:\Afallite\AffalitePL\AffaliteBL\bin\Debug\net8.0\AffaliteBL.dll
+D:\Afallite\AffalitePL\AffaliteBL\bin\Debug\net8.0\AffaliteBL.pdb
+D:\Afallite\AffalitePL\AffaliteBL\bin\Debug\net8.0\AffaliteDAL.dll
+D:\Afallite\AffalitePL\AffaliteBL\bin\Debug\net8.0\AffaliteDAL.pdb
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.csproj.Up2Date
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.dll
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\refint\AffaliteBL.dll
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.pdb
+D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\ref\AffaliteBL.dll
