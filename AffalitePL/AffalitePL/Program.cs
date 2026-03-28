@@ -1,5 +1,9 @@
 
+using AffaliteBL.IServices;
+using AffaliteBL.Services;
 using AffaliteDAL.Data;
+using AffaliteDAL.IRepo;
+using AffaliteDAL.Repo;
 using Microsoft.EntityFrameworkCore;
 
 namespace AffalitePL
@@ -14,6 +18,12 @@ namespace AffalitePL
             builder.Services.AddDbContext<AffaliteDBContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            builder.Services.AddScoped<IAffiliateRepo, AffiliateRepo>();
+            builder.Services.AddScoped<IAffiliateService, AffiliateService>();
+
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

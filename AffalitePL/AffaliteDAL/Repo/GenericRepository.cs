@@ -1,9 +1,9 @@
 ﻿using AffaliteDAL.Data;
-using AffaliteDAL.IRepo;
 using Microsoft.EntityFrameworkCore;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace AffaliteDAL.Repo
+namespace AffaliteDAL.IRepo
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
@@ -16,19 +16,19 @@ namespace AffaliteDAL.Repo
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public IEnumerable<T> GetAll()
         {
-            return await _dbSet.ToListAsync();
+            return _dbSet.ToList();
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public T? GetById(int id)
         {
-            return await _dbSet.FindAsync(id);
+            return _dbSet.Find(id);
         }
 
-        public async Task AddAsync(T entity)
+        public void Add(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            _dbSet.Add(entity);
         }
 
         public void Update(T entity)
@@ -41,9 +41,9 @@ namespace AffaliteDAL.Repo
             _dbSet.Remove(entity);
         }
 
-        public async Task SaveChangesAsync()
+        public void SaveChanges()
         {
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

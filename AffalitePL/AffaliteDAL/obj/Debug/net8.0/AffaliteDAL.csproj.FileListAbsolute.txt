@@ -12,3 +12,4 @@ D:\Afallite\AffalitePL\AffaliteDAL\obj\Debug\net8.0\refint\AffaliteDAL.dll
 D:\Afallite\AffalitePL\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.pdb
 D:\Afallite\AffalitePL\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.genruntimeconfig.cache
 D:\Afallite\AffalitePL\AffaliteDAL\obj\Debug\net8.0\ref\AffaliteDAL.dll
+D:\Afallite\AffalitePL\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.sourcelink.json

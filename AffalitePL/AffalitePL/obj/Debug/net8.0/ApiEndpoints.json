@@ -1,0 +1,129 @@
+[
+  {
+    "ContainingType": "AffalitePL.Controllers.AffiliateController",
+    "Method": "GetAllAffiliates",
+    "RelativePath": "api/Affiliate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.AffiliateController",
+    "Method": "CreateAffiliate",
+    "RelativePath": "api/Affiliate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createAffiliateDTO",
+        "Type": "AffaliteBL.DTOs.AffiliateDTOs.CreateAffiliateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.AffiliateController",
+    "Method": "GetAffiliateById",
+    "RelativePath": "api/Affiliate/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.AffiliateController",
+    "Method": "UpdateAffiliate",
+    "RelativePath": "api/Affiliate/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateAffiliateDTO",
+        "Type": "AffaliteBL.DTOs.AffiliateDTOs.UpdateAffiliateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.AffiliateController",
+    "Method": "DeleteAffiliate",
+    "RelativePath": "api/Affiliate/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.AffiliateController",
+    "Method": "GetAffiliateBalance",
+    "RelativePath": "api/Affiliate/{id}/balance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.AffiliateController",
+    "Method": "GetAffiliateCommissions",
+    "RelativePath": "api/Affiliate/{id}/commissions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.AffiliateController",
+    "Method": "GetAffiliateOrders",
+    "RelativePath": "api/Affiliate/{id}/orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

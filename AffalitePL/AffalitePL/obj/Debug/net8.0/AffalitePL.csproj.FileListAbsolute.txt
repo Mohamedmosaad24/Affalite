@@ -141,3 +141,7 @@ D:\Afallite\AffalitePL\AffalitePL\obj\Debug\net8.0\refint\AffalitePL.dll
 D:\Afallite\AffalitePL\AffalitePL\obj\Debug\net8.0\AffalitePL.pdb
 D:\Afallite\AffalitePL\AffalitePL\obj\Debug\net8.0\AffalitePL.genruntimeconfig.cache
 D:\Afallite\AffalitePL\AffalitePL\obj\Debug\net8.0\ref\AffalitePL.dll
+D:\Afallite\AffalitePL\AffalitePL\bin\Debug\net8.0\AutoMapper.dll
+D:\Afallite\AffalitePL\AffalitePL\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Afallite\AffalitePL\AffalitePL\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Afallite\AffalitePL\AffalitePL\obj\Debug\net8.0\AffalitePL.sourcelink.json
