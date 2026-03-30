@@ -45,12 +45,26 @@ namespace AffaliteAPI.Controllers
 
         // POST /api/products
         [HttpPost]
-        public IActionResult Create([FromBody] CreateProductDto dto)
+        public async Task<IActionResult> Create([FromForm] CreateProductDto dto)
         {
+            //    الصورة
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.Image.FileName);
+
+            var filePath = Path.Combine("wwwroot/images/products/", fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await dto.Image.CopyToAsync(stream);
+            }
+
             var product = _mapper.Map<Product>(dto);
+            product.ImageUrl =  fileName;
+
             _service.Create(product);
-            return Ok();
+
+            return Ok(product);
         }
+
 
         // PUT /api/products/{id}
         [HttpPut("{id}")]

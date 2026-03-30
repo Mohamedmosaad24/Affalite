@@ -1,4 +1,6 @@
-﻿namespace AffaliteBLL.DTOs.Products
+﻿using Microsoft.AspNetCore.Http;
+
+namespace AffaliteBLL.DTOs.Products
 {
     public class CreateProductDto
     {
@@ -7,7 +9,8 @@
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public int Stock { get; set; }
-        public string ImageUrl { get; set; } = string.Empty;
+        public IFormFile Image { get; set; } = null!;
+
         public int MerchantId { get; set; }
         public decimal PlatformCommissionPct { get; set; }
     }
