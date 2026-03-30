@@ -14,3 +14,6 @@ D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\refint\AffaliteBL.dll
 D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.pdb
 D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\ref\AffaliteBL.dll
 D:\Afallite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.sourcelink.json
+C:\Users\islam\source\repos\Affalite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.dll
+C:\Users\islam\source\repos\Affalite\AffalitePL\AffaliteBL\obj\Debug\net8.0\refint\AffaliteBL.dll
+C:\Users\islam\source\repos\Affalite\AffalitePL\AffaliteBL\obj\Debug\net8.0\AffaliteBL.pdb

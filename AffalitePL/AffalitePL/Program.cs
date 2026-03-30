@@ -19,6 +19,12 @@ namespace AffalitePL
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+         
+
+            // Register Services islam
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<ICommissionService, CommissionService>();
+            /******************************************************************************/
 
             builder.Services.AddScoped<IAffiliateRepo, AffiliateRepo>();
             builder.Services.AddScoped<IAffiliateService, AffiliateService>();
