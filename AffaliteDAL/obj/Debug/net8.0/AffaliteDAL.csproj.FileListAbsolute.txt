@@ -28,3 +28,18 @@ D:\Afallite\AffaliteDAL\obj\Debug\net8.0\refint\AffaliteDAL.dll
 D:\Afallite\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.pdb
 D:\Afallite\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.genruntimeconfig.cache
 D:\Afallite\AffaliteDAL\obj\Debug\net8.0\ref\AffaliteDAL.dll
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\bin\Debug\net8.0\AffaliteDAL.deps.json
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\bin\Debug\net8.0\AffaliteDAL.runtimeconfig.json
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\bin\Debug\net8.0\AffaliteDAL.dll
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\bin\Debug\net8.0\AffaliteDAL.pdb
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.csproj.AssemblyReference.cache
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.AssemblyInfoInputs.cache
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.AssemblyInfo.cs
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.csproj.CoreCompileInputs.cache
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.sourcelink.json
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.dll
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\refint\AffaliteDAL.dll
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.pdb
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.genruntimeconfig.cache
+C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteDAL\obj\Debug\net8.0\ref\AffaliteDAL.dll

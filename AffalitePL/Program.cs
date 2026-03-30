@@ -4,6 +4,7 @@ using AffaliteBL.Services;
 using AffaliteDAL.Data;
 using AffaliteDAL.IRepo;
 using AffaliteDAL.Repo;
+using Mattger_BL.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace AffalitePL
@@ -22,6 +23,13 @@ namespace AffalitePL
 
             builder.Services.AddScoped<IAffiliateRepo, AffiliateRepo>();
             builder.Services.AddScoped<IAffiliateService, AffiliateService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+
+            //app settings
+            builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
+
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddControllers();
@@ -38,6 +46,7 @@ namespace AffalitePL
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 

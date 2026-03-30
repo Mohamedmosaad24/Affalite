@@ -4391,23 +4391,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Esraa\\.nuget\\packages\\": {},
+    "C:\\Users\\Dubai Store\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Afallite\\AffalitePL\\AffalitePL.csproj",
+      "projectUniqueName": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffalitePL\\AffalitePL.csproj",
       "projectName": "AffalitePL",
-      "projectPath": "D:\\Afallite\\AffalitePL\\AffalitePL.csproj",
-      "packagesPath": "C:\\Users\\Esraa\\.nuget\\packages\\",
-      "outputPath": "D:\\Afallite\\AffalitePL\\obj\\",
+      "projectPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffalitePL\\AffalitePL.csproj",
+      "packagesPath": "C:\\Users\\Dubai Store\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffalitePL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Esraa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dubai Store\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4416,15 +4416,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Afallite\\AffaliteBL\\AffaliteBL.csproj": {
-              "projectPath": "D:\\Afallite\\AffaliteBL\\AffaliteBL.csproj"
+            "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteBL\\AffaliteBL.csproj": {
+              "projectPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteBL\\AffaliteBL.csproj"
             }
           }
         }
@@ -4479,7 +4478,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

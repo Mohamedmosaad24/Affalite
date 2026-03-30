@@ -1,13 +1,16 @@
-﻿using AffaliteBL.DTOs.AffiliateDTOs;
-using AffaliteBL.DTOs.CommissionDTOs;
-using AffaliteBL.DTOs.OrderDTOs;
-using AffaliteDAL.Entities;
-using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AffaliteBL.DTOs.AffiliateDTOs;
+using AffaliteBL.DTOs.CommissionDTOs;
+using AffaliteBL.DTOs.OrderDTOs;
+using AffaliteBL.Helpers;
+using AffaliteBLL.DTOs.Products;
+using AffaliteDAL.Entities;
+using AffaliteDAL.Entities.Enums;
+using AutoMapper;
 
 namespace AffaliteBL.Mapping
 {
@@ -23,7 +26,19 @@ namespace AffaliteBL.Mapping
 
             CreateMap<Order, OrderReadDTO>().ReverseMap();
             CreateMap<Commission, CommissionReadDTO>().ReverseMap();
-            
+
+            //Product
+            CreateMap<Product, ProductDto>()
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty))
+                //.ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant != null ? src.Merchant.Name : string.Empty))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+                .ForMember(dest => dest.ImageUrl,opt => opt.MapFrom<ImageUrlResolver>());
+
+            CreateMap<CreateProductDto, Product>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => ProductStatus.Active)) // Default status on create
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+
+            CreateMap<UpdateProductDto, Product>();
 
 
 

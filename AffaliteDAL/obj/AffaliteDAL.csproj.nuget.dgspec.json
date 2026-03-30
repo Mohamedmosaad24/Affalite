@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Afallite\\AffaliteDAL\\AffaliteDAL.csproj": {}
+    "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\AffaliteDAL.csproj": {}
   },
   "projects": {
-    "D:\\Afallite\\AffaliteDAL\\AffaliteDAL.csproj": {
+    "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\AffaliteDAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Afallite\\AffaliteDAL\\AffaliteDAL.csproj",
+        "projectUniqueName": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\AffaliteDAL.csproj",
         "projectName": "AffaliteDAL",
-        "projectPath": "D:\\Afallite\\AffaliteDAL\\AffaliteDAL.csproj",
-        "packagesPath": "C:\\Users\\Esraa\\.nuget\\packages\\",
-        "outputPath": "D:\\Afallite\\AffaliteDAL\\obj\\",
+        "projectPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\AffaliteDAL.csproj",
+        "packagesPath": "C:\\Users\\Dubai Store\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Esraa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dubai Store\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -82,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
