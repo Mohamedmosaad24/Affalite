@@ -1,4 +1,6 @@
-﻿using AffaliteDAL.Entities;
+﻿using AffaliteDAL.Data.Configurations;
+using AffaliteDAL.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AffaliteDAL.Data
 {
-    public class AffaliteDBContext : DbContext
+    public class AffaliteDBContext : IdentityDbContext<AppUser>
     {
         public AffaliteDBContext(DbContextOptions<AffaliteDBContext> options) : base(options)
         {
@@ -124,6 +126,29 @@ namespace AffaliteDAL.Data
                 .WithMany(p => p.CartItems)
                 .HasForeignKey(ci => ci.ProductId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
+            modelBuilder.Entity<AppUser>()
+                .OwnsMany(u => u.RefreshTokens, b =>
+                {
+                    b.WithOwner().HasForeignKey("AppUserId");
+                    b.Property<int>("Id");
+                    b.HasKey("Id");
+                    b.Property(p => p.Token).IsRequired();
+                });
+
+            modelBuilder.Entity<Merchant>()
+                .HasOne(m => m.AppUser)
+                .WithOne(u => u.MerchantProfile)
+                .HasForeignKey<Merchant>(m => m.AppUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Affiliate>()
+                .HasOne(a => a.AppUser)
+                .WithOne(u => u.AffiliateProfile)
+                .HasForeignKey<Affiliate>(a => a.AppUserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

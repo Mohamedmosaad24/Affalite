@@ -58,3 +58,18 @@ C:\Users\islam\source\repos\Affalite\AffaliteDAL\obj\Debug\net8.0\refint\Affalit
 C:\Users\islam\source\repos\Affalite\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.pdb
 C:\Users\islam\source\repos\Affalite\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.genruntimeconfig.cache
 C:\Users\islam\source\repos\Affalite\AffaliteDAL\obj\Debug\net8.0\ref\AffaliteDAL.dll
+D:\Project API ITI\AffaliteDAL\bin\Debug\net8.0\AffaliteDAL.deps.json
+D:\Project API ITI\AffaliteDAL\bin\Debug\net8.0\AffaliteDAL.runtimeconfig.json
+D:\Project API ITI\AffaliteDAL\bin\Debug\net8.0\AffaliteDAL.dll
+D:\Project API ITI\AffaliteDAL\bin\Debug\net8.0\AffaliteDAL.pdb
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.csproj.AssemblyReference.cache
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.AssemblyInfoInputs.cache
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.AssemblyInfo.cs
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.csproj.CoreCompileInputs.cache
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.sourcelink.json
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.dll
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\refint\AffaliteDAL.dll
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.pdb
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\AffaliteDAL.genruntimeconfig.cache
+D:\Project API ITI\AffaliteDAL\obj\Debug\net8.0\ref\AffaliteDAL.dll

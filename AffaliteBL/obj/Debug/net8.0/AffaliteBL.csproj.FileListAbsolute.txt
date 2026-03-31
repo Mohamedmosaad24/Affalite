@@ -62,3 +62,19 @@ C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.dll
 C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\refint\AffaliteBL.dll
 C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.pdb
 C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\ref\AffaliteBL.dll
+D:\Project API ITI\AffaliteBL\bin\Debug\net8.0\AffaliteBL.deps.json
+D:\Project API ITI\AffaliteBL\bin\Debug\net8.0\AffaliteBL.dll
+D:\Project API ITI\AffaliteBL\bin\Debug\net8.0\AffaliteBL.pdb
+D:\Project API ITI\AffaliteBL\bin\Debug\net8.0\AffaliteDAL.dll
+D:\Project API ITI\AffaliteBL\bin\Debug\net8.0\AffaliteDAL.pdb
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\AffaliteBL.csproj.AssemblyReference.cache
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\AffaliteBL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\AffaliteBL.AssemblyInfoInputs.cache
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\AffaliteBL.AssemblyInfo.cs
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\AffaliteBL.csproj.CoreCompileInputs.cache
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\AffaliteBL.sourcelink.json
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\AffaliteBL.csproj.Up2Date
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\AffaliteBL.dll
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\refint\AffaliteBL.dll
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\AffaliteBL.pdb
+D:\Project API ITI\AffaliteBL\obj\Debug\net8.0\ref\AffaliteBL.dll
