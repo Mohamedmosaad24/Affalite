@@ -64,3 +64,9 @@ obj/
 # VSCode workspace settings
 .vscode/
 
+bin/
+obj/
+*.user
+*.suo
+*.cache
+.vs/
