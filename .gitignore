@@ -1,1 +1,6 @@
 .vs/
+bin/
+obj/
+/AffaliteBL/obj/Debug/net8.0/AffaliteBL.AssemblyInfo.cs
+/AffaliteDAL/obj/Debug/net8.0/AffaliteDAL.AssemblyInfo.cs
+/AffalitePL/obj/Debug/net8.0/AffalitePL.AssemblyInfo.cs
