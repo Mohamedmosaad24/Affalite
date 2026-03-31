@@ -128,6 +128,69 @@
   },
   {
     "ContainingType": "AffalitePL.Controllers.CommissionsController",
+    "Method": "GetAll",
+    "RelativePath": "api/Commissions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.CommissionsController",
+    "Method": "GetById",
+    "RelativePath": "api/Commissions/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.CommissionsController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/Commissions/{id}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.CommissionsController",
+    "Method": "GetByAffiliate",
+    "RelativePath": "api/Commissions/affiliate/{affiliateId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "affiliateId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.CommissionsController",
     "Method": "GetByOrder",
     "RelativePath": "api/Commissions/order/{orderId}",
     "HttpMethod": "GET",
@@ -160,6 +223,16 @@
   },
   {
     "ContainingType": "AffalitePL.Controllers.OrdersController",
+    "Method": "GetAll",
+    "RelativePath": "api/Orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.OrdersController",
     "Method": "GetById",
     "RelativePath": "api/Orders/{id}",
     "HttpMethod": "GET",
@@ -168,6 +241,59 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.OrdersController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/Orders/{id}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.OrdersController",
+    "Method": "GetByAffiliate",
+    "RelativePath": "api/Orders/affiliate/{affiliateId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "affiliateId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AffalitePL.Controllers.OrdersController",
+    "Method": "GetByMerchant",
+    "RelativePath": "api/Orders/merchant/{merchantId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "merchantId",
         "Type": "System.Int32",
         "IsRequired": true
       }
