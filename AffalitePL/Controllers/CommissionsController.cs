@@ -1,6 +1,9 @@
-﻿using AffaliteDAL.Entities;
+﻿using AffaliteBL.DTOs.CommissionDTOs;
+using AffaliteBL.IServices;
+using AffaliteDAL.Entities;
+using AffaliteDAL.Entities.Enums;
 using AffaliteDAL.IRepo;
-using Microsoft.AspNetCore.Http;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AffalitePL.Controllers
@@ -9,12 +12,63 @@ namespace AffalitePL.Controllers
     [ApiController]
     public class CommissionsController : ControllerBase
     {
+        private readonly ICommissionService _commissionService;
+        private readonly IGenericRepository<Commission> _commissionRepo;
+        private readonly IMapper _mapper;
 
-        private readonly IGenericRepository<Commission> _commRepo;
-        public CommissionsController(IGenericRepository<Commission> commRepo) => _commRepo = commRepo;
+
+        public CommissionsController(
+            ICommissionService commissionService,
+            IGenericRepository<Commission> commissionRepo,
+            IMapper mapper)
+        {
+            _commissionService = commissionService;
+            _commissionRepo = commissionRepo;
+            _mapper = mapper;
+        }
+
+   
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var commissions = _commissionRepo.GetAll();
+            var result = _mapper.Map<IEnumerable<CommissionReadDTO>>(commissions);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var commission = _commissionRepo.GetById(id);
+            if (commission == null) return NotFound();
+
+            return Ok(_mapper.Map<CommissionReadDTO>(commission));
+        }
+
 
         [HttpGet("order/{orderId}")]
-        public IActionResult GetByOrder(int orderId) => Ok(_commRepo.GetAll().FirstOrDefault(c => c.OrderId == orderId));
+        public IActionResult GetByOrder(int orderId)
+        {
+            var result = _commissionService.GetCommissionByOrderId(orderId);
+            if (result == null) return NotFound();
+
+            return Ok(result);
+        }
+
+
+        [HttpGet("affiliate/{affiliateId}")]
+        public IActionResult GetByAffiliate(int affiliateId)
+        {
+            var result = _commissionService.GetCommissionsByAffiliate(affiliateId);
+            return Ok(result);
+        }
+
     
-}
+        [HttpPut("{id}/status")]
+        public IActionResult UpdateStatus(int id, [FromBody] CommissionStatus status)
+        {
+            _commissionService.UpdateCommissionStatus(id, status);
+            return NoContent();
+        }
+    }
 }
