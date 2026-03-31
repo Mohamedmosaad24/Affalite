@@ -48,14 +48,6 @@ namespace AffaliteBL.Mapping
                 CreateMap<Commission, CommissionReadDTO>()
                     .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
 
-            // Register -> AppUser
-            CreateMap<RegisterDTO, AppUser>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
-
-            // AppUser -> Response
-            CreateMap<AppUser, AuthResponseDTO>()
-                .ForMember(dest => dest.Token, opt => opt.Ignore())
-                .ForMember(dest => dest.Expiration, opt => opt.Ignore());
 
 
             //// User
@@ -88,6 +80,16 @@ namespace AffaliteBL.Mapping
             //CreateMap<OrderItem, OrderItemDTO>()
             //    .ForMember(dest => dest.ProductName,
             //               opt => opt.MapFrom(src => src.Product.Name));
+
+            // Register -> AppUser
+            CreateMap<RegisterDTO, AppUser>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+
+            // AppUser -> Response
+            CreateMap<AppUser, AuthResponseDTO>()
+                .ForMember(dest => dest.Token, opt => opt.Ignore())
+                .ForMember(dest => dest.Expiration, opt => opt.Ignore());
+
 
         }
     }
