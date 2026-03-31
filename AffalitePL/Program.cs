@@ -1,5 +1,6 @@
 
 using AffaliteBL.IServices;
+using AffaliteBL.Mapping;
 using AffaliteBL.Services;
 using AffaliteDAL.Data;
 using AffaliteDAL.IRepo;
@@ -25,12 +26,13 @@ namespace AffalitePL
             builder.Services.AddScoped<IAffiliateService, AffiliateService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
-
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<ICommissionService, CommissionService>();
 
             //app settings
             builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
-
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
