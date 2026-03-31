@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AffalitePL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+faecfdd680b5893e858ca0ad2df2904c206defcf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a9cc6b27c26d42cbe9356c0cd5dfc456e57d839")]
 [assembly: System.Reflection.AssemblyProductAttribute("AffalitePL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AffalitePL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

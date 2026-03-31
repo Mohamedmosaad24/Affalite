@@ -3,10 +3,17 @@ using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
 using AffaliteDAL.Data;
+using AffaliteDAL.Entities;
 using AffaliteDAL.IRepo;
 using AffaliteDAL.Repo;
+using AffalitePL.Options;
 using Mattger_BL.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace AffalitePL
 {
@@ -28,6 +35,8 @@ namespace AffalitePL
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<ICommissionService, CommissionService>();
+            builder.Services.AddScoped<IAuthServices, AuthServices>();
+            builder.Services.AddScoped<IJwtServices, JwtServices>();
 
             //app settings
             builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
@@ -37,7 +46,64 @@ namespace AffalitePL
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    [new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "bearer"
+                        }
+                    }] = Array.Empty<string>()
+                });
+            });
+            //Identity
+            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AffaliteDBContext>();
+            //jwt
+            builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JWT"));
+            builder.Services.Configure<DefaultAdminOptions>(builder.Configuration.GetSection("DefaultAdmin"));
+            var jwtOptions = builder.Configuration.GetSection("JWT").Get<JwtOptions>()
+                ?? throw new InvalidOperationException("JWT configuration section is missing or invalid.");
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+                {
+                    options.MapInboundClaims = false;
+                    options.SaveToken = true;
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = jwtOptions.Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = jwtOptions.Audience,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        NameClaimType = "uid",
+                        RoleClaimType = "role",
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwtOptions.Key)),
+                        ClockSkew = TimeSpan.Zero
+
+
+                    };
+                });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -49,7 +115,7 @@ namespace AffalitePL
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

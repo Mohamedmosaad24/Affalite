@@ -1,7 +1,56 @@
+# =========================
+# FRONTEND (React / Angular)
+# =========================
 .vs/
+**/.vs/
+
+# Node dependencies
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/build/
+
+# Environment variables
+frontend/.env
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# IDE files
+frontend/.vscode/
+frontend/.idea/
+
+# =========================
+# BACKEND (.NET WebAPI)
+# =========================
+
+# Build directories
 bin/
 obj/
-/AffaliteBL/obj/Debug/net8.0/AffaliteBL.AssemblyInfo.cs
-/AffaliteDAL/obj/Debug/net8.0/AffaliteDAL.AssemblyInfo.cs
-/AffalitePL/obj/Debug/net8.0/AffalitePL.AssemblyInfo.cs
-/AffaliteBL/obj/Debug/net8.0/AffaliteBL.AssemblyInfo.cs
+
+# User-specific files
+*.user
+*.suo
+
+# VS / VSCode
+.vs/
+.vscode/
+
+# Environment variables
+appsettings.Development.json
+
+# Logs
+*.log
+
+# =========================
+# GENERAL
+# =========================
+
+# MacOS
+.DS_Store
+
+# Cache & temp
+*.cache
