@@ -46,3 +46,19 @@ C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteBL\obj\Debug\net8.0
 C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteBL\obj\Debug\net8.0\refint\AffaliteBL.dll
 C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteBL\obj\Debug\net8.0\AffaliteBL.pdb
 C:\Users\Dubai Store\Desktop\iti\projects\Graduation\AffaliteBL\obj\Debug\net8.0\ref\AffaliteBL.dll
+C:\Users\islam\source\repos\Affalite\AffaliteBL\bin\Debug\net8.0\AffaliteBL.deps.json
+C:\Users\islam\source\repos\Affalite\AffaliteBL\bin\Debug\net8.0\AffaliteBL.dll
+C:\Users\islam\source\repos\Affalite\AffaliteBL\bin\Debug\net8.0\AffaliteBL.pdb
+C:\Users\islam\source\repos\Affalite\AffaliteBL\bin\Debug\net8.0\AffaliteDAL.dll
+C:\Users\islam\source\repos\Affalite\AffaliteBL\bin\Debug\net8.0\AffaliteDAL.pdb
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.csproj.AssemblyReference.cache
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.AssemblyInfoInputs.cache
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.AssemblyInfo.cs
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.csproj.CoreCompileInputs.cache
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.sourcelink.json
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.csproj.Up2Date
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.dll
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\refint\AffaliteBL.dll
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\AffaliteBL.pdb
+C:\Users\islam\source\repos\Affalite\AffaliteBL\obj\Debug\net8.0\ref\AffaliteBL.dll

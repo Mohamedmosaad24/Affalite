@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteBL\\AffaliteBL.csproj": {}
+    "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteBL\\AffaliteBL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteBL\\AffaliteBL.csproj": {
+    "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteBL\\AffaliteBL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteBL\\AffaliteBL.csproj",
+        "projectUniqueName": "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteBL\\AffaliteBL.csproj",
         "projectName": "AffaliteBL",
-        "projectPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteBL\\AffaliteBL.csproj",
-        "packagesPath": "C:\\Users\\Dubai Store\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteBL\\obj\\",
+        "projectPath": "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteBL\\AffaliteBL.csproj",
+        "packagesPath": "C:\\Users\\islam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteBL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Dubai Store\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\islam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\AffaliteDAL.csproj": {
-                "projectPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\AffaliteDAL.csproj"
+              "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteDAL\\AffaliteDAL.csproj": {
+                "projectPath": "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteDAL\\AffaliteDAL.csproj"
               }
             }
           }
@@ -48,7 +49,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -79,24 +80,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\AffaliteDAL.csproj": {
+    "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteDAL\\AffaliteDAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\AffaliteDAL.csproj",
+        "projectUniqueName": "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteDAL\\AffaliteDAL.csproj",
         "projectName": "AffaliteDAL",
-        "projectPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\AffaliteDAL.csproj",
-        "packagesPath": "C:\\Users\\Dubai Store\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dubai Store\\Desktop\\iti\\projects\\Graduation\\AffaliteDAL\\obj\\",
+        "projectPath": "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteDAL\\AffaliteDAL.csproj",
+        "packagesPath": "C:\\Users\\islam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteDAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Dubai Store\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\islam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -105,6 +106,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -123,7 +125,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -160,7 +162,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
