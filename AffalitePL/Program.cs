@@ -24,6 +24,8 @@ namespace AffalitePL
 
             builder.Services.AddScoped<IAffiliateRepo, AffiliateRepo>();
             builder.Services.AddScoped<IAffiliateService, AffiliateService>();
+            builder.Services.AddScoped<ICartRepo, CartRepo>();
+            builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IOrderService, OrderService>();

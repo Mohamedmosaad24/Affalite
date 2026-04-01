@@ -589,3 +589,4 @@ C:\Users\islam\source\repos\Affalite\AffalitePL\obj\Debug\net8.0\refint\Affalite
 C:\Users\islam\source\repos\Affalite\AffalitePL\obj\Debug\net8.0\AffalitePL.pdb
 C:\Users\islam\source\repos\Affalite\AffalitePL\obj\Debug\net8.0\AffalitePL.genruntimeconfig.cache
 C:\Users\islam\source\repos\Affalite\AffalitePL\obj\Debug\net8.0\ref\AffalitePL.dll
+D:\Afallite\AffalitePL\bin\Debug\net8.0\AffalitePL.staticwebassets.runtime.json
