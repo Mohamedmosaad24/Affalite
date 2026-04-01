@@ -4,11 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AffaliteBL.DTOs.AffiliateDTOs;
-<<<<<<< HEAD
 using AffaliteBL.DTOs.Auth;
-=======
 using AffaliteBL.DTOs.CartDTOs;
->>>>>>> Cart
 using AffaliteBL.DTOs.CommissionDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.Helpers;
