@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AffaliteDAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5824c8f19b8695c8b3d80351301939475ae588fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bdc282fe08228835e103793793d38ea72ec2697d")]
 [assembly: System.Reflection.AssemblyProductAttribute("AffaliteDAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AffaliteDAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
