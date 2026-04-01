@@ -368,3 +368,6 @@ FodyWeavers.xsd
 # .NET build output (explicit; must stay untracked — use git rm -r --cached if they reappear)
 **/bin/
 **/obj/
+
+# Accidental copy of Git internal ref (do not commit)
+/FETCH_HEAD

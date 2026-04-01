@@ -1,0 +1,2 @@
+Run once per clone so merges auto-drop tracked bin/obj:
+  git config core.hooksPath .githooks

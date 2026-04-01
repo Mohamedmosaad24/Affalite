@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AffaliteBL.DTOs.AffiliateDTOs;
+<<<<<<< HEAD
 using AffaliteBL.DTOs.Auth;
+=======
+using AffaliteBL.DTOs.CartDTOs;
+>>>>>>> Cart
 using AffaliteBL.DTOs.CommissionDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.Helpers;
@@ -24,9 +28,12 @@ namespace AffaliteBL.Mapping
             CreateMap<Affiliate, CreateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, UpdateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, AffiliateBalanceDTO>().ReverseMap();
-
             CreateMap<Order, OrderReadDTO>().ReverseMap();
             CreateMap<Commission, CommissionReadDTO>().ReverseMap();
+            //Cart
+            CreateMap<CartItem , AddCartItemDTO>().ReverseMap();
+             CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
+
 
             //Product
             CreateMap<Product, ProductDto>()
