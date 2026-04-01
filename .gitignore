@@ -364,3 +364,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 .DS_Store
+
+# .NET build output (explicit; must stay untracked — use git rm -r --cached if they reappear)
+**/bin/
+**/obj/
