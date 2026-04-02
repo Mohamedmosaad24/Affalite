@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AffaliteBL.DTOs.AffiliateDTOs;
+﻿using AffaliteBL.DTOs.AffiliateDTOs;
 using AffaliteBL.DTOs.Auth;
 using AffaliteBL.DTOs.CartDTOs;
+using AffaliteBL.DTOs.CategoryDTOs;
 using AffaliteBL.DTOs.CommissionDTOs;
+using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.Helpers;
 using AffaliteBLL.DTOs.Products;
 using AffaliteDAL.Entities;
 using AffaliteDAL.Entities.Enums;
 using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AffaliteBL.Mapping
 {
@@ -95,6 +97,16 @@ namespace AffaliteBL.Mapping
                 .ForMember(dest => dest.Expiration, opt => opt.Ignore());
 
 
+            // Merchant
+            CreateMap<Merchant, GetMerchantDTO>().ReverseMap();
+            CreateMap<Merchant, CreateMerchantDTO>().ReverseMap();
+            CreateMap<Merchant, UpdateMerchantDTO>().ReverseMap();
+            CreateMap<Merchant, MerchantBalanceDTO>().ReverseMap();
+
+            //Category
+            CreateMap<Category, GetCategoryDTO>().ReverseMap();
+            CreateMap<Category, CreateCategoryDTO>().ReverseMap();
+            CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
         }
     }
 }

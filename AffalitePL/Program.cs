@@ -7,6 +7,7 @@ using AffaliteDAL.Entities;
 using AffaliteDAL.IRepo;
 using AffaliteDAL.Repo;
 using AffalitePL.Options;
+using AffalitePL.Seed;
 using Mattger_BL.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -39,6 +40,15 @@ namespace AffalitePL
             builder.Services.AddScoped<ICommissionService, CommissionService>();
             builder.Services.AddScoped<IAuthServices, AuthServices>();
             builder.Services.AddScoped<IJwtServices, JwtServices>();
+
+            //Merchant
+            builder.Services.AddScoped<IMerchantRepo, MerchantRepo>();
+            builder.Services.AddScoped<IMerchantService, MerchantService>();
+
+
+            //Category
+            builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
 
             //app settings
             builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
@@ -107,6 +117,7 @@ namespace AffalitePL
                     };
                 });
             var app = builder.Build();
+            IdentitySeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
