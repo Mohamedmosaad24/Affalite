@@ -1,0 +1,8 @@
+#!/bin/sh
+# Merging branches that still track bin/obj re-adds them to the index; .gitignore cannot fix that.
+# Enable once per clone:  git config core.hooksPath .githooks
+git rm -r --cached --ignore-unmatch AffaliteBL/bin AffaliteBL/obj AffaliteDAL/bin AffaliteDAL/obj AffalitePL/bin AffalitePL/obj 2>/dev/null || true
+if ! git diff --cached --quiet 2>/dev/null; then
+	printf '\npost-merge: Removed bin/obj from Git index (ignored by .gitignore).\n'
+	printf '            Finish with:  git commit -m "chore: untrack bin/obj after merge"\n\n'
+fi

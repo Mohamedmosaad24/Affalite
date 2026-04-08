@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AffaliteBL.DTOs.AffiliateDTOs;
+﻿using AffaliteBL.DTOs.AffiliateDTOs;
+using AffaliteBL.DTOs.Auth;
+using AffaliteBL.DTOs.CartDTOs;
+using AffaliteBL.DTOs.CategoryDTOs;
 using AffaliteBL.DTOs.CommissionDTOs;
+using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.Helpers;
 using AffaliteBLL.DTOs.Products;
 using AffaliteDAL.Entities;
 using AffaliteDAL.Entities.Enums;
 using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AffaliteBL.Mapping
 {
@@ -23,9 +27,12 @@ namespace AffaliteBL.Mapping
             CreateMap<Affiliate, CreateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, UpdateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, AffiliateBalanceDTO>().ReverseMap();
-
             CreateMap<Order, OrderReadDTO>().ReverseMap();
             CreateMap<Commission, CommissionReadDTO>().ReverseMap();
+            //Cart
+            CreateMap<CartItem , AddCartItemDTO>().ReverseMap();
+             CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
+
 
             //Product
             CreateMap<Product, ProductDto>()
@@ -46,41 +53,60 @@ namespace AffaliteBL.Mapping
                 CreateMap<OrderCreateDTO, Order>();
                 CreateMap<Commission, CommissionReadDTO>()
                     .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
-            
-        
 
 
-        //// User
-        //CreateMap<AppUser, UserDTO>().ReverseMap();
-        //CreateMap<CartItem, CartItemDTO>()
-        //    .ForMember(d => d.ProductName,
-        //        o => o.MapFrom(s => s.Product.Name))
-        //    .ForMember(d => d.Price,
-        //        o => o.MapFrom(s => s.Product.Price))
-        //    .ForMember(d => d.TotalPrice,
-        //    o => o.MapFrom(s => (s.Product.Price * s.Quantity)))
-        //    .ForMember(d => d.PictureUrl,
-        //        o => o.MapFrom<CartItemImageUrlResolver>()); // 👈 هنا بدل MapFrom مباشرة
-        //// OrderItem
-        //CreateMap<OrderItem, OrderItemDTO>()
-        //    .ForMember(d => d.ProductName,
-        //        o => o.MapFrom(s => s.Product.Name))
-        //    .ForMember(d => d.Price,
-        //        o => o.MapFrom(s => s.Product.Price));
 
-        //// Cart
-        //CreateMap<Cart, CartDTO>()
-        //    .ForMember(d => d.TotalPrice,
-        //        o => o.MapFrom(s => s.Items.Sum(i => i.Product.Price * i.Quantity)));
+            //// User
+            //CreateMap<AppUser, UserDTO>().ReverseMap();
+            //CreateMap<CartItem, CartItemDTO>()
+            //    .ForMember(d => d.ProductName,
+            //        o => o.MapFrom(s => s.Product.Name))
+            //    .ForMember(d => d.Price,
+            //        o => o.MapFrom(s => s.Product.Price))
+            //    .ForMember(d => d.TotalPrice,
+            //    o => o.MapFrom(s => (s.Product.Price * s.Quantity)))
+            //    .ForMember(d => d.PictureUrl,
+            //        o => o.MapFrom<CartItemImageUrlResolver>()); // 👈 هنا بدل MapFrom مباشرة
+            //// OrderItem
+            //CreateMap<OrderItem, OrderItemDTO>()
+            //    .ForMember(d => d.ProductName,
+            //        o => o.MapFrom(s => s.Product.Name))
+            //    .ForMember(d => d.Price,
+            //        o => o.MapFrom(s => s.Product.Price));
 
-        //// Order
-        //CreateMap<Order, OrderDTO>().ReverseMap();
-        //CreateMap<Order, CreateOrderDTO>().ReverseMap();
+            //// Cart
+            //CreateMap<Cart, CartDTO>()
+            //    .ForMember(d => d.TotalPrice,
+            //        o => o.MapFrom(s => s.Items.Sum(i => i.Product.Price * i.Quantity)));
 
-        //CreateMap<OrderItem, OrderItemDTO>()
-        //    .ForMember(dest => dest.ProductName,
-        //               opt => opt.MapFrom(src => src.Product.Name));
+            //// Order
+            //CreateMap<Order, OrderDTO>().ReverseMap();
+            //CreateMap<Order, CreateOrderDTO>().ReverseMap();
 
-    }
+            //CreateMap<OrderItem, OrderItemDTO>()
+            //    .ForMember(dest => dest.ProductName,
+            //               opt => opt.MapFrom(src => src.Product.Name));
+
+            // Register -> AppUser
+            CreateMap<RegisterDTO, AppUser>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+
+            // AppUser -> Response
+            CreateMap<AppUser, AuthResponseDTO>()
+                .ForMember(dest => dest.Token, opt => opt.Ignore())
+                .ForMember(dest => dest.Expiration, opt => opt.Ignore());
+
+
+            // Merchant
+            CreateMap<Merchant, GetMerchantDTO>().ReverseMap();
+            CreateMap<Merchant, CreateMerchantDTO>().ReverseMap();
+            CreateMap<Merchant, UpdateMerchantDTO>().ReverseMap();
+            CreateMap<Merchant, MerchantBalanceDTO>().ReverseMap();
+
+            //Category
+            CreateMap<Category, GetCategoryDTO>().ReverseMap();
+            CreateMap<Category, CreateCategoryDTO>().ReverseMap();
+            CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
+        }
     }
 }

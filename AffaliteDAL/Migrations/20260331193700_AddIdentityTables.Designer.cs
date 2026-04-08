@@ -4,6 +4,7 @@ using AffaliteDAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AffaliteDAL.Migrations
 {
     [DbContext(typeof(AffaliteDBContext))]
-    partial class AffaliteDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260331193700_AddIdentityTables")]
+    partial class AddIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,15 +49,6 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Affiliates");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AppUserId = "user-affiliate-1",
-                            Balance = 0m,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.AppUser", b =>
@@ -124,42 +118,6 @@ namespace AffaliteDAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "user-merchant-1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "04d4585f-707d-45e9-a229-e358897e695b",
-                            Email = "merchant@test.com",
-                            EmailConfirmed = true,
-                            FullName = "Merchant One",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MERCHANT@TEST.COM",
-                            NormalizedUserName = "MERCHANT1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEfC8UwDo7PyngUXKR86lWrxKYNBWbdXgWsYVHDR8IxB079ezlyeYYf2P0ecObydaA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "d4f5a8cb-3d84-460d-af49-9bb7e3a9dfa0",
-                            TwoFactorEnabled = false,
-                            UserName = "merchant1"
-                        },
-                        new
-                        {
-                            Id = "user-affiliate-1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "dff4d241-bed7-4e70-ac27-39ae6eaa52a1",
-                            Email = "affiliate@test.com",
-                            EmailConfirmed = true,
-                            FullName = "Affiliate One",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "AFFILIATE@TEST.COM",
-                            NormalizedUserName = "AFFILIATE1",
-                            PasswordHash = "AQAAAAIAAYagAAAAECb3IIYjWRZxQbn6KlvqIsT0oUZ9UAkTP0iP0rI2B7IEo7pUXC0x6zaQY1cdSkbWGA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "38ae546d-1aaf-4682-abfb-d88690ff4bb5",
-                            TwoFactorEnabled = false,
-                            UserName = "affiliate1"
-                        });
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Cart", b =>
@@ -232,22 +190,6 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Mobiles",
-                            Slug = "mobiles"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Laptops",
-                            Slug = "laptops"
-                        });
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Commission", b =>
@@ -282,18 +224,6 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Commissions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AffiliateAmount = 1500m,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MerchantAmount = 25500m,
-                            OrderId = 1,
-                            PlatformAmount = 3000m,
-                            Status = 2
-                        });
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Merchant", b =>
@@ -320,15 +250,6 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Merchants");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AppUserId = "user-merchant-1",
-                            Balance = 0m,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Order", b =>
@@ -376,21 +297,6 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("MerchantId");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AffiliateCommissionPct = 5m,
-                            AffiliateId = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerAddress = "Cairo",
-                            CustomerName = "Ahmed",
-                            CustomerPhone = "01000000000",
-                            MerchantId = 1,
-                            Status = 3,
-                            TotalPrice = 30000m
-                        });
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.OrderItem", b =>
@@ -423,17 +329,6 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OrderId = 1,
-                            Price = 30000m,
-                            ProductId = 1,
-                            Quantity = 1
-                        });
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Product", b =>
@@ -484,50 +379,6 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("MerchantId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            ImageUrl = "518f36c2-0b27-46bf-a813-ff46a4d2168a.jpg",
-                            MerchantId = 1,
-                            Name = "iPhone 14",
-                            PlatformCommissionPct = 10m,
-                            Price = 30000m,
-                            Status = 2,
-                            Stock = 10
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            ImageUrl = "518f36c2-0b27-46bf-a813-ff46a4d2168a.jpg",
-                            MerchantId = 1,
-                            Name = "Samsung S23",
-                            PlatformCommissionPct = 10m,
-                            Price = 25000m,
-                            Status = 2,
-                            Stock = 15
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 2,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            ImageUrl = "518f36c2-0b27-46bf-a813-ff46a4d2168a.jpg",
-                            MerchantId = 1,
-                            Name = "Dell Laptop",
-                            PlatformCommissionPct = 12m,
-                            Price = 40000m,
-                            Status = 2,
-                            Stock = 5
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

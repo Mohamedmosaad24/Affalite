@@ -13,5 +13,7 @@ namespace AffaliteDAL.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<Order> Orders { get; set; } = new List<Order>();
+        public string AppUserId { get; set; } = string.Empty;
+        public AppUser AppUser { get; set; } = null!;
     }
 }
