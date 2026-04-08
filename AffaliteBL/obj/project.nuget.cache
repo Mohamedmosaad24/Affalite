@@ -69,13 +69,16 @@
   ],
   "logs": [
     {
-      "code": "NU1900",
+      "code": "NU1903",
       "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
+      "message": "Package 'AutoMapper' 13.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
       "projectPath": "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteBL\\AffaliteBL.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Users\\islam\\source\\repos\\Affalite\\AffaliteBL\\AffaliteBL.csproj",
-      "targetGraphs": []
+      "libraryId": "AutoMapper",
+      "targetGraphs": [
+        "net8.0"
+      ]
     }
   ]
 }
