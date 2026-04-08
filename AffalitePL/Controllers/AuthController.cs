@@ -255,4 +255,49 @@ public class AuthController(IAuthServices authService, UserManager<AppUser> user
             Data = response
         });
     }
+    [HttpPut("me")]
+    [Authorize]
+    public async Task<IActionResult> UpdateMe(UpdateUserDTO dto)
+    {
+        var userId = User.GetUserId();
+
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized(new ApiResponseDTO<object>
+            {
+                Success = false,
+                Message = "Invalid token"
+            });
+
+        var user = await userManager.Users
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (user is null)
+            return NotFound(new ApiResponseDTO<object>
+            {
+                Success = false,
+                Message = "User not found"
+            });
+
+
+        user.FullName = dto.FullName ?? user.FullName;
+        user.UserName = dto.UserName ?? user.UserName;
+        user.Email = dto.Email ?? user.Email;
+        user.PhoneNumber = dto.PhoneNumber ?? user.PhoneNumber;
+
+        var result = await userManager.UpdateAsync(user);
+
+        if (!result.Succeeded)
+            return BadRequest(new ApiResponseDTO<object>
+            {
+                Success = false,
+                Message = "Update failed",
+                Data = result.Errors
+            });
+
+        return Ok(new ApiResponseDTO<object>
+        {
+            Success = true,
+            Message = "User updated successfully"
+        });
+    }
 }
