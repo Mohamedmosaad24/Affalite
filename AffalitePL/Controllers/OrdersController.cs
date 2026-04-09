@@ -6,6 +6,7 @@ using AffaliteDAL.Entities.Enums;
 using AffaliteDAL.IRepo;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AffalitePL.Controllers
 {
@@ -38,23 +39,33 @@ namespace AffalitePL.Controllers
         }
 
 
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var order = _orderRepo.GetById(id);
+            var order = _orderRepo.GetAllQueryable()
+             .AsNoTracking()
+             .Include(o => o.Items)
+             .ThenInclude(i => i.Product)
+             .FirstOrDefault(o => o.Id == id);
+
             if (order == null) return NotFound();
             return Ok(_mapper.Map<OrderReadDTO>(order));
         }
 
-     
+
         [HttpGet]
         public IActionResult GetAll()
         {
-            var orders = _orderRepo.GetAll();
+            var orders = _orderRepo.GetAllQueryable()
+            .AsNoTracking()
+            .Include(o => o.Items)
+            .ThenInclude(i => i.Product)  // ← علشان ياخد اسم المنتج
+            .ToList();
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
 
-     
+
         //[HttpGet("merchant/{merchantId}")]
         //public IActionResult GetByMerchant(int merchantId)
         //{
