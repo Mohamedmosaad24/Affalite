@@ -6,11 +6,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AffaliteDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class cuopon : Migration
+    public partial class AddWishlistAndCUpon : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_OrderItems_Products_ProductId",
+                table: "OrderItems");
+
             migrationBuilder.CreateTable(
                 name: "Coupons",
                 columns: table => new
@@ -19,7 +23,7 @@ namespace AffaliteDAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DiscountPercentage = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    DiscountPercentage = table.Column<decimal>(type: "decimal(5,2)", nullable: true),
                     ValidFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ValidTo = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -37,143 +41,184 @@ namespace AffaliteDAL.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Wishlists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AffiliateId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wishlists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Wishlists_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.UpdateData(
                 table: "Affiliates",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 18, 42, 7, 201, DateTimeKind.Utc).AddTicks(893));
+                value: new DateTime(2026, 4, 9, 20, 28, 26, 816, DateTimeKind.Utc).AddTicks(5198));
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "user1",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "87093f4a-af0c-4dda-95ac-a42a26164916", "AQAAAAIAAYagAAAAELzjoAHjWcQF845EAumKRu3Q4kHlbKwOw+5JIth1Aok9lO/48EoNglfMvHuKVk5/CQ==", "7e7f0870-16f1-4646-ab66-1299b2349603" });
+                values: new object[] { "37def511-4a06-4e31-bedb-20195e896fa6", "AQAAAAIAAYagAAAAENO4PTD6mqNFxnYbeMHfgS+Pc7Ot4poZTL0Mz1Jz5LK8koKpuVgxP8bzza7dYDfH9g==", "71fcc375-e893-41d5-acd0-9b856af3d604" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "user2",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "834cb421-d1f9-417b-9ba8-cf28bd305fa0", "AQAAAAIAAYagAAAAEBpsV3JSuAymK93EruivBt9qLLVQtpKRja4RtY1u/h9gmpZ5Krw7v1oUIJXAx12u/A==", "8f97c156-ad81-4e0c-9e8a-9a315ca151d8" });
+                values: new object[] { "4d2ba00c-8838-42e2-9888-1b2b33ecb085", "AQAAAAIAAYagAAAAECqEcPL4DXuIPiG1P9qGXNI690u+xkaKCoUmbubt8nShpqXBV9SoJaAH9Qdc8r64hA==", "cb003b91-726b-4b8e-9812-48017684744c" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "user3",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "f8d5481a-5261-4dba-b732-fa39fcb3bcad", "AQAAAAIAAYagAAAAELOS0hoIz/+Tvby9u4L/vi5/OC+BupHPWX20AlifpeNQ+OHt6dyEnfyiQC99MBf6BQ==", "3c6f64c7-dc04-4e7e-8bb9-fac97c6de76b" });
+                values: new object[] { "5aafab0d-0426-4b06-8bdc-f90163ee1291", "AQAAAAIAAYagAAAAELFbM+DQBhy+D/5boAdYht7I3GkxojdZYMHY4yrAZfFTsenNUuaeGXkUQaLxwxTwXw==", "8effee1f-cf47-4856-bbc5-e0e67f0cecf5" });
 
             migrationBuilder.UpdateData(
                 table: "CartItems",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(1265));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(5672));
 
             migrationBuilder.UpdateData(
                 table: "CartItems",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(1275));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(5681));
 
             migrationBuilder.UpdateData(
                 table: "Carts",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(1213));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(5589));
 
             migrationBuilder.UpdateData(
                 table: "Categories",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 18, 42, 7, 201, DateTimeKind.Utc).AddTicks(756));
+                value: new DateTime(2026, 4, 9, 20, 28, 26, 816, DateTimeKind.Utc).AddTicks(5040));
 
             migrationBuilder.UpdateData(
                 table: "Categories",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 18, 42, 7, 201, DateTimeKind.Utc).AddTicks(759));
+                value: new DateTime(2026, 4, 9, 20, 28, 26, 816, DateTimeKind.Utc).AddTicks(5042));
 
             migrationBuilder.UpdateData(
                 table: "Commissions",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 3, 11, 18, 42, 7, 201, DateTimeKind.Utc).AddTicks(1674));
+                value: new DateTime(2026, 3, 11, 20, 28, 26, 816, DateTimeKind.Utc).AddTicks(6647));
 
             migrationBuilder.UpdateData(
                 table: "Merchants",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 18, 42, 7, 201, DateTimeKind.Utc).AddTicks(827));
+                value: new DateTime(2026, 4, 9, 20, 28, 26, 816, DateTimeKind.Utc).AddTicks(5119));
 
             migrationBuilder.UpdateData(
                 table: "OrderItems",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(1463));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(6432));
 
             migrationBuilder.UpdateData(
                 table: "OrderItems",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(1468));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(6472));
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(1346));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(5952));
 
             migrationBuilder.UpdateData(
                 table: "ProductReview",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(1137));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(5496));
 
             migrationBuilder.UpdateData(
                 table: "ProductReview",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(1143));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(5502));
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(964));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(5319));
 
             migrationBuilder.UpdateData(
                 table: "Products",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedAt",
-                value: new DateTime(2026, 4, 9, 20, 42, 7, 201, DateTimeKind.Local).AddTicks(1028));
+                value: new DateTime(2026, 4, 9, 22, 28, 26, 816, DateTimeKind.Local).AddTicks(5377));
 
             migrationBuilder.CreateIndex(
                 name: "IX_Coupons_ProductId",
                 table: "Coupons",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wishlists_ProductId",
+                table: "Wishlists",
+                column: "ProductId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_OrderItems_Products_ProductId",
+                table: "OrderItems",
+                column: "ProductId",
+                principalTable: "Products",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_OrderItems_Products_ProductId",
+                table: "OrderItems");
+
             migrationBuilder.DropTable(
                 name: "Coupons");
+
+            migrationBuilder.DropTable(
+                name: "Wishlists");
 
             migrationBuilder.UpdateData(
                 table: "Affiliates",
@@ -300,6 +345,13 @@ namespace AffaliteDAL.Migrations
                 keyValue: 2,
                 column: "CreatedAt",
                 value: new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(1926));
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_OrderItems_Products_ProductId",
+                table: "OrderItems",
+                column: "ProductId",
+                principalTable: "Products",
+                principalColumn: "Id");
         }
     }
 }
