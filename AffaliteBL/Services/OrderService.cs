@@ -38,28 +38,22 @@ namespace AffaliteBL.Services
             var neworder = _mapper.Map<Order>(orderDto);
             decimal platformAmount = 0;
 
-            var cart = _cartRepo
-               .GetCartWithAffilaiteId((int)orderDto.AffiliateId);
+            var cart = _cartRepo.GetCartWithAffilaiteId((int)orderDto.AffiliateId);
 
             if (cart == null || cart.Items.Count == 0)
                 throw new Exception("Cart is empty");
-            decimal totalPrice = neworder.AffiliateCommissionPct;
 
+            decimal totalPrice = 0;
+
+            // ✅ Loop واحد بس للحساب
             foreach (var item in cart.Items)
             {
-
-
-                item.Product.SaleCount += item.Quantity;
-
                 var itemTotal = item.Product.Price * item.Quantity;
-
                 platformAmount += (item.Product.PlatformCommissionPct / 100) * itemTotal;
                 totalPrice += itemTotal;
-
-
-
             }
 
+            // ✅ إنشاء الـ Order
             Order order = new Order
             {
                 AffiliateId = cart.AffiliateId,
@@ -70,71 +64,70 @@ namespace AffaliteBL.Services
                 CreatedAt = DateTime.Now,
                 Status = OrderStatus.Pending,
                 TotalPrice = totalPrice,
-                Items = new List<OrderItem>(),
-
+                Items = new List<OrderItem>()
             };
             _orderRepo.Add(order);
             _orderRepo.SaveChanges();
+
+            // ✅ إضافة الـ OrderItems وتحديث الـ Stock
             foreach (var item in cart.Items)
             {
-                item.Product.SaleCount += item.Quantity;
-                item.Product.Stock -=1;
-                var orderItem = new OrderItem
+                item.Product.SaleCount += item.Quantity; // ← مرة واحدة بس
+                item.Product.Stock -= item.Quantity;      // ← كان بيطرح 1 بس، صح يطرح الـ quantity
+
+                order.Items.Add(new OrderItem
                 {
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
                     Price = item.Product.Price
-                };
-
-                order.Items.Add(orderItem);
+                });
             }
-
             _orderRepo.SaveChanges();
+
+            // ✅ إنشاء الـ Commission
+            decimal affiliateAmount = totalPrice * (neworder.AffiliateCommissionPct / 100);
             var commission = new Commission
             {
                 OrderId = order.Id,
-                AffiliateAmount = order.AffiliateCommissionPct,
+                AffiliateAmount = affiliateAmount,
                 PlatformAmount = platformAmount,
-                Status = CommissionStatus.Pending,
-                MerchantAmount = totalPrice - (platformAmount + order.AffiliateCommissionPct)
+                MerchantAmount = totalPrice - (platformAmount + affiliateAmount),
+                Status = CommissionStatus.Pending
             };
             _commissionRepo.Add(commission);
             _commissionRepo.SaveChanges();
-            commission.MerchantAmount = order.TotalPrice - (commission.AffiliateAmount + commission.PlatformAmount);
 
+            // ✅ MerchantCommissions
             foreach (var item in cart.Items)
             {
-
-
-
                 var itemTotal = item.Product.Price * item.Quantity;
-
-                platformAmount += (item.Product.PlatformCommissionPct / 100) * itemTotal;
-
-                MerchantCommissions merchantCommissions = new MerchantCommissions
+                _merchantCommissions.Add(new MerchantCommissions
                 {
                     CommissionId = commission.Id,
                     MerchantId = item.Product.MerchantId,
                     value = itemTotal - (item.Product.PlatformCommissionPct / 100) * itemTotal
-                };
-                _merchantCommissions.Add(merchantCommissions);
-                _merchantCommissions.SaveChanges();
-                MerchantOrder merchantOrder = new MerchantOrder
-                {
-                    MerchantId = item.Product.MerchantId,
-                    OrderId = order.Id
-                };
-                _merchantOrder.Add(merchantOrder);
-                _merchantOrder.SaveChanges();
-
-
-
+                });
             }
+            _merchantCommissions.SaveChanges();
 
+            // ✅ MerchantOrder - Distinct عشان منكررش
+            var merchantIds = cart.Items
+                .Select(i => i.Product.MerchantId)
+                .Distinct();
+
+            foreach (var merchantId in merchantIds)
+            {
+                _merchantOrder.Add(new MerchantOrder
+                {
+                    MerchantId = merchantId,
+                    OrderId = order.Id
+                });
+            }
+            _merchantOrder.SaveChanges();
+
+            // ✅ امسح الـ Cart
             _cartRepo.Delete(cart);
             _cartRepo.SaveChanges();
-
-
 
             return _mapper.Map<OrderReadDTO>(order);
         }

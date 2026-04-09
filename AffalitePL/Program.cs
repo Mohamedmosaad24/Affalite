@@ -50,6 +50,9 @@ namespace AffalitePL
             builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+            builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+            builder.Services.AddScoped<ICouponService, CouponService>();
+
             //app settings
             builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 

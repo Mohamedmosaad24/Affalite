@@ -116,6 +116,13 @@ namespace AffaliteBL.Mapping
             CreateMap<Category, CreateCategoryDTO>().ReverseMap();
             CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
 
+            CreateMap<OrderItem, OrderItemDTO>()
+           .ForMember(dest => dest.ProductName,
+              opt => opt.MapFrom(src => src.Product.Name));
+
+            CreateMap<Order, OrderReadDTO>();
+
+
 
 
         }
