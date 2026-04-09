@@ -10,6 +10,7 @@ namespace AffaliteBL.Helpers
     public class ProductQueryParams
     {
         public string? Search { get; set; }
+        public string? Type { get; set; }
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }
         public ProductStatus? Status { get; set; }
