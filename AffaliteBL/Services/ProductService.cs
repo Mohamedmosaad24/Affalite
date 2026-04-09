@@ -55,6 +55,22 @@ namespace AffaliteBL.Services
                 .Skip((query.PageNumber - 1) * query.PageSize)
                 .Take(query.PageSize);
 
+            // Type
+            if (!string.IsNullOrEmpty(query.Type))
+                if(query.Type == "new")
+                {
+                products = products
+                .OrderByDescending(p => p.CreatedAt);
+                }
+            if (query.Type == "top")
+            {
+                products = products
+                .OrderByDescending(p => p.SaleCount);
+            }
+
+
+
+
             return products.ToList();
         }
 
@@ -78,7 +94,9 @@ namespace AffaliteBL.Services
             existing.Description = product.Description;
             existing.Price = product.Price;
             existing.Stock = product.Stock;
-            existing.ImageUrl = product.ImageUrl;
+            existing.Images = product.Images;
+            existing.Reviews = product.Reviews;
+            existing.SaleCount = product.SaleCount;
             existing.CategoryId = product.CategoryId;
             existing.MerchantId = product.MerchantId;
             existing.PlatformCommissionPct = product.PlatformCommissionPct;

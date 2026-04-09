@@ -30,7 +30,7 @@ namespace AffaliteDAL.Repo
         public IEnumerable<Order> GetMerchantOrders(int merchantId)
         {
             return _context.Orders
-                .Where(o => o.MerchantId == merchantId)
+                //.Where(o => o.MerchantId == merchantId)
                 .ToList();
         }
 

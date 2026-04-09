@@ -15,5 +15,6 @@ namespace AffaliteDAL.Entities
         public ICollection<Order> Orders { get; set; } = new List<Order>();
         public string AppUserId { get; set; } = string.Empty;
         public AppUser AppUser { get; set; } = null!;
+        public Cart Cart { get; set; }
     }
 }

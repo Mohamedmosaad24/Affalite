@@ -49,6 +49,9 @@ namespace AffalitePL
             builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+            builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+            builder.Services.AddScoped<ICouponService, CouponService>();
+
             //app settings
             builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
@@ -65,6 +68,7 @@ namespace AffalitePL
                 });
             });
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
@@ -125,6 +129,8 @@ namespace AffalitePL
 
                     };
                 });
+
+
             var app = builder.Build();
             IdentitySeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AffaliteDAL.Entities
@@ -13,8 +14,10 @@ namespace AffaliteDAL.Entities
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [JsonIgnore]
 
         public Cart? Cart { get; set; }
+
         public Product? Product { get; set; }
     }
 }
