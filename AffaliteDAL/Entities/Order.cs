@@ -10,7 +10,6 @@ namespace AffaliteDAL.Entities
     public class Order
     {
         public int Id { get; set; }
-        public int MerchantId { get; set; }
         public int? AffiliateId { get; set; }
 
         public string CustomerName { get; set; } = string.Empty;
@@ -22,7 +21,8 @@ namespace AffaliteDAL.Entities
         public OrderStatus Status { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public Merchant? Merchant { get; set; }
+        //public List<Merchant> Merchants { get; set; }
+        public ICollection<MerchantOrder> MerchantOrder { get; set; }
         public Affiliate? Affiliate { get; set; }
 
         public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();

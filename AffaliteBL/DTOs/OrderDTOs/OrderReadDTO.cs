@@ -7,5 +7,6 @@
         public decimal AffiliateCommissionPct { get; set; }
         public string Status { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
+        public List<OrderItemDTO> Items { get; set; } = new();
     }
 }

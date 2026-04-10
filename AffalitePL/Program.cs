@@ -50,25 +50,39 @@ namespace AffalitePL
             builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+            builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+            builder.Services.AddScoped<ICouponService, CouponService>();
+
+            builder.Services.AddScoped<IWishlistRepo, WishlistRepo>();
+            builder.Services.AddScoped<IWishlistService, WishlistService>();
+
             //app settings
             builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 8a92e8e6ab56073551b6586e3e721a1e64c976bc
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
+<<<<<<< HEAD
                     policy.WithOrigins("http://localhost:4200", "http://localhost:55000")
+=======
+                    policy.WithOrigins("http://localhost:4200")
+>>>>>>> 8a92e8e6ab56073551b6586e3e721a1e64c976bc
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
                 });
             });
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
@@ -129,6 +143,8 @@ namespace AffalitePL
 
                     };
                 });
+
+
             var app = builder.Build();
             IdentitySeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
 

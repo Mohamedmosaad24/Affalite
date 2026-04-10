@@ -45,5 +45,10 @@ namespace AffaliteDAL.IRepo
         {
             _context.SaveChanges();
         }
+
+        public IQueryable<T> GetAllQueryable()
+        {
+            return _dbSet.AsQueryable();
+        }
     }
 }

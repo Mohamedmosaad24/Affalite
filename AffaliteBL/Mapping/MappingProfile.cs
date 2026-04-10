@@ -1,4 +1,9 @@
-﻿using AffaliteBL.DTOs.AffiliateDTOs;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AffaliteBL.DTOs.AffiliateDTOs;
 using AffaliteBL.DTOs.Auth;
 using AffaliteBL.DTOs.CartDTOs;
 using AffaliteBL.DTOs.CategoryDTOs;
@@ -6,15 +11,12 @@ using AffaliteBL.DTOs.CommissionDTOs;
 using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.Helpers;
+using AffaliteBLL.DTOs;
 using AffaliteBLL.DTOs.Products;
 using AffaliteDAL.Entities;
 using AffaliteDAL.Entities.Enums;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Mattger_BL.Helpers;
 
 namespace AffaliteBL.Mapping
 {
@@ -33,6 +35,8 @@ namespace AffaliteBL.Mapping
             CreateMap<CartItem , AddCartItemDTO>().ReverseMap();
              CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
 
+            //review
+            CreateMap<ProductReview, ReviewDto>();
 
             //Product
             CreateMap<Product, ProductDto>()
@@ -40,12 +44,20 @@ namespace AffaliteBL.Mapping
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty))
                 .ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant != null ? src.Merchant.Name : string.Empty))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+<<<<<<< HEAD
                 .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
                 .ForMember(dest => dest.ImageUrl,opt => opt.MapFrom<ImageUrlResolver>());
+=======
+                .ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant.AppUser.FullName))
+                .ForMember(dest => dest.Images, opt => opt.MapFrom<ImageUrlResolver>())
+                    .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src => src.Reviews)).ReverseMap();
+
+>>>>>>> 8a92e8e6ab56073551b6586e3e721a1e64c976bc
 
             CreateMap<CreateProductDto, Product>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => ProductStatus.Active)) // Default status on create
-                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.Images, opt => opt.Ignore());
 
             CreateMap<UpdateProductDto, Product>();
 
@@ -109,6 +121,16 @@ namespace AffaliteBL.Mapping
             CreateMap<Category, GetCategoryDTO>().ReverseMap();
             CreateMap<Category, CreateCategoryDTO>().ReverseMap();
             CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
+
+            CreateMap<OrderItem, OrderItemDTO>()
+           .ForMember(dest => dest.ProductName,
+              opt => opt.MapFrom(src => src.Product.Name));
+
+            CreateMap<Order, OrderReadDTO>();
+
+
+
+
         }
     }
 }

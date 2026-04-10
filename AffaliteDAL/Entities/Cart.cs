@@ -12,5 +12,7 @@ namespace AffaliteDAL.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<CartItem> Items { get; set; } = new List<CartItem>();
+        public int AffiliateId { get; set; }
+        public Affiliate Affiliate { get; set; }
     }
 }

@@ -24,7 +24,9 @@ namespace AffaliteDAL.Repo
         {
             return _context.Products
                 .Include(p => p.Category)
-                .Include(p => p.Merchant)
+                .Include(p => p.Merchant).ThenInclude(p=>p.AppUser)
+                .Include(p=>p.Images)
+                .Include(p=>p.Reviews)
                 .AsQueryable();
         }
     }
