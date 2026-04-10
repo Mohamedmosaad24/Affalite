@@ -18,6 +18,7 @@ namespace AffaliteDAL.Repo
         {
             return _context.Carts
                 .Include(c => c.Items)
+                    .ThenInclude(i => i.Product)
                 .FirstOrDefault(c => c.Id == cartId);
         }
 

@@ -1,106 +1,140 @@
 ﻿using AffaliteBL.DTOs.CartDTOs;
 using AffaliteBL.IServices;
-using AffaliteDAL.Entities;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using AffalitePL.Helpers;
+using Mattger_BL.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace AffalitePL.Controllers
 {
-    //    ------------------------------------------------------------------
-    //5) Cart(مهم جدًا)
-    //GET     /api/cart/{cartId
-    //}
-    //POST / api / cart
-    //DELETE / api / cart /{ cartId}
-    
-
-    //-------------------------------------------------------------------
-
     [Route("api/[controller]")]
     [ApiController]
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
-        private readonly IMapper _mapper;
+        private readonly string _imagesBaseUrl;
 
-        public CartController(ICartService cartService, IMapper mapper)
+        public CartController(ICartService cartService, IOptions<ApiSettings> apiSettings)
         {
             _cartService = cartService;
-            _mapper = mapper;
+            _imagesBaseUrl = apiSettings.Value.BaseUrl ?? string.Empty;
         }
-        [HttpGet("{cartId}")]
+
+        private CartUiResponseDto MapUi(int cartId)
+        {
+            var cart = _cartService.GetCartById(cartId);
+            return CartUiMapper.Map(cart, _imagesBaseUrl);
+        }
+
+        [HttpGet("{cartId:int}")]
         public IActionResult Get(int cartId)
         {
             var cart = _cartService.GetCartById(cartId);
             if (cart == null)
-            {
                 return NotFound($"Cart with id: {cartId} not found");
-            }
-            var result = _mapper.Map<Cart>(cart);
-            return Ok(result);
+
+            return Ok(MapUi(cartId));
         }
+
         [HttpPost]
         public IActionResult CreateCart()
         {
             var cart = _cartService.CreateCart();
-            var result = _mapper.Map<Cart>(cart);
-            return Ok(result);
+            return Ok(CartUiMapper.Map(cart, _imagesBaseUrl));
         }
-        [HttpDelete("{cartId}")]
+
+        [HttpDelete("{cartId:int}")]
         public IActionResult DeleteCart(int cartId)
         {
             var cart = _cartService.GetCartById(cartId);
             if (cart == null)
-            {
                 return NotFound($"Cart with id: {cartId} not found");
-            }
+
             _cartService.DeleteCart(cartId);
             return Ok("Cart deleted successfully");
         }
-        
-        //POST / api / cart /{ cartId}/ items
-        [HttpPost("{cartId}/items")]
-        public IActionResult CreateItem(int cartId, AddCartItemDTO addCartItemDTO)
+
+        [HttpPost("{cartId:int}/items")]
+        public IActionResult CreateItem(int cartId, [FromBody] AddCartItemDTO addCartItemDTO)
         {
             try
             {
                 _cartService.CreateItem(cartId, addCartItemDTO);
-                return Ok("Item added to cart successfully");
+                return Ok(MapUi(cartId));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        //PUT / api / cart /{ cartId}/ items /{ itemId}
-        [HttpPut("{cartId}/items/{itemId}")]
-        public IActionResult UpdateItem(int cartId, int itemId, UpdateCartItemDTO updateCartItemDTO)
+
+        [HttpPut("{cartId:int}/items/{itemId:int}")]
+        public IActionResult UpdateItem(int cartId, int itemId, [FromBody] UpdateCartItemDTO updateCartItemDTO)
         {
             try
             {
                 _cartService.UpdateItem(cartId, itemId, updateCartItemDTO);
-                return Ok("Cart item updated successfully");
+                return Ok(MapUi(cartId));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        //DELETE / api / cart /{ cartId}/ items /{ itemId}
-        [HttpDelete("{cartId}/items/{itemId}")]
-        public IActionResult DeleteItems(int cartId,int itemId)
+
+        [HttpDelete("{cartId:int}/items/{itemId:int}")]
+        public IActionResult DeleteItems(int cartId, int itemId)
         {
             try
             {
                 _cartService.DeleteItem(cartId, itemId);
-                return Ok("Cart item deleted successfully");
+                return Ok(MapUi(cartId));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        /// <summary>Matches Angular cart service (update by product id).</summary>
+        [HttpPut("{cartId:int}/products/{productId:int}")]
+        public IActionResult UpdateItemByProduct(int cartId, int productId, [FromBody] UpdateCartItemDTO updateCartItemDTO)
+        {
+            try
+            {
+                _cartService.UpdateItemByProductId(cartId, productId, updateCartItemDTO);
+                return Ok(MapUi(cartId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>Matches Angular cart service (remove by product id).</summary>
+        [HttpDelete("{cartId:int}/products/{productId:int}")]
+        public IActionResult DeleteItemByProduct(int cartId, int productId)
+        {
+            try
+            {
+                _cartService.DeleteItemByProductId(cartId, productId);
+                return Ok(MapUi(cartId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>Coupon handling not implemented yet; returns false for the SPA.</summary>
+        [HttpPost("{cartId:int}/coupon")]
+        public IActionResult ApplyCoupon(int cartId, [FromBody] ApplyCouponRequestDto? body)
+        {
+            _ = body?.Code;
+            if (_cartService.GetCartById(cartId) == null)
+                return NotFound($"Cart with id: {cartId} not found");
+
+            return Ok(false);
         }
     }
 }
