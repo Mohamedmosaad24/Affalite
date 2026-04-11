@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AffaliteBL.DTOs.AffiliateDTOs;
+﻿using AffaliteBL.DTOs.AffiliateDTOs;
 using AffaliteBL.DTOs.Auth;
 using AffaliteBL.DTOs.CartDTOs;
 using AffaliteBL.DTOs.CategoryDTOs;
 using AffaliteBL.DTOs.CommissionDTOs;
 using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
+using AffaliteBL.DTOs.ReviewDTOs;
 using AffaliteBL.Helpers;
 using AffaliteBLL.DTOs;
 using AffaliteBLL.DTOs.Products;
@@ -17,6 +13,11 @@ using AffaliteDAL.Entities;
 using AffaliteDAL.Entities.Enums;
 using AutoMapper;
 using Mattger_BL.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AffaliteBL.Mapping
 {
@@ -36,7 +37,7 @@ namespace AffaliteBL.Mapping
              CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
 
             //review
-            CreateMap<ProductReview, ReviewDto>();
+            CreateMap<ProductReviews, ProductReviewDto>();
 
             //Product
             CreateMap<Product, ProductDto>()

@@ -24,6 +24,7 @@ namespace AffaliteDAL.Repo
         {
             return _context.Carts.Include(c => c.Items).ThenInclude(p => p.Product).ThenInclude(p => p.Images)
                 .FirstOrDefault(c => c.AffiliateId == uId);
+            
         }
         public CartItem? GetCartItem(int cartId, int itemId)
         {

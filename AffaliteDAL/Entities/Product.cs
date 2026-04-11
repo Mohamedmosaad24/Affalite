@@ -29,6 +29,6 @@ namespace AffaliteDAL.Entities
         public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
         // New collections
         public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
-        public ICollection<ProductReview> Reviews { get; set; } = new List<ProductReview>();
+        public ICollection<ProductReviews> Reviews { get; set; } = new List<ProductReviews>();
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using AffaliteBL.DTOs.ReviewDTOs;
+
 namespace AffaliteBLL.DTOs.Products
 {
     public class ProductDto
@@ -15,6 +17,6 @@ namespace AffaliteBLL.DTOs.Products
         public decimal PlatformCommissionPct { get; set; }
         public string Status { get; set; } = string.Empty;
         public List<string> Images { get; set; } = new List<string>();
-        public List<ReviewDto> Reviews { get; set; } = new List<ReviewDto>();
+        public List<ProductReviewDto> Reviews { get; set; } = new List<ProductReviewDto>();
     }
 }

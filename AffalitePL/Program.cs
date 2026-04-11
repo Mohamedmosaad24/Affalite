@@ -1,6 +1,8 @@
 using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
+using AffaliteBLL.Services;
+using AffaliteBLL.Services.Interfaces;
 using AffaliteDAL.Data;
 using AffaliteDAL.Entities;
 using AffaliteDAL.IRepo;
@@ -35,6 +37,8 @@ namespace AffalitePL
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IProductReviewRepo, ProductReviewRepo>();
+            builder.Services.AddScoped<IProductReviewService, ProductReviewService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<ICommissionService, CommissionService>();
             builder.Services.AddScoped<IAuthServices, AuthServices>();
