@@ -92,5 +92,41 @@ namespace AffaliteBL.Services
             _repo.DeleteItem(item);
             _repo.Save();
         }
+
+        public void UpdateItemByProductId(int cartId, int productId, UpdateCartItemDTO updateCartItemDTO)
+        {
+            var cart = _repo.GetCartWithItems(cartId);
+            if (cart == null)
+                throw new Exception("Cart not found");
+
+            var line = cart.Items?.FirstOrDefault(i => i.ProductId == productId);
+            if (line == null)
+                throw new Exception("Cart item not found");
+
+            if (updateCartItemDTO.Quantity <= 0)
+            {
+                _repo.DeleteItem(line);
+                _repo.Save();
+                return;
+            }
+
+            line.Quantity = updateCartItemDTO.Quantity;
+            _repo.UpdateItem(line);
+            _repo.Save();
+        }
+
+        public void DeleteItemByProductId(int cartId, int productId)
+        {
+            var cart = _repo.GetCartWithItems(cartId);
+            if (cart == null)
+                throw new Exception("Cart not found");
+
+            var line = cart.Items?.FirstOrDefault(i => i.ProductId == productId);
+            if (line == null)
+                throw new Exception("Cart item not found");
+
+            _repo.DeleteItem(line);
+            _repo.Save();
+        }
     }
 }
