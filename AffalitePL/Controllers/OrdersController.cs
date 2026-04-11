@@ -17,17 +17,19 @@ namespace AffalitePL.Controllers
         private readonly IOrderService _orderService;
         private readonly IAffiliateService _affiliateService;
         private readonly IMerchantService _merchantService;
+        private readonly IOrderRepo IOrderRepo1;
         private readonly IGenericRepository<Order> _orderRepo;
         private readonly IMapper _mapper;
 
    
-        public OrdersController(IOrderService orderService, IGenericRepository<Order> orderRepo, IMapper mapper, IAffiliateService affiliateService, IMerchantService merchantService)
+        public OrdersController(IOrderService orderService, IGenericRepository<Order> orderRepo, IMapper mapper, IAffiliateService affiliateService, IMerchantService merchantService,IOrderRepo orderRepo1)
         {
             _orderService = orderService;
             _orderRepo = orderRepo;
             _mapper = mapper;
             _affiliateService = affiliateService;
             _merchantService = merchantService;
+            IOrderRepo1 = orderRepo1;
         }
 
 
@@ -85,7 +87,7 @@ namespace AffalitePL.Controllers
         public IActionResult UpdateStatus(int id, [FromBody] OrderStatus status)
         {
 
-            var order = _orderRepo.GetById(id);
+            var order = IOrderRepo1.GetById(id);
             if (order == null) return NotFound();
             Affiliate affilaite = _affiliateService.GetAffiliateById((int)order.AffiliateId);
             //Merchant merchant = _merchantService.GetMerchantById((int)order.MerchantId);
@@ -97,7 +99,7 @@ namespace AffalitePL.Controllers
             order.Status = status;
             _orderRepo.Update(order);
             _orderRepo.SaveChanges();
-            return NoContent();
+            return Ok(order);
         }
     }
 }

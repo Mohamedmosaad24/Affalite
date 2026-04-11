@@ -1,6 +1,10 @@
-﻿using AffaliteBLL.DTOs;
+﻿using AffaliteBL.DTOs.ReviewDTOs;
+using AffaliteBLL.DTOs;
+using AffaliteBLL.DTOs.Products;
 using AffaliteBLL.Services.Interfaces;
 using AffaliteDAL.Entities;
+using AutoMapper;
+using AutoMapper.Configuration;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AffalitePL.Controllers
@@ -10,10 +14,12 @@ namespace AffalitePL.Controllers
     public class ProductReviewController : ControllerBase
     {
         private readonly IProductReviewService _service;
+        private readonly IMapper IMapping;
 
-        public ProductReviewController(IProductReviewService service)
+        public ProductReviewController(IProductReviewService service,IMapper mapping)
         {
             _service = service;
+            IMapping = mapping;
         }
 
         [HttpGet]
@@ -55,9 +61,10 @@ namespace AffalitePL.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, ProductReviews review)
+        public IActionResult Update(int id,UpdateProductReviewDto review)
         {
-            var result = _service.Update(id, review);
+            var reviews = IMapping.Map<ProductReviews>(review);
+            var result = _service.Update(id, reviews);
             if (!result)
                 return NotFound();
 

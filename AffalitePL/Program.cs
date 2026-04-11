@@ -43,6 +43,8 @@ namespace AffalitePL
             builder.Services.AddScoped<ICommissionService, CommissionService>();
             builder.Services.AddScoped<IAuthServices, AuthServices>();
             builder.Services.AddScoped<IJwtServices, JwtServices>();
+            builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+
 
             //Merchant
             builder.Services.AddScoped<IMerchantRepo, MerchantRepo>();
@@ -64,21 +66,19 @@ namespace AffalitePL
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 8a92e8e6ab56073551b6586e3e721a1e64c976bc
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-<<<<<<< HEAD
-                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000")
-=======
+
+                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
+
                     policy.WithOrigins("http://localhost:4200")
->>>>>>> 8a92e8e6ab56073551b6586e3e721a1e64c976bc
+
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();

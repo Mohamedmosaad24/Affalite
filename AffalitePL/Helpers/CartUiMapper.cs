@@ -27,10 +27,10 @@ namespace AffalitePL.Helpers
                 var unit = p?.Price ?? 0;
                 var lineTotal = unit * line.Quantity;
                 subtotal += lineTotal;
-                var file = p?.ImageUrl;
-                var fullImage = string.IsNullOrEmpty(file)
-                    ? string.Empty
-                    : $"{baseTrim}/images/products/{file}";
+                //var file = p?.ImageUrl;
+                //var fullImage = string.IsNullOrEmpty(file)
+                //    ? string.Empty
+                //    : $"{baseTrim}/images/products/{file}";
 
                 items.Add(new CartUiItemDto
                 {
@@ -38,7 +38,7 @@ namespace AffalitePL.Helpers
                     ProductName = p?.Name ?? string.Empty,
                     Description = p?.Description ?? string.Empty,
                     Price = unit,
-                    Image = fullImage,
+                    //Image = fullImage,
                     Quantity = line.Quantity,
                     Total = lineTotal
                 });
