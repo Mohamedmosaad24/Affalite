@@ -1,4 +1,6 @@
 ﻿
+using AffaliteBL.DTOs.ReviewDTOs;
+
 namespace AffaliteBLL.DTOs.Products
 {
     public class ProductDto

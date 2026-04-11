@@ -8,6 +8,8 @@ using AffaliteBL.IServices;
 using AffaliteDAL.Entities;
 using AffaliteDAL.Entities.Enums;
 using AffaliteDAL.IRepo;
+using AffaliteBLL.Services;
+
 
 namespace AffaliteBL.Services
 {
