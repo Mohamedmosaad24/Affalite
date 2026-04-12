@@ -1,4 +1,4 @@
-﻿
+
 namespace AffaliteBLL.DTOs.Products
 {
     public class ProductDto
@@ -15,11 +15,9 @@ namespace AffaliteBLL.DTOs.Products
         public string MerchantName { get; set; } = string.Empty;
         public decimal PlatformCommissionPct { get; set; }
         public string Status { get; set; } = string.Empty;
-<<<<<<< HEAD
+
         public DateTime CreatedAt { get; set; }
-=======
         public List<string> Images { get; set; } = new List<string>();
         public List<ReviewDto> Reviews { get; set; } = new List<ReviewDto>();
->>>>>>> 8a92e8e6ab56073551b6586e3e721a1e64c976bc
     }
 }
