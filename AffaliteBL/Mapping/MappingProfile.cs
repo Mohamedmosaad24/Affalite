@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AffaliteBL.DTOs.AffiliateDTOs;
-=======
-﻿using AffaliteBL.DTOs.AffiliateDTOs;
->>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
 using AffaliteBL.DTOs.Auth;
 using AffaliteBL.DTOs.CartDTOs;
 using AffaliteBL.DTOs.CategoryDTOs;
@@ -52,27 +43,18 @@ namespace AffaliteBL.Mapping
             CreateMap<Product, ProductDto>()
                 .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty))
-<<<<<<< HEAD
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
-                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
-                .ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant != null && src.Merchant.AppUser != null ? src.Merchant.AppUser.FullName : string.Empty))
-=======
                 //.ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant != null ? src.Merchant.Name : string.Empty))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
 
                 .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
+                .ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant != null && src.Merchant.AppUser != null ? src.Merchant.AppUser.FullName : string.Empty))
                 .ForMember(dest => dest.Images, opt => opt.MapFrom<ImageUrlResolver>())
 
                 .ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant.AppUser.FullName))
->>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
                 .ForMember(dest => dest.Images, opt => opt.MapFrom<ImageUrlResolver>())
                 .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src => src.Reviews)).ReverseMap();
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
 
             CreateMap<CreateProductDto, Product>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => ProductStatus.Active)) // Default status on create

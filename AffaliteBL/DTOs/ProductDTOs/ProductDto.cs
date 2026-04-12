@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
-﻿
+
 using AffaliteBL.DTOs.ReviewDTOs;
->>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
 
 namespace AffaliteBLL.DTOs.Products
 {
@@ -20,15 +17,9 @@ namespace AffaliteBLL.DTOs.Products
         public string MerchantName { get; set; } = string.Empty;
         public decimal PlatformCommissionPct { get; set; }
         public string Status { get; set; } = string.Empty;
-<<<<<<< HEAD
-
-        public DateTime CreatedAt { get; set; }
-        public List<string> Images { get; set; } = new List<string>();
-        public List<ReviewDto> Reviews { get; set; } = new List<ReviewDto>();
-=======
         public DateTime CreatedAt { get; set; }
         public List<string> Images { get; set; } = new List<string>();
         public List<ProductReviewDto> Reviews { get; set; } = new List<ProductReviewDto>();
->>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
+        public List<ReviewDto> Reviews { get; set; } = new List<ReviewDto>();
     }
 }

@@ -1,8 +1,7 @@
 using AffaliteBL.DTOs.CartDTOs;
 using AffaliteBLL.DTOs.Products;
 using AffaliteDAL.Entities;
-using AutoMapper;
-using Microsoft.Extensions.Options;
+
 using Mattger_BL.Helpers;
 
 namespace AffaliteBL.Helpers
