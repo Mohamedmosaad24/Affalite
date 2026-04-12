@@ -22,12 +22,17 @@ namespace AffaliteDAL.Repo
                     .ThenInclude(i => i.Product)
 
                 .Include(c => c.Items).ThenInclude(p=>p.Product).ThenInclude(p=>p.Images)
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
                 .FirstOrDefault(c => c.Id == cartId);
         }
         public Cart? GetCartWithAffilaiteId(int uId)
         {
             return _context.Carts.Include(c => c.Items).ThenInclude(p => p.Product).ThenInclude(p => p.Images)
                 .FirstOrDefault(c => c.AffiliateId == uId);
+            
         }
         public CartItem? GetCartItem(int cartId, int itemId)
         {

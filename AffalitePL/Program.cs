@@ -1,7 +1,8 @@
-
 using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
+using AffaliteBLL.Services;
+using AffaliteBLL.Services.Interfaces;
 using AffaliteDAL.Data;
 using AffaliteDAL.Entities;
 using AffaliteDAL.IRepo;
@@ -36,10 +37,14 @@ namespace AffalitePL
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IProductReviewRepo, ProductReviewRepo>();
+            builder.Services.AddScoped<IProductReviewService, ProductReviewService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<ICommissionService, CommissionService>();
             builder.Services.AddScoped<IAuthServices, AuthServices>();
             builder.Services.AddScoped<IJwtServices, JwtServices>();
+            builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+
 
             //Merchant
             builder.Services.AddScoped<IMerchantRepo, MerchantRepo>();
@@ -65,13 +70,23 @@ namespace AffalitePL
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
 
+<<<<<<< HEAD
                     policy.WithOrigins("http://localhost:4200", "http://localhost:55000")
+=======
+                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
+
+                    policy.WithOrigins("http://localhost:4200")
+
+>>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();

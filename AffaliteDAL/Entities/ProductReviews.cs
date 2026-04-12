@@ -2,7 +2,7 @@
 
 namespace AffaliteDAL.Entities
 {
-    public class ProductReview
+    public class ProductReviews
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -13,6 +13,6 @@ namespace AffaliteDAL.Entities
 
         public Product? Product { get; set; }
         // optionally, if you have a User entity
-        // public User? User { get; set; }
+         //public User? User { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AffaliteDAL.Entities
@@ -23,6 +24,7 @@ namespace AffaliteDAL.Entities
 
         //public List<Merchant> Merchants { get; set; }
         public ICollection<MerchantOrder> MerchantOrder { get; set; }
+        [JsonIgnore]
         public Affiliate? Affiliate { get; set; }
 
         public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();

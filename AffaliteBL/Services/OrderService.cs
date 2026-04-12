@@ -63,7 +63,7 @@ namespace AffaliteBL.Services
                 AffiliateCommissionPct = neworder.AffiliateCommissionPct,
                 CreatedAt = DateTime.Now,
                 Status = OrderStatus.Pending,
-                TotalPrice = totalPrice,
+                TotalPrice = totalPrice + neworder.AffiliateCommissionPct ,
                 Items = new List<OrderItem>()
             };
             _orderRepo.Add(order);
@@ -85,13 +85,13 @@ namespace AffaliteBL.Services
             _orderRepo.SaveChanges();
 
             // ✅ إنشاء الـ Commission
-            decimal affiliateAmount = totalPrice * (neworder.AffiliateCommissionPct / 100);
+            
             var commission = new Commission
             {
                 OrderId = order.Id,
-                AffiliateAmount = affiliateAmount,
+                AffiliateAmount = neworder.AffiliateCommissionPct,
                 PlatformAmount = platformAmount,
-                MerchantAmount = totalPrice - (platformAmount + affiliateAmount),
+                MerchantAmount = totalPrice - (platformAmount + neworder.AffiliateCommissionPct),
                 Status = CommissionStatus.Pending
             };
             _commissionRepo.Add(commission);
@@ -105,7 +105,7 @@ namespace AffaliteBL.Services
                 {
                     CommissionId = commission.Id,
                     MerchantId = item.Product.MerchantId,
-                    value = itemTotal - (item.Product.PlatformCommissionPct / 100) * itemTotal
+                    value = itemTotal - ((item.Product.PlatformCommissionPct / 100) * itemTotal)
                 });
             }
             _merchantCommissions.SaveChanges();
