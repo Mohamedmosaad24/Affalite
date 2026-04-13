@@ -20,6 +20,6 @@ namespace AffaliteBLL.DTOs.Products
         public DateTime CreatedAt { get; set; }
         public List<string> Images { get; set; } = new List<string>();
         public List<ProductReviewDto> Reviews { get; set; } = new List<ProductReviewDto>();
-        public List<ReviewDto> Reviews { get; set; } = new List<ReviewDto>();
+        
     }
 }
