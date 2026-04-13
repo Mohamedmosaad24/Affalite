@@ -1,4 +1,4 @@
-using AffaliteBL.IServices;
+﻿using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
 using AffaliteBLL.Services;
@@ -68,20 +68,32 @@ namespace AffalitePL
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
-
-
-
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-
-                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000")
+                    policy.SetIsOriginAllowed(_ => true)
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
                 });
             });
+
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAngular", policy =>
+            //    {
+
+            //        policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
+            //        policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
+
+            //        policy.WithOrigins("http://localhost:4200")
+
+            //              .AllowAnyHeader()
+            //              .AllowAnyMethod()
+            //              .AllowCredentials();
+            //    });
+            //});
             builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -156,7 +168,7 @@ namespace AffalitePL
                 app.UseSwaggerUI();
             }
             app.UseCors("AllowAngular");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();

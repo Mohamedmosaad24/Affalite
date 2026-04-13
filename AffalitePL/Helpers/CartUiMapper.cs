@@ -27,10 +27,14 @@ namespace AffalitePL.Helpers
                 var unit = p?.Price ?? 0;
                 var lineTotal = unit * line.Quantity;
                 subtotal += lineTotal;
-                var file = p?.ImageUrl;
+                var file = p?.Images?.FirstOrDefault()?.ImageUrl;
                 var fullImage = string.IsNullOrEmpty(file)
                     ? string.Empty
                     : $"{baseTrim}/images/products/{file}";
+                //var file = p?.ImageUrl;
+                //var fullImage = string.IsNullOrEmpty(file)
+                //    ? string.Empty
+                //    : $"{baseTrim}/images/products/{file}";
 
                 items.Add(new CartUiItemDto
                 {
