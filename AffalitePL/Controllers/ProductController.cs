@@ -79,10 +79,10 @@ namespace AffaliteAPI.Controllers
 
         // PUT /api/products/{id}
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] UpdateProductDto dto)
+        public IActionResult Update(int id, [FromForm] UpdateProductDto dto)
         {
-            var product = _mapper.Map<Product>(dto);
-            _service.Update(id, product);
+            //var product = _mapper.Map<Product>(dto);
+            _service.Update(id, dto);
             return Ok();
         }
 
