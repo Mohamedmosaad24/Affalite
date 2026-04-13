@@ -1,4 +1,4 @@
-using AffaliteBL.IServices;
+﻿using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
 using AffaliteBLL.Services;
@@ -68,30 +68,32 @@ namespace AffalitePL
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-
-<<<<<<< HEAD
-                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000")
-=======
-                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
-
-                    policy.WithOrigins("http://localhost:4200")
-
->>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
+                    policy.SetIsOriginAllowed(_ => true)
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
                 });
             });
+
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAngular", policy =>
+            //    {
+
+            //        policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
+            //        policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
+
+            //        policy.WithOrigins("http://localhost:4200")
+
+            //              .AllowAnyHeader()
+            //              .AllowAnyMethod()
+            //              .AllowCredentials();
+            //    });
+            //});
             builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -166,7 +168,7 @@ namespace AffalitePL
                 app.UseSwaggerUI();
             }
             app.UseCors("AllowAngular");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
