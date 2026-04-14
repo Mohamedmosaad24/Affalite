@@ -1,6 +1,8 @@
 ﻿using AffaliteBL.DTOs.WishlistDTOS;
 using AffaliteBL.IServices;
 using AffaliteDAL.Entities;
+using Mattger_BL.Helpers;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,12 @@ namespace AffaliteBL.Services;
 public class WishlistService : IWishlistService
 {
     private readonly IWishlistRepo _wishlistRepo;
+    private readonly ApiSettings _settings;
 
-    public WishlistService(IWishlistRepo wishlistRepo)
+    public WishlistService(IWishlistRepo wishlistRepo, IOptions<ApiSettings> options)
     {
         _wishlistRepo = wishlistRepo;
+        _settings = options.Value;
     }
 
     public List<WishlistItemDTO> GetWishlist(int affiliateId)
@@ -26,7 +30,9 @@ public class WishlistService : IWishlistService
             ProductId = w.ProductId,
             Name = w.Product?.Name ?? "",
             Price = w.Product?.Price ?? 0,
-            ImageUrl = w.Product?.Images?.FirstOrDefault()?.ImageUrl,
+            ImageUrl = w.Product?.Images?.FirstOrDefault()?.ImageUrl != null
+                ? $"{_settings.BaseUrl}images/products/{w.Product!.Images.First().ImageUrl}"
+                : null,
             CreatedAt = w.CreatedAt
         }).ToList();
     }

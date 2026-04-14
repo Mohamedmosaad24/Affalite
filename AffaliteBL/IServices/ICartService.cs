@@ -6,7 +6,7 @@ namespace AffaliteBL.IServices
     public interface ICartService
     {
         Cart? GetCartById(int id);
-        Cart CreateCart();
+        Cart CreateCart(int userId);
         void DeleteCart(int id);
 
         void CreateItem(int cartId, AddCartItemDTO addCartItemDTO);
