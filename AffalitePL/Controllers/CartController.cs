@@ -37,9 +37,9 @@ namespace AffalitePL.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCart()
+        public IActionResult CreateCart(int userId)
         {
-            var cart = _cartService.CreateCart();
+            var cart = _cartService.CreateCart(userId);
             return Ok(CartUiMapper.Map(cart, _imagesBaseUrl));
         }
 

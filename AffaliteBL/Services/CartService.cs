@@ -19,9 +19,9 @@ namespace AffaliteBL.Services
             return _repo.GetCartWithItems(id);
         }
 
-        public Cart CreateCart()
+        public Cart CreateCart(int userId)
         {
-            var cart = new Cart();
+            var cart = new Cart { AffiliateId= userId,CreatedAt=DateTime.Now };
 
             _repo.Add(cart);
             _repo.Save();
