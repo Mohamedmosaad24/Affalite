@@ -98,7 +98,7 @@ namespace AffaliteBL.Services
             existing.Details = dto.Details;
             existing.Price = dto.Price;
             existing.Stock = dto.Stock;
-            existing.CategoryId = dto.CategoryId;
+            existing.CategoryId = (int)dto.CategoryId;
             existing.MerchantId = dto.MerchantId;
             existing.PlatformCommissionPct = dto.PlatformCommissionPct;
             existing.Status = dto.Status;

@@ -22,7 +22,8 @@ public class OrderRepo : IOrderRepo
 
     public Order GetById(int id)
     {
-        return _context.Orders.Include(o => o.Commission)
+        return _context.Orders.Include(o => o.Commission).ThenInclude(c=>c.MerchantCommissions)
+            .Include(o=>o.MerchantOrder).ThenInclude(m=>m.Merchant)
                               .Include(o => o.Items).
                               ThenInclude(o => o.Product).
                               ThenInclude(o => o.Images).

@@ -16,5 +16,7 @@ namespace AffaliteBL.IServices
         IEnumerable<OrderReadDTO> GetAffiliateOrders(int affiliateId);
         IEnumerable<CommissionReadDTO> GetAffiliateCommissions(int affiliateId);
         AffiliateBalanceDTO? GetAffiliateBalance(int affiliateId);
+        Affiliate? GetAffiliateUserId(string userId);
+
     }
 }

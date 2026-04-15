@@ -13,5 +13,6 @@ namespace AffaliteDAL.IRepo
         IEnumerable<Product> GetMerchantProducts(int merchantId);
         IEnumerable<Order> GetMerchantOrders(int merchantId);
         decimal? GetMerchantBalance(int merchantId);
+        Merchant? GetMerchantByUserId(string userId);
     }
 }

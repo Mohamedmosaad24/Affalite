@@ -93,5 +93,10 @@ namespace AffaliteBL.Services
                 Balance = balance.Value
             };
         }
+        public Merchant? GetMerchantByUserId(string userId)
+        {
+            return _repo.GetMerchantByUserId(userId);
+        }
+
     }
 }

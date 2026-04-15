@@ -10,7 +10,7 @@ namespace AffaliteBL.DTOs.ReviewDTOs
         {
             public int Id { get; set; }
             public int ProductId { get; set; }
-            public int AffiliateId { get; set; }
+            public int AffiliateName { get; set; }
             public string Comment { get; set; } = string.Empty;
             public int Rating { get; set; }
             public DateTime CreatedAt { get; set; }

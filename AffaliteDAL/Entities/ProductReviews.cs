@@ -7,6 +7,7 @@ namespace AffaliteDAL.Entities
         public int Id { get; set; }
         public int ProductId { get; set; }
         public int AffiliateId { get; set; }
+        public Affiliate Affiliate { get; set; }
         public string Comment { get; set; } = string.Empty;
         public int Rating { get; set; } // 1-5 scale
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

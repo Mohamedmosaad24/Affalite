@@ -13,5 +13,6 @@ namespace AffaliteBLL.DTOs.Products
         public ICollection<IFormFile> Images { get; set; } = new List<IFormFile>();
         public int MerchantId { get; set; }
         public decimal PlatformCommissionPct { get; set; }
+
     }
 }

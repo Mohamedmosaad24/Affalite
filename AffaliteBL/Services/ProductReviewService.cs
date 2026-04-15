@@ -23,7 +23,7 @@ namespace AffaliteBLL.Services
                 {
                     Id = r.Id,
                     ProductId = r.ProductId,
-                    AffiliateId = r.AffiliateId,
+                    AffiliateName = r.AffiliateId,
                     Comment = r.Comment,
                     Rating = r.Rating,
                     CreatedAt = r.CreatedAt
@@ -44,7 +44,7 @@ namespace AffaliteBLL.Services
             {
                 Id = review.Id,
                 ProductId = review.ProductId,
-                AffiliateId = review.AffiliateId,
+                AffiliateName = review.AffiliateId,
                 Comment = review.Comment,
                 Rating = review.Rating,
                 CreatedAt = review.CreatedAt
@@ -60,7 +60,7 @@ namespace AffaliteBLL.Services
                 {
                     Id = r.Id,
                     ProductId = r.ProductId,
-                    AffiliateId = r.AffiliateId,
+                    AffiliateName = r.AffiliateId,
                     Comment = r.Comment,
                     Rating = r.Rating,
                     CreatedAt = r.CreatedAt
@@ -79,7 +79,7 @@ namespace AffaliteBLL.Services
                 {
                     Id = r.Id,
                     ProductId = r.ProductId,
-                    AffiliateId = r.AffiliateId,
+                    AffiliateName = r.AffiliateId,
                     Comment = r.Comment,
                     Rating = r.Rating,
                     CreatedAt = r.CreatedAt
@@ -115,7 +115,7 @@ namespace AffaliteBLL.Services
             {
                 Id = review.Id,
                 ProductId = review.ProductId,
-                AffiliateId = review.AffiliateId,
+                AffiliateName = review.AffiliateId,
                 Comment = review.Comment,
                 Rating = review.Rating,
                 CreatedAt = review.CreatedAt

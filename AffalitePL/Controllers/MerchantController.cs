@@ -94,5 +94,12 @@ namespace AffalitePL.Controllers
 
             return Ok(result);
         }
+        [HttpGet("${userId}/merchant")]
+        public  IActionResult GetMerchantByUserId(string userId)
+        {
+            var res= _merchantService.GetMerchantByUserId(userId);
+           var merchant= _mapper.Map<GetMerchantDTO>(res);
+            return Ok(merchant);
+        }
     }
 }

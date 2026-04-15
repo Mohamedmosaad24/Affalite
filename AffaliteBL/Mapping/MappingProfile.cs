@@ -33,11 +33,17 @@ namespace AffaliteBL.Mapping
             CreateMap<Order, OrderReadDTO>().ReverseMap();
             CreateMap<Commission, CommissionReadDTO>().ReverseMap();
             //Cart
-            CreateMap<CartItem , AddCartItemDTO>().ReverseMap();
-             CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
+            CreateMap<Cart, CartDTO>().ReverseMap();
+            CreateMap<CartItem, CartItemDTO>().ReverseMap();
+
+            CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
+                //.ForMember(dest => dest.im, opt => opt.MapFrom<ImageUrlResolver>())
+
 
             //review
-            CreateMap<ProductReviews, ProductReviewDto>();
+            CreateMap<ProductReviews, ProductReviewDto>()
+                .ForMember(dest => dest.AffiliateName, opt => opt.MapFrom(src => src.Affiliate.AppUser.FullName));
+
 
             //Product
             CreateMap<Product, ProductDto>()

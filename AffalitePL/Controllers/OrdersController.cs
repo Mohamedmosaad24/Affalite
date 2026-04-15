@@ -90,12 +90,24 @@ namespace AffalitePL.Controllers
             var order = IOrderRepo1.GetById(id);
             if (order == null) return NotFound();
             Affiliate affilaite = _affiliateService.GetAffiliateById((int)order.AffiliateId);
-            //Merchant merchant = _merchantService.GetMerchantById((int)order.MerchantId);
-            if(status == OrderStatus.Paid)
+            List<Merchant> MerchantIds = order.MerchantOrder.Select(m => m.Merchant).ToList();
+
+            if (status == OrderStatus.Paid && order.Commission.Status!=CommissionStatus.Paid)
             {
                 affilaite.Balance += order.Commission.AffiliateAmount;
-                //merchant.Balance += order.Commission.MerchantAmount ;
+                foreach (var merchant in MerchantIds)
+                {
+                    var merchantRe = order.Commission.MerchantCommissions.Where(m => m.MerchantId == merchant.Id ).ToList();
+                    merchant.Balance += merchantRe.Sum(c=>c.value);
+                }
+                order.Commission.Status = CommissionStatus.Paid;
             }
+
+            if(status == OrderStatus.Cancelled)
+            {
+                order.Commission.Status = CommissionStatus.Failed;
+            }
+
             order.Status = status;
             _orderRepo.Update(order);
             _orderRepo.SaveChanges();

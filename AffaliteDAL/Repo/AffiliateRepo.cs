@@ -40,5 +40,12 @@ namespace AffaliteDAL.Repo
                 .Select(a => (decimal?)a.Balance)
                 .FirstOrDefault();
         }
+         
+        public Affiliate? GetAffiliateUserId(string userId)
+        {
+            return _context.Affiliates
+    .Where(a => a.AppUserId == userId)
+    .FirstOrDefault();
+        }
     }
 }

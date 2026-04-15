@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AffaliteDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class seeddata : Migration
+    public partial class seeding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,9 +29,9 @@ namespace AffaliteDAL.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "user1", 0, "913acdbb-b509-47e1-87b7-17248105825b", "merchant1@affalite.com", true, "Ahmed Hassan", false, null, "MERCHANT1@AFFALITE.COM", "MERCHANT1@AFFALITE.COM", "AQAAAAIAAYagAAAAEG1EqOF9+zjivoS3AiebUoT1CCdF2Odc2kkHzuzCcAOkRcwVWeQ7yMoyxX8UTGO2pw==", "01001234567", false, "62fbe75a-437e-4fb0-8ad2-b76d15515e5d", false, "merchant1" },
-                    { "user2", 0, "4e3d6d9f-35a1-4d57-af3b-849dc4b42c05", "affiliate1@affalite.com", true, "Youssef Ali", false, null, "AFFILIATE1@AFFALITE.COM", "AFFILIATE1@AFFALITE.COM", "AQAAAAIAAYagAAAAEImCU2KjZAXmXa7LE5jzBRLzhrECEBKnlXiafdiQci06rZEcqEMaq99ekvPamOgG1w==", "01001112233", false, "f9c3c6d1-b65c-4d94-886a-d05b98ed29b0", false, "affiliate1" },
-                    { "user3", 0, "9b4c966a-1fa2-44fe-a1b8-2abbeff3ee8f", "customer1@affalite.com", true, "Hana Adel", false, null, "CUSTOMER1@AFFALITE.COM", "CUSTOMER1@AFFALITE.COM", "AQAAAAIAAYagAAAAEKOP1rO39EN1hSePVu1n5c8DXNi6JkPwc2bJb1nVT6fXGv5bJhoCNNvMLm7GgGl5AQ==", "01002223344", false, "1b90b7e7-3d6e-4208-8b6f-010980e1c96b", false, "customer1" }
+                    { "user1", 0, "e5225354-41b5-42d5-86ca-0bc8a3e7e7d3", "merchant1@affalite.com", true, "Ahmed Hassan", false, null, "MERCHANT1@AFFALITE.COM", "MERCHANT1@AFFALITE.COM", "AQAAAAIAAYagAAAAEBbBSfBGA5jM89nEYiCvg8+9/V+RIYQ8y3NYog6AOnIsHPmhqlYwF0W+uH7uLfmYew==", "01001234567", false, "b18f7a67-6283-4248-a53d-3ad677d6d9b0", false, "merchant1" },
+                    { "user2", 0, "67215f38-a34e-451c-8789-5b8be665061c", "affiliate1@affalite.com", true, "Youssef Ali", false, null, "AFFILIATE1@AFFALITE.COM", "AFFILIATE1@AFFALITE.COM", "AQAAAAIAAYagAAAAEA9/QAFMX0LECw2HNq5bjEelW+HW9BW3htFPCc/5Gp3pjQIqnAYAYlykq/c1VkndIw==", "01001112233", false, "99125844-003e-454e-94ea-cdf0a15f4774", false, "affiliate1" },
+                    { "user3", 0, "a49762b8-b848-4667-b397-7461b61585d2", "customer1@affalite.com", true, "Hana Adel", false, null, "CUSTOMER1@AFFALITE.COM", "CUSTOMER1@AFFALITE.COM", "AQAAAAIAAYagAAAAEFqDCtUpGBVLS6ArB879mFRA8qj2zqn55BGgEyIn32HIjiChJc/Mg3tRT7vKcZg6AQ==", "01002223344", false, "40478c9c-ca84-4ff9-966b-2e1a735202c5", false, "customer1" }
                 });
 
             migrationBuilder.InsertData(
@@ -39,14 +39,14 @@ namespace AffaliteDAL.Migrations
                 columns: new[] { "Id", "CreatedAt", "Name", "Slug" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2026, 4, 11, 2, 50, 18, 162, DateTimeKind.Utc).AddTicks(3628), "Electronics", "electronics" },
-                    { 2, new DateTime(2026, 4, 11, 2, 50, 18, 162, DateTimeKind.Utc).AddTicks(3630), "Fashion", "fashion" }
+                    { 1, new DateTime(2026, 4, 15, 5, 19, 23, 602, DateTimeKind.Utc).AddTicks(2668), "Electronics", "electronics" },
+                    { 2, new DateTime(2026, 4, 15, 5, 19, 23, 602, DateTimeKind.Utc).AddTicks(2673), "Fashion", "fashion" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Affiliates",
                 columns: new[] { "Id", "AppUserId", "Balance", "CreatedAt" },
-                values: new object[] { 1, "user2", 1500m, new DateTime(2026, 4, 11, 2, 50, 18, 162, DateTimeKind.Utc).AddTicks(3777) });
+                values: new object[] { 1, "user2", 1500m, new DateTime(2026, 4, 15, 5, 19, 23, 602, DateTimeKind.Utc).AddTicks(3104) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -61,25 +61,25 @@ namespace AffaliteDAL.Migrations
             migrationBuilder.InsertData(
                 table: "Merchants",
                 columns: new[] { "Id", "AppUserId", "Balance", "CreatedAt" },
-                values: new object[] { 1, "user1", 5000m, new DateTime(2026, 4, 11, 2, 50, 18, 162, DateTimeKind.Utc).AddTicks(3708) });
+                values: new object[] { 1, "user1", 5000m, new DateTime(2026, 4, 15, 5, 19, 23, 602, DateTimeKind.Utc).AddTicks(2893) });
 
             migrationBuilder.InsertData(
                 table: "Carts",
-                columns: new[] { "Id", "AffiliateId", "CreatedAt" },
-                values: new object[] { 1, 1, new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(4077) });
+                columns: new[] { "Id", "AffilaiteCommission", "AffiliateId", "CreatedAt", "Shiping", "SubTotal", "Total" },
+                values: new object[] { 1, 0m, 1, new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(4132), 10m, 0m, 0m });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "AffiliateCommissionPct", "AffiliateId", "CreatedAt", "CustomerAddress", "CustomerName", "CustomerPhone", "Status", "TotalPrice" },
-                values: new object[] { 1, 5m, 1, new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(4260), "123 Street", "David", "01000000004", 1, 2018m });
+                values: new object[] { 1, 5m, 1, new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(4760), "123 Street", "David", "01000000004", 1, 2018m });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CategoryId", "CreatedAt", "Description", "Details", "MerchantId", "Name", "PlatformCommissionPct", "Price", "SaleCount", "Status", "Stock" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(3844), "Latest Apple iPhone", "Details here", 1, "iPhone 14", 5m, 999m, 10, 2, 50 },
-                    { 2, 2, new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(3916), "Fantasy novel", "Details here", 1, "Harry Potter Book", 2m, 20m, 50, 2, 100 }
+                    { 1, 1, new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(3296), "Latest Apple iPhone", "Details here", 1, "iPhone 14", 5m, 999m, 10, 2, 50 },
+                    { 2, 2, new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(3453), "Fantasy novel", "Details here", 1, "Harry Potter Book", 2m, 20m, 50, 2, 100 }
                 });
 
             migrationBuilder.InsertData(
@@ -87,14 +87,14 @@ namespace AffaliteDAL.Migrations
                 columns: new[] { "Id", "CartId", "CreatedAt", "ProductId", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(4116), 1, 2 },
-                    { 2, 1, new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(4133), 2, 1 }
+                    { 1, 1, new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(4341), 1, 2 },
+                    { 2, 1, new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(4381), 2, 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Commissions",
                 columns: new[] { "Id", "AffiliateAmount", "CreatedAt", "MerchantAmount", "OrderId", "PlatformAmount", "Status" },
-                values: new object[] { 1, 578.99m, new DateTime(2026, 3, 13, 2, 50, 18, 162, DateTimeKind.Utc).AddTicks(4396), 17756.00m, 1, 964.99m, 1 });
+                values: new object[] { 1, 578.99m, new DateTime(2026, 3, 17, 5, 19, 23, 602, DateTimeKind.Utc).AddTicks(5421), 17756.00m, 1, 964.99m, 1 });
 
             migrationBuilder.InsertData(
                 table: "MerchantOrder",
@@ -106,8 +106,8 @@ namespace AffaliteDAL.Migrations
                 columns: new[] { "Id", "CreatedAt", "OrderId", "Price", "ProductId", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(4344), 1, 999m, 1, 2 },
-                    { 2, new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(4348), 1, 20m, 2, 1 }
+                    { 1, new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(5205), 1, 999m, 1, 2 },
+                    { 2, new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(5226), 1, 20m, 2, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -126,8 +126,8 @@ namespace AffaliteDAL.Migrations
                 columns: new[] { "Id", "AffiliateId", "Comment", "CreatedAt", "ProductId", "Rating" },
                 values: new object[,]
                 {
-                    { 1, 1, "Great phone!", new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(4007), 1, 5 },
-                    { 2, 1, "Loved the book", new DateTime(2026, 4, 11, 4, 50, 18, 162, DateTimeKind.Local).AddTicks(4010), 2, 4 }
+                    { 1, 1, "Great phone!", new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(3853), 1, 5 },
+                    { 2, 1, "Loved the book", new DateTime(2026, 4, 15, 7, 19, 23, 602, DateTimeKind.Local).AddTicks(3882), 2, 4 }
                 });
 
             migrationBuilder.InsertData(

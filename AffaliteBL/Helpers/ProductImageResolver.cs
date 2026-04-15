@@ -25,7 +25,7 @@ namespace Mattger_BL.Helpers
             return source.Images.Select(img => $"{_settings.BaseUrl}images/products/{img.ImageUrl}").ToList();
         }
 
-        public class CartItemImageUrlResolver : IValueResolver<CartItem, AddCartItemDTO, List<string>>
+        public class CartItemImageUrlResolver : IValueResolver<CartItem, AddCartItemDTO, string>
         {
             private readonly ApiSettings _settings;
 
@@ -34,12 +34,12 @@ namespace Mattger_BL.Helpers
                 _settings = options.Value;
             }
 
-            public List<string> Resolve(CartItem source, AddCartItemDTO destination, List<string> destMember, ResolutionContext context)
+            public string Resolve(CartItem source, AddCartItemDTO destination, string destMember, ResolutionContext context)
             {
                 if (source.Product == null || source.Product.Images == null || !source.Product.Images.Any())
-                    return new List<string>();
+                    return null;
 
-                return source.Product.Images.Select(img => $"{_settings.BaseUrl}images/products/{img.ImageUrl}").ToList();
+                return source.Product.Images.Select(img => $"{_settings.BaseUrl}images/products/{img.ImageUrl}").FirstOrDefault();
             }
         }
     }

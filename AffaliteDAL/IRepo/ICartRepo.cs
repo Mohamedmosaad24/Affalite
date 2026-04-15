@@ -4,7 +4,7 @@ namespace AffaliteDAL.IRepo
 {
     public interface ICartRepo : IGenericRepository<Cart>
     {
-        Cart? GetCartWithItems(int cartId);
+        Cart? GetCartWithItems(int userId);
         Cart? GetCartWithAffilaiteId(int uId);
         CartItem? GetCartItem(int cartId, int itemId);
         Product? GetProduct(int productId);
