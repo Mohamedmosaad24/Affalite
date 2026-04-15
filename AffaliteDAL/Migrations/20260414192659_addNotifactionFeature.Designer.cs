@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AffaliteDAL.Migrations
 {
     [DbContext(typeof(AffaliteDBContext))]
-<<<<<<<< HEAD:AffaliteDAL/Migrations/20260415051106_edit cart.Designer.cs
-    [Migration("20260415051106_edit cart")]
-    partial class editcart
-========
-    [Migration("20260413105113_inital migration")]
-    partial class initalmigration
->>>>>>>> Notification:AffaliteDAL/Migrations/20260413105113_inital migration.Designer.cs
+    [Migration("20260414192659_addNotifactionFeature")]
+    partial class addNotifactionFeature
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,23 +128,11 @@ namespace AffaliteDAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("AffilaiteCommission")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("AffiliateId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Shiping")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("SubTotal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -357,6 +340,45 @@ namespace AffaliteDAL.Migrations
                     b.ToTable("MerchantOrder");
                 });
 
+            modelBuilder.Entity("AffaliteDAL.Entities.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RelatedEntityId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("AffaliteDAL.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -453,6 +475,10 @@ namespace AffaliteDAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("MerchantId")
                         .HasColumnType("int");
 
@@ -535,8 +561,6 @@ namespace AffaliteDAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AffiliateId");
 
                     b.HasIndex("ProductId");
 
@@ -842,6 +866,17 @@ namespace AffaliteDAL.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("AffaliteDAL.Entities.Notification", b =>
+                {
+                    b.HasOne("AffaliteDAL.Entities.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("AffaliteDAL.Entities.Order", b =>
                 {
                     b.HasOne("AffaliteDAL.Entities.Affiliate", "Affiliate")
@@ -903,19 +938,11 @@ namespace AffaliteDAL.Migrations
 
             modelBuilder.Entity("AffaliteDAL.Entities.ProductReviews", b =>
                 {
-                    b.HasOne("AffaliteDAL.Entities.Affiliate", "Affiliate")
-                        .WithMany()
-                        .HasForeignKey("AffiliateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("AffaliteDAL.Entities.Product", "Product")
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Affiliate");
 
                     b.Navigation("Product");
                 });
