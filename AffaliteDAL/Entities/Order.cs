@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AffaliteDAL.Entities
@@ -10,7 +11,6 @@ namespace AffaliteDAL.Entities
     public class Order
     {
         public int Id { get; set; }
-        public int MerchantId { get; set; }
         public int? AffiliateId { get; set; }
 
         public string CustomerName { get; set; } = string.Empty;
@@ -22,7 +22,9 @@ namespace AffaliteDAL.Entities
         public OrderStatus Status { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public Merchant? Merchant { get; set; }
+        //public List<Merchant> Merchants { get; set; }
+        public ICollection<MerchantOrder> MerchantOrder { get; set; }
+        [JsonIgnore]
         public Affiliate? Affiliate { get; set; }
 
         public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();

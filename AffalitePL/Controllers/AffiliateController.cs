@@ -35,13 +35,13 @@ namespace AffalitePL.Controllers
                 var result = _mapper.Map<GetAffiliateDTO>(affiliate);
             return Ok(result);
         }
-        [HttpPost]
-        public IActionResult CreateAffiliate(CreateAffiliateDTO createAffiliateDTO)
-        {
-            var affiliate = _mapper.Map<Affiliate>(createAffiliateDTO);
-            _affiliateService.CreateAffiliate(affiliate);
-            return Ok("Create affiliate");
-        }
+        //[HttpPost]
+        //public IActionResult CreateAffiliate(CreateAffiliateDTO createAffiliateDTO)
+        //{
+        //    var affiliate = _mapper.Map<Affiliate>(createAffiliateDTO);
+        //    _affiliateService.CreateAffiliate(affiliate);
+        //    return Ok("Create affiliate");
+        //}
         [HttpPut("{id}")]
         public IActionResult UpdateAffiliate(int id, UpdateAffiliateDTO updateAffiliateDTO)
         {
@@ -80,6 +80,16 @@ namespace AffalitePL.Controllers
         {
             var result = _affiliateService.GetAffiliateBalance(id);
 
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+        [HttpGet("{userId}/Affilaite")]
+        public IActionResult GetAffiliateBalance(string userId)
+        {
+            var result = _affiliateService.GetAffiliateUserId(userId);
+            var affilaite = _mapper.Map<GetAffiliateDTO>(result);
             if (result == null)
                 return NotFound();
 

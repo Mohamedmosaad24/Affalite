@@ -5,11 +5,14 @@ using AffaliteBL.DTOs.CategoryDTOs;
 using AffaliteBL.DTOs.CommissionDTOs;
 using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
+using AffaliteBL.DTOs.ReviewDTOs;
 using AffaliteBL.Helpers;
+using AffaliteBLL.DTOs;
 using AffaliteBLL.DTOs.Products;
 using AffaliteDAL.Entities;
 using AffaliteDAL.Entities.Enums;
 using AutoMapper;
+using Mattger_BL.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,20 +33,38 @@ namespace AffaliteBL.Mapping
             CreateMap<Order, OrderReadDTO>().ReverseMap();
             CreateMap<Commission, CommissionReadDTO>().ReverseMap();
             //Cart
-            CreateMap<CartItem , AddCartItemDTO>().ReverseMap();
-             CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
+            CreateMap<Cart, CartDTO>().ReverseMap();
+            CreateMap<CartItem, CartItemDTO>().ReverseMap();
+
+            CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
+                //.ForMember(dest => dest.im, opt => opt.MapFrom<ImageUrlResolver>())
+
+
+            //review
+            CreateMap<ProductReviews, ProductReviewDto>()
+                .ForMember(dest => dest.AffiliateName, opt => opt.MapFrom(src => src.Affiliate.AppUser.FullName));
 
 
             //Product
             CreateMap<Product, ProductDto>()
+                .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty))
                 //.ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant != null ? src.Merchant.Name : string.Empty))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
-                .ForMember(dest => dest.ImageUrl,opt => opt.MapFrom<ImageUrlResolver>());
+
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
+                .ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant != null && src.Merchant.AppUser != null ? src.Merchant.AppUser.FullName : string.Empty))
+                //.ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
+                .ForMember(dest => dest.Images, opt => opt.MapFrom<ImageUrlResolver>())
+                .ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant.AppUser.FullName))
+                .ForMember(dest => dest.Images, opt => opt.MapFrom<ImageUrlResolver>())
+                    .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src => src.Reviews)).ReverseMap();
+
 
             CreateMap<CreateProductDto, Product>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => ProductStatus.Active)) // Default status on create
-                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.Images, opt => opt.Ignore());
 
             CreateMap<UpdateProductDto, Product>();
 
@@ -107,6 +128,16 @@ namespace AffaliteBL.Mapping
             CreateMap<Category, GetCategoryDTO>().ReverseMap();
             CreateMap<Category, CreateCategoryDTO>().ReverseMap();
             CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
+
+            CreateMap<OrderItem, OrderItemDTO>()
+           .ForMember(dest => dest.ProductName,
+              opt => opt.MapFrom(src => src.Product.Name));
+
+            CreateMap<Order, OrderReadDTO>();
+
+
+
+
         }
     }
 }

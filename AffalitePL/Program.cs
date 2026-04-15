@@ -1,7 +1,8 @@
-
 using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
+using AffaliteBLL.Services;
+using AffaliteBLL.Services.Interfaces;
 using AffaliteDAL.Data;
 using AffaliteDAL.Entities;
 using AffaliteDAL.IRepo;
@@ -36,10 +37,14 @@ namespace AffalitePL
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IProductReviewRepo, ProductReviewRepo>();
+            builder.Services.AddScoped<IProductReviewService, ProductReviewService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<ICommissionService, CommissionService>();
             builder.Services.AddScoped<IAuthServices, AuthServices>();
             builder.Services.AddScoped<IJwtServices, JwtServices>();
+            builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+
 
             //Merchant
             builder.Services.AddScoped<IMerchantRepo, MerchantRepo>();
@@ -50,22 +55,47 @@ namespace AffalitePL
             builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+            builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+            builder.Services.AddScoped<ICouponService, CouponService>();
+
+            builder.Services.AddScoped<IWishlistRepo, WishlistRepo>();
+            builder.Services.AddScoped<IWishlistService, WishlistService>();
+
+            //Notifications
+            builder.Services.AddScoped<INotificationRepo, NotificationRepo>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
+
+            //Admin Dashboard
+            builder.Services.AddScoped<IAdminDashboardRepo, AdminDashboardRepo>();
+            builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+
+            //Email
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
             //app settings
             builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200")
+                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000")
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
                 });
             });
+
+
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
@@ -126,6 +156,8 @@ namespace AffalitePL
 
                     };
                 });
+
+
             var app = builder.Build();
             IdentitySeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
 
@@ -136,7 +168,7 @@ namespace AffalitePL
                 app.UseSwaggerUI();
             }
             app.UseCors("AllowAngular");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();

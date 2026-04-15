@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AffaliteBL.DTOs.CartDTOs;
+using AffaliteBLL.DTOs.Products;
+using AffaliteDAL.Entities;
+using AutoMapper;
 
-namespace AffaliteBL.Helpers
+using Microsoft.Extensions.Options;
+
+namespace Mattger_BL.Helpers
 {
-    using System.Runtime;
-    using AffaliteBLL.DTOs.Products;
-    using AffaliteDAL.Entities;
-    using AutoMapper;
-    using Mattger_BL.Helpers;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Options;
-    public class ImageUrlResolver : IValueResolver<Product, ProductDto, string>
+    public class ImageUrlResolver : IValueResolver<Product, ProductDto, List<string>>
     {
         private readonly ApiSettings _settings;
 
@@ -22,32 +16,31 @@ namespace AffaliteBL.Helpers
             _settings = options.Value;
         }
 
-        public string Resolve(Product source, ProductDto destination, string destMember, ResolutionContext context)
+        public List<string> Resolve(Product source, ProductDto destination, List<string> destMember, ResolutionContext context)
         {
-            if (string.IsNullOrEmpty(source.ImageUrl))
-                return null;
+            if (source.Images == null || !source.Images.Any())
+                return new List<string>();
 
-            return $"{_settings.BaseUrl}images/products/{source.ImageUrl}";
+            // بناء اللينكات لكل صورة
+            return source.Images.Select(img => $"{_settings.BaseUrl}images/products/{img.ImageUrl}").ToList();
         }
 
+        public class CartItemImageUrlResolver : IValueResolver<CartItem, AddCartItemDTO, string>
+        {
+            private readonly ApiSettings _settings;
+
+            public CartItemImageUrlResolver(IOptions<ApiSettings> options)
+            {
+                _settings = options.Value;
+            }
+
+            public string Resolve(CartItem source, AddCartItemDTO destination, string destMember, ResolutionContext context)
+            {
+                if (source.Product == null || source.Product.Images == null || !source.Product.Images.Any())
+                    return null;
+
+                return source.Product.Images.Select(img => $"{_settings.BaseUrl}images/products/{img.ImageUrl}").FirstOrDefault();
+            }
+        }
     }
-    //public class CartItemImageUrlResolver : IValueResolver<CartItem, CartItemDTO, string>
-    //{
-    //    private readonly ApiSettings _settings;
-
-    //    public CartItemImageUrlResolver(IOptions<ApiSettings> options)
-    //    {
-    //        _settings = options.Value;
-
-    //    }
-
-    //    public string Resolve(CartItem source, CartItemDTO destination, string destMember, ResolutionContext context)
-    //    {
-    //        if (source.Product == null || string.IsNullOrEmpty(source.Product.PictureUrl))
-    //            return null;
-    //        return $"{_settings.BaseUrl}images/{source.Product.PictureUrl}";
-
-    //    }
-
-    //}
 }

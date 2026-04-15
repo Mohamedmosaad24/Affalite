@@ -1,13 +1,16 @@
-﻿using System;
+﻿using AffaliteBL.Helpers;
+using AffaliteBL.IServices;
+using AffaliteBLL.DTOs.Products;
+using AffaliteDAL.Entities;
+using AffaliteDAL.Entities.Enums;
+using AffaliteDAL.IRepo;
+using AffaliteBLL.Services;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AffaliteBL.Helpers;
-using AffaliteBL.IServices;
-using AffaliteDAL.Entities;
-using AffaliteDAL.Entities.Enums;
-using AffaliteDAL.IRepo;
 
 namespace AffaliteBL.Services
 {
@@ -55,6 +58,22 @@ namespace AffaliteBL.Services
                 .Skip((query.PageNumber - 1) * query.PageSize)
                 .Take(query.PageSize);
 
+            // Type
+            if (!string.IsNullOrEmpty(query.Type))
+                if(query.Type == "new")
+                {
+                products = products
+                .OrderByDescending(p => p.CreatedAt);
+                }
+            if (query.Type == "top")
+            {
+                products = products
+                .OrderByDescending(p => p.SaleCount);
+            }
+
+
+
+
             return products.ToList();
         }
 
@@ -69,20 +88,40 @@ namespace AffaliteBL.Services
             _repo.SaveChanges();
         }
 
-        public void Update(int id, Product product)
+        public void Update(int id, UpdateProductDto dto)
         {
-            var existing = _repo.GetById(id);
+            var existing = _repo.GetQueryable().FirstOrDefault(p => p.Id == id);
             if (existing == null) return;
 
-            existing.Name = product.Name;
-            existing.Description = product.Description;
-            existing.Price = product.Price;
-            existing.Stock = product.Stock;
-            existing.ImageUrl = product.ImageUrl;
-            existing.CategoryId = product.CategoryId;
-            existing.MerchantId = product.MerchantId;
-            existing.PlatformCommissionPct = product.PlatformCommissionPct;
-            existing.Status = product.Status;
+            existing.Name = dto.Name;
+            existing.Description = dto.Description;
+            existing.Details = dto.Details;
+            existing.Price = dto.Price;
+            existing.Stock = dto.Stock;
+            existing.CategoryId = (int)dto.CategoryId;
+            existing.MerchantId = dto.MerchantId;
+            existing.PlatformCommissionPct = dto.PlatformCommissionPct;
+            existing.Status = dto.Status;
+
+
+            existing.Images = existing.Images
+           .Where(img => dto.ExistingImageUrls
+           .Any(url => url.Contains(img.ImageUrl)))
+           .ToList();
+
+
+            if (dto.Images != null && dto.Images.Any())
+            {
+                foreach (var file in dto.Images)
+                {
+                    var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                    var path = Path.Combine("wwwroot/images/products", fileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                        file.CopyTo(stream);
+
+                    existing.Images.Add(new ProductImage { ImageUrl = fileName });
+                }
+            }
 
             _repo.Update(existing);
             _repo.SaveChanges();
@@ -90,7 +129,7 @@ namespace AffaliteBL.Services
 
         public void Delete(int id)
         {
-            var existing = _repo.GetById(id);
+            var existing = _repo.GetQueryable().FirstOrDefault(p => p.Id == id);
             if (existing == null) return;
 
             _repo.Delete(existing);

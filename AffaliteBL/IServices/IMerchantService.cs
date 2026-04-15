@@ -21,5 +21,7 @@ namespace AffaliteBL.IServices
         // Relations
         IEnumerable<OrderReadDTO> GetMerchantOrders(int merchantId);
         MerchantBalanceDTO? GetMerchantBalance(int merchantId);
+        Merchant? GetMerchantByUserId(string userId);
+
     }
 }

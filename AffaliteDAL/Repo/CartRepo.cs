@@ -17,10 +17,20 @@ namespace AffaliteDAL.Repo
         public Cart? GetCartWithItems(int cartId)
         {
             return _context.Carts
+
                 .Include(c => c.Items)
+                    .ThenInclude(i => i.Product)
+
+                .Include(c => c.Items).ThenInclude(p=>p.Product).ThenInclude(p=>p.Images)
+
                 .FirstOrDefault(c => c.Id == cartId);
         }
-
+        public Cart? GetCartWithAffilaiteId(int uId)
+        {
+            return _context.Carts.Include(c => c.Items).ThenInclude(p => p.Product).ThenInclude(p => p.Images)
+                .FirstOrDefault(c => c.AffiliateId == uId);
+            
+        }
         public CartItem? GetCartItem(int cartId, int itemId)
         {
             return _context.CartItems

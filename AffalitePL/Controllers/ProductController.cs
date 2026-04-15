@@ -47,31 +47,42 @@ namespace AffaliteAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateProductDto dto)
         {
-            //    الصورة
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.Image.FileName);
+            // تحويل الخصائص البسيطة فقط
+            var product = _mapper.Map<Product>(dto);
 
-            var filePath = Path.Combine("wwwroot/images/products/", fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            // رفع الملفات يدويًا
+            if (dto.Images != null && dto.Images.Any())
             {
-                await dto.Image.CopyToAsync(stream);
+                foreach (var file in dto.Images)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var filePath = Path.Combine("wwwroot/images/products/", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    product.Images.Add(new ProductImage
+                    {
+                        FileName = fileName,
+                        ImageUrl = fileName
+                    });
+                }
             }
 
-            var product = _mapper.Map<Product>(dto);
-            product.ImageUrl =  fileName;
 
             _service.Create(product);
 
             return Ok(product);
         }
 
-
         // PUT /api/products/{id}
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] UpdateProductDto dto)
+        public IActionResult Update(int id, [FromForm] UpdateProductDto dto)
         {
-            var product = _mapper.Map<Product>(dto);
-            _service.Update(id, product);
+            //var product = _mapper.Map<Product>(dto);
+            _service.Update(id, dto);
             return Ok();
         }
 

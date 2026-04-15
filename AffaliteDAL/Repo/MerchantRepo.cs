@@ -29,8 +29,8 @@ namespace AffaliteDAL.Repo
 
         public IEnumerable<Order> GetMerchantOrders(int merchantId)
         {
-            return _context.Orders
-                .Where(o => o.MerchantId == merchantId)
+            return _context.Orders.Include(m=>m.Items).ThenInclude(o=>o.Product)
+                .Where(o => o.Id == merchantId)
                 .ToList();
         }
 
@@ -40,6 +40,11 @@ namespace AffaliteDAL.Repo
                 .Where(m => m.Id == merchantId)
                 .Select(m => (decimal?)m.Balance)
                 .FirstOrDefault();
+        }
+        
+        public Merchant? GetMerchantByUserId(string userId)
+        {
+            return _context.Merchants.Where(m => m.AppUserId == userId).FirstOrDefault();
         }
     }
 }

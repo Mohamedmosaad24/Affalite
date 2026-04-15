@@ -7,11 +7,12 @@ namespace AffaliteBLL.DTOs.Products
         public string Name { get; set; } = string.Empty;
         public int CategoryId { get; set; }
         public string Description { get; set; } = string.Empty;
+        public string Details { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public int Stock { get; set; }
-        public IFormFile Image { get; set; } = null!;
-
+        public ICollection<IFormFile> Images { get; set; } = new List<IFormFile>();
         public int MerchantId { get; set; }
         public decimal PlatformCommissionPct { get; set; }
+
     }
 }

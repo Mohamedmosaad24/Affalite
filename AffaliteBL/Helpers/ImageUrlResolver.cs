@@ -1,48 +1,12 @@
-﻿using AffaliteDAL.Entities;
-using AutoMapper;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AffaliteBL.DTOs.CartDTOs;
+using AffaliteBLL.DTOs.Products;
+using AffaliteDAL.Entities;
+
+using Mattger_BL.Helpers;
 
 namespace AffaliteBL.Helpers
 {
-        //public class ImageUrlResolver : IValueResolver<Product, ProductDTO, string>
-        //{
-        //    private readonly ApiSettings _settings;
-
-        //    public ImageUrlResolver(IOptions<ApiSettings> options)
-        //    {
-        //        _settings = options.Value;
-        //    }
-
-        //    public string Resolve(Product source, ProductDTO destination, string destMember, ResolutionContext context)
-        //    {
-        //        if (string.IsNullOrEmpty(source.PictureUrl))
-        //            return null;
-
-        //        return $"{_settings.BaseUrl}images/{source.PictureUrl}";
-        //    }
-
-        //}
-        //public class CartItemImageUrlResolver : IValueResolver<CartItem, CartItemDTO, string>
-        //{
-        //    private readonly ApiSettings _settings;
-
-        //    public CartItemImageUrlResolver(IOptions<ApiSettings> options)
-        //    {
-        //        _settings = options.Value;
-
-        //    }
-
-        //    public string Resolve(CartItem source, CartItemDTO destination, string destMember, ResolutionContext context)
-        //    {
-        //        if (source.Product == null || string.IsNullOrEmpty(source.Product.PictureUrl))
-        //            return null;
-        //        return $"{_settings.BaseUrl}images/{source.Product.PictureUrl}";
-
-        //    }
-        //}
+    // NOTE: This resolver is kept for backward compatibility.
+    // The primary resolver used in MappingProfile is
+    // Mattger_BL.Helpers.ImageUrlResolver (in ProductImageResolver.cs).
 }

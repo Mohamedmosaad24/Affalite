@@ -1,106 +1,132 @@
 ﻿using AffaliteBL.DTOs.CartDTOs;
 using AffaliteBL.IServices;
-using AffaliteDAL.Entities;
+using AffalitePL.Helpers;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using Mattger_BL.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace AffalitePL.Controllers
 {
-    //    ------------------------------------------------------------------
-    //5) Cart(مهم جدًا)
-    //GET     /api/cart/{cartId
-    //}
-    //POST / api / cart
-    //DELETE / api / cart /{ cartId}
-    
-
-    //-------------------------------------------------------------------
-
     [Route("api/[controller]")]
     [ApiController]
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
         private readonly IMapper _mapper;
+        private readonly string _imagesBaseUrl;
 
-        public CartController(ICartService cartService, IMapper mapper)
+        public CartController(ICartService cartService, IOptions<ApiSettings> apiSettings,IMapper mapper)
         {
             _cartService = cartService;
             _mapper = mapper;
+            _imagesBaseUrl = apiSettings.Value.BaseUrl ?? string.Empty;
+
         }
-        [HttpGet("{cartId}")]
-        public IActionResult Get(int cartId)
+
+        //private CartUiResponseDto MapUi(int cartId)
+        //{
+        //    var cart = _cartService.GetCartById(cartId);
+        //    return CartUiMapper.Map(cart, _imagesBaseUrl);
+        //}
+
+        [HttpGet("{userId:int}")]
+        public IActionResult Get(int userId)
         {
-            var cart = _cartService.GetCartById(cartId);
+            var cart = _cartService.GetCartByUserId(userId);
+            var res = _mapper.Map<CartDTO> (cart);
             if (cart == null)
-            {
-                return NotFound($"Cart with id: {cartId} not found");
-            }
-            var result = _mapper.Map<Cart>(cart);
-            return Ok(result);
+                return NotFound($"Cart with id: {userId} not found");
+
+            return Ok(res);
         }
-        [HttpPost]
-        public IActionResult CreateCart()
-        {
-            var cart = _cartService.CreateCart();
-            var result = _mapper.Map<Cart>(cart);
-            return Ok(result);
-        }
-        [HttpDelete("{cartId}")]
-        public IActionResult DeleteCart(int cartId)
-        {
-            var cart = _cartService.GetCartById(cartId);
-            if (cart == null)
-            {
-                return NotFound($"Cart with id: {cartId} not found");
-            }
-            _cartService.DeleteCart(cartId);
-            return Ok("Cart deleted successfully");
-        }
-        
-        //POST / api / cart /{ cartId}/ items
-        [HttpPost("{cartId}/items")]
-        public IActionResult CreateItem(int cartId, AddCartItemDTO addCartItemDTO)
+
+        //[HttpPost]
+        //public IActionResult CreateCart(int userId)
+        //{
+        //    var cart = _cartService.CreateCart(userId);
+        //    return Ok(CartUiMapper.Map(cart, _imagesBaseUrl));
+        //}
+
+        //[HttpDelete("{cartId:int}")]
+        //public IActionResult DeleteCart(int cartId)
+        //{
+        //    var cart = _cartService.GetCartById(cartId);
+        //    if (cart == null)
+        //        return NotFound($"Cart with id: {cartId} not found");
+
+        //    _cartService.DeleteCart(cartId);
+        //    return Ok("Cart deleted successfully");
+        //}
+
+        [HttpPost("{userId:int}/items")]
+        public IActionResult CreateItem(int userId, [FromBody] AddCartItemDTO? addCartItemDTO,decimal? affilaiteCommission)
         {
             try
             {
-                _cartService.CreateItem(cartId, addCartItemDTO);
-                return Ok("Item added to cart successfully");
+                _cartService.CreateItem(userId, addCartItemDTO, affilaiteCommission);
+                return Ok("done");
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        //PUT / api / cart /{ cartId}/ items /{ itemId}
-        [HttpPut("{cartId}/items/{itemId}")]
-        public IActionResult UpdateItem(int cartId, int itemId, UpdateCartItemDTO updateCartItemDTO)
+
+
+        //[HttpDelete("{cartId:int}/items/{itemId:int}")]
+        //public IActionResult DeleteItems(int cartId, int itemId)
+        //{
+        //    try
+        //    {
+        //        _cartService.DeleteItem(cartId, itemId);
+        //        return Ok(MapUi(cartId));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        ///// <summary>Matches Angular cart service (update by product id).</summary>
+        //[HttpPut("{cartId:int}/products/{productId:int}")]
+        //public IActionResult UpdateItemByProduct(int cartId, int productId, [FromBody] UpdateCartItemDTO updateCartItemDTO)
+        //{
+        //    try
+        //    {
+        //        _cartService.UpdateItemByProductId(cartId, productId, updateCartItemDTO);
+        //        return Ok(MapUi(cartId));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        /// <summary>Matches Angular cart service (remove by product id).</summary>
+        [HttpDelete("{userId:int}/products/{productId:int}")]
+        public IActionResult DeleteItemByProduct(int userId, int productId)
         {
             try
             {
-                _cartService.UpdateItem(cartId, itemId, updateCartItemDTO);
-                return Ok("Cart item updated successfully");
+                _cartService.DeleteItemByProductId(userId, productId);
+                return Ok("Done");
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        //DELETE / api / cart /{ cartId}/ items /{ itemId}
-        [HttpDelete("{cartId}/items/{itemId}")]
-        public IActionResult DeleteItems(int cartId,int itemId)
+
+        /// <summary>Coupon handling not implemented yet; returns false for the SPA.</summary>
+        [HttpPost("{userId:int}/coupon")]
+        public IActionResult ApplyCoupon(int userId, [FromBody] ApplyCouponRequestDto? body)
         {
-            try
-            {
-                _cartService.DeleteItem(cartId, itemId);
-                return Ok("Cart item deleted successfully");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _ = body?.Code;
+            if (_cartService.GetCartByUserId(userId) == null)
+                return NotFound($"Cart with id: {userId} not found");
+
+            return Ok(false);
         }
     }
 }

@@ -105,5 +105,11 @@ namespace AffaliteBL.Services
                 Balance = balance.Value
             };
         }
+        public Affiliate? GetAffiliateUserId(string userId)
+        {
+            return _repo.GetAffiliateUserId(userId);
+        }
+
+
     }
 }
