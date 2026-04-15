@@ -68,11 +68,25 @@ namespace AffalitePL
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
+
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-                    policy.SetIsOriginAllowed(_ => true)
+
+<<<<<<< HEAD
+                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000")
+=======
+                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
+
+                    policy.WithOrigins("http://localhost:4200")
+
+>>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
