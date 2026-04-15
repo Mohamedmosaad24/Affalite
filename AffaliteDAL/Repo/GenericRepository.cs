@@ -1,4 +1,4 @@
-﻿using AffaliteDAL.Data;
+using AffaliteDAL.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ namespace AffaliteDAL.IRepo
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly AffaliteDBContext _context;
+        protected readonly AffaliteDBContext _context;
         private readonly DbSet<T> _dbSet;
 
         public GenericRepository(AffaliteDBContext context)

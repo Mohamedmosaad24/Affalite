@@ -45,6 +45,9 @@ namespace AffaliteBL.Mapping
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty))
                 //.ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant != null ? src.Merchant.Name : string.Empty))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
+                .ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant != null && src.Merchant.AppUser != null ? src.Merchant.AppUser.FullName : string.Empty))
                 //.ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
                 .ForMember(dest => dest.Images, opt => opt.MapFrom<ImageUrlResolver>())
                 .ForMember(dest => dest.MerchantName, opt => opt.MapFrom(src => src.Merchant.AppUser.FullName))

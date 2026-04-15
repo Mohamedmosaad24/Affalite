@@ -1,4 +1,4 @@
-﻿using AffaliteBL.IServices;
+using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
 using AffaliteBLL.Services;
@@ -61,6 +61,18 @@ namespace AffalitePL
             builder.Services.AddScoped<IWishlistRepo, WishlistRepo>();
             builder.Services.AddScoped<IWishlistService, WishlistService>();
 
+            //Notifications
+            builder.Services.AddScoped<INotificationRepo, NotificationRepo>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
+
+            //Admin Dashboard
+            builder.Services.AddScoped<IAdminDashboardRepo, AdminDashboardRepo>();
+            builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+
+            //Email
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
             //app settings
             builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
@@ -70,44 +82,18 @@ namespace AffalitePL
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-
-<<<<<<< HEAD
                     policy.WithOrigins("http://localhost:4200", "http://localhost:55000")
-=======
-                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
-
-                    policy.WithOrigins("http://localhost:4200")
-
->>>>>>> f4456d929e75816ada2360a3e93e7a6c849c30ab
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
                 });
             });
 
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowAngular", policy =>
-            //    {
 
-            //        policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
-            //        policy.WithOrigins("http://localhost:4200", "http://localhost:55000");
-
-            //        policy.WithOrigins("http://localhost:4200")
-
-            //              .AllowAnyHeader()
-            //              .AllowAnyMethod()
-            //              .AllowCredentials();
-            //    });
-            //});
             builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

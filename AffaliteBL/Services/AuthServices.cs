@@ -1,4 +1,5 @@
 using AffaliteBL.DTOs.Auth;
+using AffaliteBL.DTOs.NotificationDTOs;
 using AffaliteBL.IServices;
 using AffaliteDAL.Entities;
 using AffaliteDAL.Entities.Enums;
@@ -23,19 +24,25 @@ public class AuthServices : IAuthServices
     private readonly UserManager<AppUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly IJwtServices _jwtServices;
+    private readonly INotificationService _notificationService;
+    private readonly IEmailService _emailService;
 
     public AuthServices(
         UserManager<AppUser> userManager,
         RoleManager<IdentityRole> roleManager,
         IJwtServices jwtServices,
         IGenericRepository<Merchant> merchantRepo,
-        IGenericRepository<Affiliate> affiliateRepo)
+        IGenericRepository<Affiliate> affiliateRepo,
+        INotificationService notificationService,
+        IEmailService emailService)
     {
         _userManager = userManager;
         _roleManager = roleManager;
         _jwtServices = jwtServices;
         _merchantRepo = merchantRepo;
         _affiliateRepo = affiliateRepo;
+        _notificationService = notificationService;
+        _emailService = emailService;
     }
 
     public Task<AuthResponseDTO> RegisterAffiliateAsync(RegisterDTO model)
@@ -100,6 +107,18 @@ public class AuthServices : IAuthServices
         var refreshToken = GenerateRefreshToken();
         user.RefreshTokens.Add(refreshToken);
         await _userManager.UpdateAsync(user);
+
+        var roleName = role.Equals(MerchantRole, StringComparison.OrdinalIgnoreCase) ? "Merchant" : "Affiliate";
+
+        _notificationService.CreateNotification(new CreateNotificationDTO
+        {
+            UserId = user.Id,
+            Title = "Welcome to Affalite!",
+            Message = $"Congratulations {model.FullName}! Your {roleName} account has been created successfully.",
+            Type = NotificationType.System
+        });
+
+        await _emailService.SendWelcomeEmailAsync(model.Email, model.FullName, roleName);
 
         var tokenResult = await _jwtServices.GenerateTokenAsync(user);
         return BuildAuthResponse(user, tokenResult, refreshToken);

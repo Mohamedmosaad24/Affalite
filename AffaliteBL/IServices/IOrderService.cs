@@ -1,4 +1,4 @@
-﻿using AffaliteBL.DTOs.OrderDTOs;
+using AffaliteBL.DTOs.OrderDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,7 @@ namespace AffaliteBL.IServices
 {
     public interface IOrderService
     {
-        OrderReadDTO CreateOrder(OrderCreateDTO orderDto);
+        Task<OrderReadDTO> CreateOrder(OrderCreateDTO orderDto);
         OrderReadDTO GetOrderById(int id);
-
-
     }
 }
