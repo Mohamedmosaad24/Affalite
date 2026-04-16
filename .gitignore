@@ -371,3 +371,4 @@ FodyWeavers.xsd
 
 # Accidental copy of Git internal ref (do not commit)
 /FETCH_HEAD
+/AffaliteDAL/Migrations
