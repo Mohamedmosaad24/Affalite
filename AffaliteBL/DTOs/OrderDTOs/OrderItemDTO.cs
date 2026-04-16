@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AffaliteBLL.DTOs.Products;
 
 namespace AffaliteBL.DTOs.OrderDTOs
 {
@@ -16,7 +17,7 @@ namespace AffaliteBL.DTOs.OrderDTOs
 
         public int Quantity { get; set; }
         public List<string> Images { get; set; } = new List<string>();
-
+        public ProductDto Product { get; set; }
 
         public decimal TotalPrice { get; set; }
     }

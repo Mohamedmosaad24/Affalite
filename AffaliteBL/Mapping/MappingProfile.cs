@@ -68,7 +68,10 @@ namespace AffaliteBL.Mapping
             // Ordera  and commissions
             CreateMap<Order, OrderReadDTO>()
                     .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
-                CreateMap<OrderCreateDTO, Order>();
+            CreateMap<OrderItem, OrderItemDTO>()
+        .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Product.Images)).ReverseMap();
+
+            CreateMap<OrderCreateDTO, Order>();
                 CreateMap<Commission, CommissionReadDTO>()
                     .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
 

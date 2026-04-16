@@ -78,6 +78,13 @@ namespace AffaliteBL.Services
                 cart.AffilaiteCommission = (decimal)affilaiteCommission;
             }
             _repo.Save();
+             cart = _repo.GetCartWithAffilaiteId(userId);
+
+            //update cart total
+            cart.SubTotal = cart.Items.Sum(i => i.Quantity * i.Product.Price);
+            cart.Total = cart.Items.Sum(i => i.Quantity * i.Product.Price) + cart.Shiping + cart.AffilaiteCommission;
+
+            _repo.Save();
             
         }
 
