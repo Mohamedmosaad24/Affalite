@@ -107,8 +107,7 @@ namespace AffalitePL.Controllers
         {
             var order = _orderRepo1.GetById(id);
             if (order == null) return NotFound();
-<<<<<<< Updated upstream
-=======
+
 
             Affiliate affilaite = _affiliateService.GetAffiliateById((int)order.AffiliateId);
             List<Merchant> MerchantIds = order.MerchantOrder.Select(m => m.Merchant).ToList();
@@ -130,7 +129,7 @@ namespace AffalitePL.Controllers
             }
 
 
->>>>>>> Stashed changes
+
 
             var affiliate = _affiliateService.GetAffiliateById((int)order.AffiliateId);
 
@@ -140,10 +139,7 @@ namespace AffalitePL.Controllers
             }
 
             var oldStatus = order.Status;
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
             order.Status = status;
             _orderRepo.Update(order);
             _orderRepo.SaveChanges();

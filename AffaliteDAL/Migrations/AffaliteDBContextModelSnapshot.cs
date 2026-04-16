@@ -46,8 +46,6 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Affiliates");
-<<<<<<< Updated upstream
-=======
 
                     b.HasData(
                         new
@@ -57,7 +55,7 @@ namespace AffaliteDAL.Migrations
                             Balance = 1500m,
                             CreatedAt = new DateTime(2026, 4, 16, 1, 5, 26, 712, DateTimeKind.Utc).AddTicks(4044)
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.AppUser", b =>
@@ -127,8 +125,7 @@ namespace AffaliteDAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -185,7 +182,7 @@ namespace AffaliteDAL.Migrations
                             TwoFactorEnabled = false,
                             UserName = "customer1"
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Cart", b =>
@@ -208,8 +205,7 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Carts");
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -222,7 +218,7 @@ namespace AffaliteDAL.Migrations
                             SubTotal = 0m,
                             Total = 0m
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.CartItem", b =>
@@ -252,8 +248,7 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -272,7 +267,7 @@ namespace AffaliteDAL.Migrations
                             ProductId = 2,
                             Quantity = 1
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Category", b =>
@@ -300,8 +295,7 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Categories");
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -318,7 +312,7 @@ namespace AffaliteDAL.Migrations
                             Name = "Fashion",
                             Slug = "fashion"
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Commission", b =>
@@ -353,8 +347,7 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Commissions");
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -367,7 +360,7 @@ namespace AffaliteDAL.Migrations
                             PlatformAmount = 964.99m,
                             Status = 1
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Coupon", b =>
@@ -437,8 +430,7 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Merchants");
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -448,7 +440,7 @@ namespace AffaliteDAL.Migrations
                             Balance = 5000m,
                             CreatedAt = new DateTime(2026, 4, 16, 1, 5, 26, 712, DateTimeKind.Utc).AddTicks(3988)
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.MerchantCommissions", b =>
@@ -569,8 +561,7 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("AffiliateId");
 
                     b.ToTable("Orders");
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -585,7 +576,7 @@ namespace AffaliteDAL.Migrations
                             Status = 1,
                             TotalPrice = 2018m
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.OrderItem", b =>
@@ -618,8 +609,7 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -640,7 +630,7 @@ namespace AffaliteDAL.Migrations
                             ProductId = 2,
                             Quantity = 1
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Product", b =>
@@ -698,8 +688,7 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("MerchantId");
 
                     b.ToTable("Products");
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -732,7 +721,7 @@ namespace AffaliteDAL.Migrations
                             Status = 2,
                             Stock = 100
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.ProductImage", b =>
@@ -759,8 +748,6 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImage");
-<<<<<<< Updated upstream
-=======
 
                     b.HasData(
                         new
@@ -791,7 +778,7 @@ namespace AffaliteDAL.Migrations
                             ImageUrl = "p3.jpg",
                             ProductId = 2
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.ProductReviews", b =>
@@ -823,8 +810,7 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductReviews");
-<<<<<<< Updated upstream
-=======
+
 
                     b.HasData(
                         new
@@ -845,7 +831,7 @@ namespace AffaliteDAL.Migrations
                             ProductId = 2,
                             Rating = 4
                         });
->>>>>>> Stashed changes
+
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Wishlist", b =>
