@@ -40,7 +40,8 @@ namespace AffaliteBL.Services
             IGenericRepository<Affiliate> affiliateRepo,
             INotificationService notificationService,
             IEmailService emailService,
-            IOrderRepo orderRepoo
+            IOrderRepo orderRepoo,
+            IMerchantRepo merchantRepo
             )
         {
             _orderRepo = orderRepo;
@@ -53,6 +54,7 @@ namespace AffaliteBL.Services
             _affiliateRepo = affiliateRepo;
             _notificationService = notificationService;
             _emailService = emailService;
+            _merchantRepo = merchantRepo;
         }
 
         public async Task<OrderReadDTO> CreateOrder(OrderCreateDTO orderDto)

@@ -20,7 +20,10 @@ namespace AffaliteBL.Services
         public CartDTO? GetCartByUserId(int userId)
         {
              var cart = _repo.GetCartWithAffilaiteId(userId);
+
             var cartDto = mapper.Map<CartDTO>(cart);
+            if (cart == null)
+                return cartDto;
             cartDto.SubTotal = cart.Items.Sum(i => i.Quantity * i.Product.Price);
             cartDto.AffilaiteCommission = cart.AffilaiteCommission;
             cartDto.Shiping = 10;
