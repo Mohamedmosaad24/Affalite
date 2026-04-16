@@ -6,11 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AffaliteDAL.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:AffaliteDAL/Migrations/20260415051106_edit cart.cs
     public partial class editcart : Migration
-========
-    public partial class initalmigration : Migration
->>>>>>>> Notification:AffaliteDAL/Migrations/20260413105113_inital migration.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -489,15 +485,12 @@ namespace AffaliteDAL.Migrations
                 {
                     table.PrimaryKey("PK_ProductReviews", x => x.Id);
                     table.ForeignKey(
-<<<<<<<< HEAD:AffaliteDAL/Migrations/20260415051106_edit cart.cs
                         name: "FK_ProductReviews_Affiliates_AffiliateId",
                         column: x => x.AffiliateId,
                         principalTable: "Affiliates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-========
->>>>>>>> Notification:AffaliteDAL/Migrations/20260413105113_inital migration.cs
                         name: "FK_ProductReviews_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
@@ -662,14 +655,11 @@ namespace AffaliteDAL.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:AffaliteDAL/Migrations/20260415051106_edit cart.cs
                 name: "IX_ProductReviews_AffiliateId",
                 table: "ProductReviews",
                 column: "AffiliateId");
 
             migrationBuilder.CreateIndex(
-========
->>>>>>>> Notification:AffaliteDAL/Migrations/20260413105113_inital migration.cs
                 name: "IX_ProductReviews_ProductId",
                 table: "ProductReviews",
                 column: "ProductId");

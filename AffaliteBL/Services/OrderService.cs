@@ -28,8 +28,8 @@ namespace AffaliteBL.Services
         private readonly IMapper _mapper;
         private readonly IMerchantRepo _merchantRepo;
 
-        public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<Commission> commissionRepo, IMapper mapper, ICartRepo cartRepo
-            , IGenericRepository<MerchantCommissions> merchantCommissions, IGenericRepository<MerchantOrder> merchantOrder, IOrderRepo orderRepoo)
+        //public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<Commission> commissionRepo, IMapper mapper, ICartRepo cartRepo
+        //    , IGenericRepository<MerchantCommissions> merchantCommissions, IGenericRepository<MerchantOrder> merchantOrder, IOrderRepo orderRepoo);
         public OrderService(
             IGenericRepository<Order> orderRepo,
             IGenericRepository<Commission> commissionRepo,
@@ -39,7 +39,9 @@ namespace AffaliteBL.Services
             IGenericRepository<MerchantOrder> merchantOrder,
             IGenericRepository<Affiliate> affiliateRepo,
             INotificationService notificationService,
-            IEmailService emailService)
+            IEmailService emailService,
+            IOrderRepo orderRepoo
+            )
         {
             _orderRepo = orderRepo;
             _commissionRepo = commissionRepo;

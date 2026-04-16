@@ -86,7 +86,7 @@ namespace AffalitePL
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000")
+                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000", "http://localhost:4300")
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();

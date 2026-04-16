@@ -12,5 +12,7 @@ namespace AffaliteBL.IServices
     {
         Task<OrderReadDTO> CreateOrder(OrderCreateDTO orderDto);
         OrderReadDTO GetOrderById(int id);
+        List<Order> getOrdersByAff(int affId);
+
     }
 }
