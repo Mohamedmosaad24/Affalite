@@ -17,6 +17,7 @@ namespace AffaliteBL.Services
     public class OrderService : IOrderService
     {
         private readonly IGenericRepository<Order> _orderRepo;
+        private readonly IOrderRepo _orderRepoo;
         private readonly ICartRepo _cartRepo;
         private readonly IGenericRepository<Commission> _commissionRepo;
         private readonly IGenericRepository<MerchantCommissions> _merchantCommissions;
@@ -27,6 +28,8 @@ namespace AffaliteBL.Services
         private readonly IMapper _mapper;
         private readonly IMerchantRepo _merchantRepo;
 
+        public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<Commission> commissionRepo, IMapper mapper, ICartRepo cartRepo
+            , IGenericRepository<MerchantCommissions> merchantCommissions, IGenericRepository<MerchantOrder> merchantOrder, IOrderRepo orderRepoo)
         public OrderService(
             IGenericRepository<Order> orderRepo,
             IGenericRepository<Commission> commissionRepo,
@@ -44,6 +47,7 @@ namespace AffaliteBL.Services
             _cartRepo = cartRepo;
             _merchantCommissions = merchantCommissions;
             _merchantOrder = merchantOrder;
+            _orderRepoo = orderRepoo;
             _affiliateRepo = affiliateRepo;
             _notificationService = notificationService;
             _emailService = emailService;
@@ -79,7 +83,7 @@ namespace AffaliteBL.Services
                 AffiliateCommissionPct = neworder.AffiliateCommissionPct,
                 CreatedAt = DateTime.Now,
                 Status = OrderStatus.Pending,
-                TotalPrice = totalPrice + neworder.AffiliateCommissionPct ,
+                TotalPrice = totalPrice + neworder.AffiliateCommissionPct + 10 ,
                 Items = new List<OrderItem>()
             };
             _orderRepo.Add(order);
@@ -105,9 +109,9 @@ namespace AffaliteBL.Services
             var commission = new Commission
             {
                 OrderId = order.Id,
-                AffiliateAmount = neworder.AffiliateCommissionPct,
+                AffiliateAmount =cart.AffilaiteCommission,
                 PlatformAmount = platformAmount,
-                MerchantAmount = totalPrice - (platformAmount + neworder.AffiliateCommissionPct),
+                MerchantAmount = cart.Total - (platformAmount + cart.AffilaiteCommission +10),
                 Status = CommissionStatus.Pending
             };
             _commissionRepo.Add(commission);
@@ -187,6 +191,10 @@ namespace AffaliteBL.Services
             var order = _orderRepo.GetById(id);
             return _mapper.Map<OrderReadDTO>(order);
 
+        }
+        public List<Order> getOrdersByAff(int affId)
+        {
+            return _orderRepoo.GetByAffId(affId);
         }
     }
 }

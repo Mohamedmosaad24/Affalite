@@ -68,6 +68,7 @@ namespace AffalitePL.Controllers
              .AsNoTracking()
              .Include(o => o.Items)
              .ThenInclude(i => i.Product)
+             .ThenInclude(i=>i.Images)
              .FirstOrDefault(o => o.Id == id);
 
             if (order == null) return NotFound();
@@ -81,7 +82,8 @@ namespace AffalitePL.Controllers
             var orders = _orderRepo.GetAllQueryable()
             .AsNoTracking()
             .Include(o => o.Items)
-            .ThenInclude(i => i.Product)  // ← علشان ياخد اسم المنتج
+            .ThenInclude(i => i.Product)
+            .ThenInclude(i=>i.Images)
             .ToList();
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
@@ -97,7 +99,7 @@ namespace AffalitePL.Controllers
         [HttpGet("affiliate/{affiliateId}")]
         public IActionResult GetByAffiliate(int affiliateId)
         {
-            var orders = _orderRepo.GetAll().Where(o => o.AffiliateId == affiliateId);
+            var orders = _orderService.getOrdersByAff(affiliateId);
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
 
