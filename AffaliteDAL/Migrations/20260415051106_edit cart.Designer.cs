@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AffaliteDAL.Migrations
 {
     [DbContext(typeof(AffaliteDBContext))]
-<<<<<<<< HEAD:AffaliteDAL/Migrations/20260415051106_edit cart.Designer.cs
     [Migration("20260415051106_edit cart")]
-    partial class editcart
-========
-    [Migration("20260413105113_inital migration")]
     partial class initalmigration
->>>>>>>> Notification:AffaliteDAL/Migrations/20260413105113_inital migration.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
