@@ -115,7 +115,11 @@ public class AuthServices : IAuthServices
             UserId = user.Id,
             Title = "Welcome to Affalite!",
             Message = $"Congratulations {model.FullName}! Your {roleName} account has been created successfully.",
-            Type = NotificationType.System
+            //Type = NotificationType.System
+            //added by islam soliman for ntification feature
+            Type = role.Equals("Merchant", StringComparison.OrdinalIgnoreCase)
+    ? NotificationType.Merchant
+    : NotificationType.Affiliate
         });
 
         await _emailService.SendWelcomeEmailAsync(model.Email, model.FullName, roleName);
@@ -139,6 +143,15 @@ public class AuthServices : IAuthServices
             user.RefreshTokens.Add(activeRefreshToken);
             await _userManager.UpdateAsync(user);
         }
+        // Notification message default added by islam soliman
+        _notificationService.CreateNotification(new CreateNotificationDTO
+        {
+            UserId = user.Id,
+            Title = "New sign-in to your account",
+            Message = $"You signed in on {DateTime.UtcNow:dd MMM yyyy} at {DateTime.UtcNow:HH:mm} UTC. If this wasn't you, secure your account immediately.",
+            Type = NotificationType.System
+        });
+
 
         var tokenResult = await _jwtServices.GenerateTokenAsync(user);
         return BuildAuthResponse(user, tokenResult, activeRefreshToken);

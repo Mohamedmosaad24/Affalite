@@ -46,6 +46,18 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Affiliates");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AppUserId = "user2",
+                            Balance = 1500m,
+                            CreatedAt = new DateTime(2026, 4, 16, 1, 5, 26, 712, DateTimeKind.Utc).AddTicks(4044)
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.AppUser", b =>
@@ -115,6 +127,65 @@ namespace AffaliteDAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "user1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "972638a3-bebb-4da1-82a1-c1f8006c3669",
+                            Email = "merchant1@affalite.com",
+                            EmailConfirmed = true,
+                            FullName = "Ahmed Hassan",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MERCHANT1@AFFALITE.COM",
+                            NormalizedUserName = "MERCHANT1@AFFALITE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDjZ7+FOAQAfy5EE5F2NIqmw1zH6rluwgKomsze01au80wx30yDpxlS4lpDnvJHZEg==",
+                            PhoneNumber = "01001234567",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "569215f4-bf87-4d5f-be38-a807deba58fd",
+                            TwoFactorEnabled = false,
+                            UserName = "merchant1"
+                        },
+                        new
+                        {
+                            Id = "user2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a954408f-8fb0-4b92-bb32-514a89a7dd2f",
+                            Email = "affiliate1@affalite.com",
+                            EmailConfirmed = true,
+                            FullName = "Youssef Ali",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "AFFILIATE1@AFFALITE.COM",
+                            NormalizedUserName = "AFFILIATE1@AFFALITE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKKUGlRQSnQYW9kcLo0ugVUPJcVBcEy9jGbP892wxpqxmHl3h4sUiWkmPWEzU4gOaA==",
+                            PhoneNumber = "01001112233",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2b8d27d2-e6c7-49d8-80db-00429152b4e4",
+                            TwoFactorEnabled = false,
+                            UserName = "affiliate1"
+                        },
+                        new
+                        {
+                            Id = "user3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5e907404-0fbf-4b87-91f0-8bb20b31ac7f",
+                            Email = "customer1@affalite.com",
+                            EmailConfirmed = true,
+                            FullName = "Hana Adel",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CUSTOMER1@AFFALITE.COM",
+                            NormalizedUserName = "CUSTOMER1@AFFALITE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAzNPe1Szw8uK37wk9bu8Iqo9VggXRBy+K06E9pEifczFJ2ZTsXjswanlfbNArLi3w==",
+                            PhoneNumber = "01002223344",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e53d3530-346e-47fd-b82a-07d7749e2a29",
+                            TwoFactorEnabled = false,
+                            UserName = "customer1"
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Cart", b =>
@@ -137,6 +208,21 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Carts");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AffilaiteCommission = 0m,
+                            AffiliateId = 1,
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4412),
+                            Shiping = 10m,
+                            SubTotal = 0m,
+                            Total = 0m
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.CartItem", b =>
@@ -166,6 +252,27 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CartId = 1,
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4455),
+                            ProductId = 1,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CartId = 1,
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4465),
+                            ProductId = 2,
+                            Quantity = 1
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Category", b =>
@@ -193,6 +300,25 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Categories");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2026, 4, 16, 1, 5, 26, 712, DateTimeKind.Utc).AddTicks(3890),
+                            Name = "Electronics",
+                            Slug = "electronics"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2026, 4, 16, 1, 5, 26, 712, DateTimeKind.Utc).AddTicks(3891),
+                            Name = "Fashion",
+                            Slug = "fashion"
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Commission", b =>
@@ -227,6 +353,21 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Commissions");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AffiliateAmount = 578.99m,
+                            CreatedAt = new DateTime(2026, 3, 18, 1, 5, 26, 712, DateTimeKind.Utc).AddTicks(4770),
+                            MerchantAmount = 17756.00m,
+                            OrderId = 1,
+                            PlatformAmount = 964.99m,
+                            Status = 1
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Coupon", b =>
@@ -296,6 +437,18 @@ namespace AffaliteDAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Merchants");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AppUserId = "user1",
+                            Balance = 5000m,
+                            CreatedAt = new DateTime(2026, 4, 16, 1, 5, 26, 712, DateTimeKind.Utc).AddTicks(3988)
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.MerchantCommissions", b =>
@@ -416,6 +569,23 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("AffiliateId");
 
                     b.ToTable("Orders");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AffiliateCommissionPct = 5m,
+                            AffiliateId = 1,
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4523),
+                            CustomerAddress = "123 Street",
+                            CustomerName = "David",
+                            CustomerPhone = "01000000004",
+                            Status = 1,
+                            TotalPrice = 2018m
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.OrderItem", b =>
@@ -448,6 +618,29 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4611),
+                            OrderId = 1,
+                            Price = 999m,
+                            ProductId = 1,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4615),
+                            OrderId = 1,
+                            Price = 20m,
+                            ProductId = 2,
+                            Quantity = 1
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Product", b =>
@@ -505,6 +698,41 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("MerchantId");
 
                     b.ToTable("Products");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4162),
+                            Description = "Latest Apple iPhone",
+                            Details = "Details here",
+                            MerchantId = 1,
+                            Name = "iPhone 14",
+                            PlatformCommissionPct = 5m,
+                            Price = 999m,
+                            SaleCount = 10,
+                            Status = 2,
+                            Stock = 50
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 2,
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4248),
+                            Description = "Fantasy novel",
+                            Details = "Details here",
+                            MerchantId = 1,
+                            Name = "Harry Potter Book",
+                            PlatformCommissionPct = 2m,
+                            Price = 20m,
+                            SaleCount = 50,
+                            Status = 2,
+                            Stock = 100
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.ProductImage", b =>
@@ -531,6 +759,39 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImage");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FileName = "iphone14.jpg",
+                            ImageUrl = "p5.png",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FileName = "iphone14.jpg",
+                            ImageUrl = "p4.jpg",
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FileName = "harrypotter.jpg",
+                            ImageUrl = "p2.png",
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FileName = "harrypotter.jpg",
+                            ImageUrl = "p3.jpg",
+                            ProductId = 2
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.ProductReviews", b =>
@@ -562,6 +823,29 @@ namespace AffaliteDAL.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductReviews");
+<<<<<<< Updated upstream
+=======
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AffiliateId = 1,
+                            Comment = "Great phone!",
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4335),
+                            ProductId = 1,
+                            Rating = 5
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AffiliateId = 1,
+                            Comment = "Loved the book",
+                            CreatedAt = new DateTime(2026, 4, 16, 3, 5, 26, 712, DateTimeKind.Local).AddTicks(4339),
+                            ProductId = 2,
+                            Rating = 4
+                        });
+>>>>>>> Stashed changes
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.Wishlist", b =>

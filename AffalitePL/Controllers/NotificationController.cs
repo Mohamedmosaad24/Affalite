@@ -20,6 +20,7 @@ public class NotificationController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public IActionResult CreateNotification([FromBody] CreateNotificationDTO model)
     {
         if (!ModelState.IsValid)
@@ -41,7 +42,7 @@ public class NotificationController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet]
+    [HttpGet("")]
     public IActionResult GetUserNotifications([FromQuery] NotificationQueryParams queryParams)
     {
         var userId = User.GetUserId();
