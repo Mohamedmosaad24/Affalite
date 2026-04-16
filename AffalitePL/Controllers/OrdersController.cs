@@ -107,7 +107,7 @@ namespace AffalitePL.Controllers
         {
             var order = _orderRepo1.GetById(id);
             if (order == null) return NotFound();
-<<<<<<< HEAD
+
             Affiliate affilaite = _affiliateService.GetAffiliateById((int)order.AffiliateId);
             List<Merchant> MerchantIds = order.MerchantOrder.Select(m => m.Merchant).ToList();
 
@@ -127,7 +127,7 @@ namespace AffalitePL.Controllers
                 order.Commission.Status = CommissionStatus.Failed;
             }
 
-=======
+
 
             var affiliate = _affiliateService.GetAffiliateById((int)order.AffiliateId);
 
@@ -137,7 +137,7 @@ namespace AffalitePL.Controllers
             }
 
             var oldStatus = order.Status;
->>>>>>> Notification
+
             order.Status = status;
             _orderRepo.Update(order);
             _orderRepo.SaveChanges();
