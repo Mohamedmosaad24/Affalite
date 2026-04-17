@@ -192,7 +192,7 @@ namespace AffaliteBL.Services
 
         public OrderReadDTO GetOrderById(int id)
         {
-            var order = _orderRepo.GetById(id);
+            var order = _orderRepoo.GetById(id);
             return _mapper.Map<OrderReadDTO>(order);
 
         }

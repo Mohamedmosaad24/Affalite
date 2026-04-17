@@ -68,6 +68,7 @@ namespace AffalitePL.Controllers
              .AsNoTracking()
              .Include(o => o.Items)
              .ThenInclude(i => i.Product)
+             .ThenInclude(p=>p.Images)
              .FirstOrDefault(o => o.Id == id);
 
             if (order == null) return NotFound();
@@ -132,11 +133,6 @@ namespace AffalitePL.Controllers
 
 
             var affiliate = _affiliateService.GetAffiliateById((int)order.AffiliateId);
-
-            if (status == OrderStatus.Paid)
-            {
-                affiliate.Balance += order.Commission.AffiliateAmount;
-            }
 
             var oldStatus = order.Status;
 
