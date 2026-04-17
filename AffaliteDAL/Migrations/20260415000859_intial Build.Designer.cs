@@ -12,13 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AffaliteDAL.Migrations
 {
     [DbContext(typeof(AffaliteDBContext))]
-<<<<<<<< HEAD:AffaliteDAL/Migrations/20260415051924_seeding.Designer.cs
     [Migration("20260415051924_seeding")]
     partial class seeding
-========
     [Migration("20260415000859_intial Build")]
     partial class intialBuild
->>>>>>>> DALChanges:AffaliteDAL/Migrations/20260415000859_intial Build.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
