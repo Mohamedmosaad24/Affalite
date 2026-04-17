@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AffaliteDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class newdatabase : Migration
+    public partial class intialBuild : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -392,6 +392,32 @@ namespace AffaliteDAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Coupons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DiscountPercentage = table.Column<decimal>(type: "decimal(5,2)", nullable: true),
+                    ValidFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ValidTo = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    MaxUsageCount = table.Column<int>(type: "int", nullable: true),
+                    UsedCount = table.Column<int>(type: "int", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coupons", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Coupons_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderItems",
                 columns: table => new
                 {
@@ -415,7 +441,8 @@ namespace AffaliteDAL.Migrations
                         name: "FK_OrderItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -440,7 +467,7 @@ namespace AffaliteDAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductReview",
+                name: "ProductReviews",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -453,9 +480,30 @@ namespace AffaliteDAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductReview", x => x.Id);
+                    table.PrimaryKey("PK_ProductReviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductReview_Products_ProductId",
+                        name: "FK_ProductReviews_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Wishlists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AffiliateId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wishlists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Wishlists_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -499,9 +547,9 @@ namespace AffaliteDAL.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "user1", 0, "0430c25f-bc2c-4739-a327-03a9b9ee2754", "merchant1@affalite.com", true, "Ahmed Hassan", false, null, "MERCHANT1@AFFALITE.COM", "MERCHANT1@AFFALITE.COM", "AQAAAAIAAYagAAAAEPPDMA7sBsVIbG+yimcCCs8MAWnBoCbEQA7cfJy3Bf6a3ViKKJM6DDZSgWn4X4KmfQ==", "01001234567", false, "c4e5dc9f-399f-4cfa-a573-a6545afbb9f0", false, "merchant1" },
-                    { "user2", 0, "de5c8a26-b37e-4ce0-a597-f89ef104ee6e", "affiliate1@affalite.com", true, "Youssef Ali", false, null, "AFFILIATE1@AFFALITE.COM", "AFFILIATE1@AFFALITE.COM", "AQAAAAIAAYagAAAAEIxgSbNB7oHr17LVvb0UWKPhgB0qYUCHvQ8JHyRvkCrqMH60bPP1JDPAAUmycP7Fvw==", "01001112233", false, "964975d4-d7cd-4627-bbff-d26984c7e4e6", false, "affiliate1" },
-                    { "user3", 0, "e344c7fd-97e9-46b9-85fd-621baf5c30de", "customer1@affalite.com", true, "Hana Adel", false, null, "CUSTOMER1@AFFALITE.COM", "CUSTOMER1@AFFALITE.COM", "AQAAAAIAAYagAAAAEIzaSLKx5VgiYzdFdWD0ki16N/k/WmDvmnRbPy+Jg2C/VfY/f3hHQLQwhMIXBsHVXA==", "01002223344", false, "5cb3470c-cc81-489c-b667-1306e6b42c82", false, "customer1" }
+                    { "user1", 0, "1450e614-3904-4746-ad45-50a2555a781a", "merchant1@affalite.com", true, "Ahmed Hassan", false, null, "MERCHANT1@AFFALITE.COM", "MERCHANT1@AFFALITE.COM", "AQAAAAIAAYagAAAAEH75oK0Uxhz73kmjBLjC8jD9Mq6AH0juPjYjGiDUfvO8uLquL3jaFr3rKaPgue49PQ==", "01001234567", false, "49237401-c6d2-4ad5-b191-5d68fc33cceb", false, "merchant1" },
+                    { "user2", 0, "87b076e2-72b0-4ba9-b713-7077906753ca", "affiliate1@affalite.com", true, "Youssef Ali", false, null, "AFFILIATE1@AFFALITE.COM", "AFFILIATE1@AFFALITE.COM", "AQAAAAIAAYagAAAAEH6xL6tjI6yb9FpiMbZ1KOTNHyMGN2IthfQZiN2VAcrS/JCRnV7IbW810eDSmIBHww==", "01001112233", false, "164824a5-fee7-4935-bb45-380c2edaaa88", false, "affiliate1" },
+                    { "user3", 0, "58b53bdd-4a5b-457b-978f-1aec5ac96144", "customer1@affalite.com", true, "Hana Adel", false, null, "CUSTOMER1@AFFALITE.COM", "CUSTOMER1@AFFALITE.COM", "AQAAAAIAAYagAAAAEGlJ7PrPxigSVLevkBAJ+6ZNUSDczt027E5U8U8K86IMuUzEfZ7hde1FeqRV7OSXVw==", "01002223344", false, "7716c2fa-aff8-4183-be97-a27fb152b07e", false, "customer1" }
                 });
 
             migrationBuilder.InsertData(
@@ -509,14 +557,14 @@ namespace AffaliteDAL.Migrations
                 columns: new[] { "Id", "CreatedAt", "Name", "Slug" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2026, 4, 9, 5, 45, 21, 544, DateTimeKind.Utc).AddTicks(1498), "Electronics", "electronics" },
-                    { 2, new DateTime(2026, 4, 9, 5, 45, 21, 544, DateTimeKind.Utc).AddTicks(1501), "Fashion", "fashion" }
+                    { 1, new DateTime(2026, 4, 15, 0, 8, 58, 223, DateTimeKind.Utc).AddTicks(7492), "Electronics", "electronics" },
+                    { 2, new DateTime(2026, 4, 15, 0, 8, 58, 223, DateTimeKind.Utc).AddTicks(7493), "Fashion", "fashion" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Affiliates",
                 columns: new[] { "Id", "AppUserId", "Balance", "CreatedAt" },
-                values: new object[] { 1, "user2", 1500m, new DateTime(2026, 4, 9, 5, 45, 21, 544, DateTimeKind.Utc).AddTicks(1696) });
+                values: new object[] { 1, "user2", 1500m, new DateTime(2026, 4, 15, 0, 8, 58, 223, DateTimeKind.Utc).AddTicks(7563) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -531,25 +579,25 @@ namespace AffaliteDAL.Migrations
             migrationBuilder.InsertData(
                 table: "Merchants",
                 columns: new[] { "Id", "AppUserId", "Balance", "CreatedAt" },
-                values: new object[] { 1, "user1", 5000m, new DateTime(2026, 4, 9, 5, 45, 21, 544, DateTimeKind.Utc).AddTicks(1600) });
+                values: new object[] { 1, "user1", 5000m, new DateTime(2026, 4, 15, 0, 8, 58, 223, DateTimeKind.Utc).AddTicks(7528) });
 
             migrationBuilder.InsertData(
                 table: "Carts",
                 columns: new[] { "Id", "AffiliateId", "CreatedAt" },
-                values: new object[] { 1, 1, new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(2170) });
+                values: new object[] { 1, 1, new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7755) });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "AffiliateCommissionPct", "AffiliateId", "CreatedAt", "CustomerAddress", "CustomerName", "CustomerPhone", "Status", "TotalPrice" },
-                values: new object[] { 1, 5m, 1, new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(2397), "123 Street", "David", "01000000004", 1, 2018m });
+                values: new object[] { 1, 5m, 1, new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7832), "123 Street", "David", "01000000004", 1, 2018m });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CategoryId", "CreatedAt", "Description", "Details", "MerchantId", "Name", "PlatformCommissionPct", "Price", "SaleCount", "Status", "Stock" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(1865), "Latest Apple iPhone", "Details here", 1, "iPhone 14", 5m, 999m, 10, 2, 50 },
-                    { 2, 2, new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(1926), "Fantasy novel", "Details here", 1, "Harry Potter Book", 2m, 20m, 50, 2, 100 }
+                    { 1, 1, new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7601), "Latest Apple iPhone", "Details here", 1, "iPhone 14", 5m, 999m, 10, 2, 50 },
+                    { 2, 2, new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7665), "Fantasy novel", "Details here", 1, "Harry Potter Book", 2m, 20m, 50, 2, 100 }
                 });
 
             migrationBuilder.InsertData(
@@ -557,14 +605,14 @@ namespace AffaliteDAL.Migrations
                 columns: new[] { "Id", "CartId", "CreatedAt", "ProductId", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(2236), 1, 2 },
-                    { 2, 1, new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(2253), 2, 1 }
+                    { 1, 1, new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7799), 1, 2 },
+                    { 2, 1, new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7802), 2, 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Commissions",
                 columns: new[] { "Id", "AffiliateAmount", "CreatedAt", "MerchantAmount", "OrderId", "PlatformAmount", "Status" },
-                values: new object[] { 1, 578.99m, new DateTime(2026, 3, 11, 5, 45, 21, 544, DateTimeKind.Utc).AddTicks(2670), 17756.00m, 1, 964.99m, 1 });
+                values: new object[] { 1, 578.99m, new DateTime(2026, 3, 17, 0, 8, 58, 223, DateTimeKind.Utc).AddTicks(7925), 17756.00m, 1, 964.99m, 1 });
 
             migrationBuilder.InsertData(
                 table: "MerchantOrder",
@@ -576,8 +624,8 @@ namespace AffaliteDAL.Migrations
                 columns: new[] { "Id", "CreatedAt", "OrderId", "Price", "ProductId", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(2581), 1, 999m, 1, 2 },
-                    { 2, new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(2586), 1, 20m, 2, 1 }
+                    { 1, new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7893), 1, 999m, 1, 2 },
+                    { 2, new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7896), 1, 20m, 2, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -592,12 +640,12 @@ namespace AffaliteDAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ProductReview",
+                table: "ProductReviews",
                 columns: new[] { "Id", "AffiliateId", "Comment", "CreatedAt", "ProductId", "Rating" },
                 values: new object[,]
                 {
-                    { 1, 1, "Great phone!", new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(2063), 1, 5 },
-                    { 2, 1, "Loved the book", new DateTime(2026, 4, 9, 7, 45, 21, 544, DateTimeKind.Local).AddTicks(2068), 2, 4 }
+                    { 1, 1, "Great phone!", new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7729), 1, 5 },
+                    { 2, 1, "Loved the book", new DateTime(2026, 4, 15, 2, 8, 58, 223, DateTimeKind.Local).AddTicks(7731), 2, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -679,6 +727,11 @@ namespace AffaliteDAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Coupons_ProductId",
+                table: "Coupons",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MerchantCommissions_CommissionId",
                 table: "MerchantCommissions",
                 column: "CommissionId");
@@ -715,8 +768,8 @@ namespace AffaliteDAL.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductReview_ProductId",
-                table: "ProductReview",
+                name: "IX_ProductReviews_ProductId",
+                table: "ProductReviews",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -733,6 +786,11 @@ namespace AffaliteDAL.Migrations
                 name: "IX_RefreshToken_AppUserId",
                 table: "RefreshToken",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wishlists_ProductId",
+                table: "Wishlists",
+                column: "ProductId");
         }
 
         /// <inheritdoc />
@@ -757,6 +815,9 @@ namespace AffaliteDAL.Migrations
                 name: "CartItems");
 
             migrationBuilder.DropTable(
+                name: "Coupons");
+
+            migrationBuilder.DropTable(
                 name: "MerchantCommissions");
 
             migrationBuilder.DropTable(
@@ -769,10 +830,13 @@ namespace AffaliteDAL.Migrations
                 name: "ProductImage");
 
             migrationBuilder.DropTable(
-                name: "ProductReview");
+                name: "ProductReviews");
 
             migrationBuilder.DropTable(
                 name: "RefreshToken");
+
+            migrationBuilder.DropTable(
+                name: "Wishlists");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
