@@ -7,6 +7,8 @@ namespace AffaliteDAL.IRepo
         IEnumerable<Commission> GetAffiliateCommissions(int affiliateId);
         decimal? GetAffiliateBalance(int affiliateId);
         Affiliate? GetAffiliateUserId(string userId);
+        public IEnumerable<Affiliate> GetAllAffiliates();
+
 
     }
 }

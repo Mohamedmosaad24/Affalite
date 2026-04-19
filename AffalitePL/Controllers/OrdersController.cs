@@ -87,12 +87,15 @@ namespace AffalitePL.Controllers
         }
 
 
-        //[HttpGet("merchant/{merchantId}")]
-        //public IActionResult GetByMerchant(int merchantId)
-        //{
-        //    var orders = _orderRepo.GetAll().Where(o => o.MerchantId == merchantId);
-        //    return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
-        //}
+        [HttpGet("merchant/{merchantId}")]
+        public IActionResult GetByMerchant(int merchantId)
+        {
+            var orders = _orderService.getOrdersByMer(merchantId); // ← استخدم الـ Service
+            if (orders == null || !orders.Any())
+                return NotFound();
+
+            return Ok(orders);
+        }
 
         [HttpGet("affiliate/{affiliateId}")]
         public IActionResult GetByAffiliate(int affiliateId)

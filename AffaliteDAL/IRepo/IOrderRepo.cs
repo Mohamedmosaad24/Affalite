@@ -10,5 +10,5 @@ public interface IOrderRepo
 {
     Order GetById(int id);
     List<Order> GetByAffId(int id);
-
+    List<Order> GetByMerId(int id);
 }
