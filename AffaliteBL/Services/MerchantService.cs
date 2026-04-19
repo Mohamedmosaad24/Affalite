@@ -19,10 +19,11 @@ namespace AffaliteBL.Services
         {
             _repo = repo;
         }
+      
 
         public IEnumerable<Merchant> GetAllMerchants()
         {
-            return _repo.GetAll();
+            return _repo.GetAllMerchants();
         }
 
         public Merchant? GetMerchantById(int id)
@@ -48,7 +49,7 @@ namespace AffaliteBL.Services
 
             if (existingMerchant != null)
             {
-                existingMerchant.Balance = merchant.Balance;
+                //existingMerchant.Balance = merchant.Balance;
 
                 _repo.Update(existingMerchant);
                 _repo.SaveChanges();

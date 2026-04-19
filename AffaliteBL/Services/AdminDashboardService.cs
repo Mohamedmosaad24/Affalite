@@ -1,4 +1,4 @@
-using AffaliteBL.DTOs.Auth;
+﻿using AffaliteBL.DTOs.Auth;
 using AffaliteBL.DTOs.DashboardDTOs;
 using AffaliteBL.IServices;
 using AffaliteDAL.Data;
@@ -122,12 +122,50 @@ public class AdminDashboardService : IAdminDashboardService
         }
     }
 
+    //public ApiResponseDTO<List<TopProductDTO>> GetTopProducts(int count = 5)
+    //{
+    //    try
+    //    {
+    //        var topProducts = _context.OrderItems
+    //            .Include(oi => oi.Product)
+    //            .GroupBy(oi => new { oi.ProductId, oi.Product.Name, oi.Product.Images })
+    //            .Select(g => new TopProductDTO
+    //            {
+    //                ProductId = g.Key.ProductId,
+    //                ProductName = g.Key.Name,
+    //                OrderCount = g.Sum(oi => oi.Quantity),
+    //                TotalSales = g.Sum(oi => oi.Price * oi.Quantity),
+    //                //ImageUrl = g.Key.Images.FirstOrDefault()
+    //            })
+    //            .OrderByDescending(p => p.TotalSales)
+    //            .Take(count)
+    //            .ToList();
+
+    //        return new ApiResponseDTO<List<TopProductDTO>>
+    //        {
+    //            Success = true,
+    //            Message = "Top products retrieved successfully",
+    //            Data = topProducts
+    //        };
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        return new ApiResponseDTO<List<TopProductDTO>>
+    //        {
+    //            Success = false,
+    //            Message = "Failed to retrieve top products",
+    //            Errors = new List<string> { ex.Message }
+    //        };
+    //    }
+
     public ApiResponseDTO<List<TopProductDTO>> GetTopProducts(int count = 5)
     {
         try
         {
             var topProducts = _context.OrderItems
                 .Include(oi => oi.Product)
+                    .ThenInclude(p => p.Images)
+                .AsEnumerable()  // ← الحل هنا
                 .GroupBy(oi => new { oi.ProductId, oi.Product.Name, oi.Product.Images })
                 .Select(g => new TopProductDTO
                 {
@@ -135,7 +173,7 @@ public class AdminDashboardService : IAdminDashboardService
                     ProductName = g.Key.Name,
                     OrderCount = g.Sum(oi => oi.Quantity),
                     TotalSales = g.Sum(oi => oi.Price * oi.Quantity),
-                    //ImageUrl = g.Key.Images.FirstOrDefault()
+                    //ImageUrl = g.Key.Images.FirstOrDefault(u => u.ImageUrl)// ← دي هتشتغل دلوقتي
                 })
                 .OrderByDescending(p => p.TotalSales)
                 .Take(count)

@@ -17,7 +17,12 @@ namespace AffaliteDAL.Repo
         {
             _context = context;
         }
-
+        public IEnumerable<Affiliate> GetAllAffiliates()
+        {
+            return _context.Affiliates
+                .Include(a => a.AppUser) // Include related AppUser data if needed
+                .ToList();
+        }
         public IEnumerable<Order> GetAffiliateOrders(int affiliateId)
         {
             return _context.Orders

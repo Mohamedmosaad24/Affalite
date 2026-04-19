@@ -3,6 +3,7 @@ using AffaliteBL.IServices;
 using AffaliteDAL.Entities;
 using AffaliteDAL.Entities.Enums;
 using AffaliteDAL.IRepo;
+using AffaliteDAL.Repo;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,13 @@ namespace AffaliteBL.Services
     {
         private readonly IGenericRepository<Commission> _commissionRepo;
         private readonly IMapper _mapper;
+        private readonly ICommissionRepo _commRepo;
 
-        public CommissionService(IGenericRepository<Commission> commissionRepo, IMapper mapper)
+        public CommissionService(IGenericRepository<Commission> commissionRepo, IMapper mapper, ICommissionRepo CommRepo)
         {
             _commissionRepo = commissionRepo;
             _mapper = mapper;
+            _commRepo = CommRepo;
         }
 
       
@@ -51,6 +54,24 @@ namespace AffaliteBL.Services
             return _mapper.Map<IEnumerable<CommissionReadDTO>>(commissions);
         }
 
+        public IEnumerable<CommissionReadDTO> GetCommissionsByMerchant(int merchantId)
+        {
+            var commissions = _commRepo.GetAllCommissionsByMerchant(merchantId);
+            return commissions.Select(c => new CommissionReadDTO
+            {
+                Id = c.Id,
+                OrderId = c.OrderId,
+                AffiliateAmount = c.AffiliateAmount,
+                PlatformAmount = c.PlatformAmount,
+                MerchantAmount = c.MerchantAmount,
+                Status = c.Status.ToString(),
+                CreatedAt = c.CreatedAt
+            });
+
+
+        }
+
+
         public CommissionReadDTO? GetCommissionByOrderId(int orderId)
         {
             var commission = _commissionRepo.GetAll().FirstOrDefault(c => c.OrderId == orderId);
@@ -67,8 +88,6 @@ namespace AffaliteBL.Services
                 _commissionRepo.SaveChanges();
             }
         }
-    
 
-
-}
+    }
 }

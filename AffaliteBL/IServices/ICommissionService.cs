@@ -12,6 +12,7 @@ namespace AffaliteBL.IServices
     public interface ICommissionService
     {
         IEnumerable<CommissionReadDTO> GetCommissionsByAffiliate(int affiliateId);
+        IEnumerable<CommissionReadDTO> GetCommissionsByMerchant(int merchantId);
 
         CommissionReadDTO GetCommissionByOrderId(int orderId);
 
