@@ -63,7 +63,14 @@ namespace AffalitePL.Controllers
             return Ok(result);
         }
 
-    
+        [HttpGet("merchant/{merchantId}")]
+        public IActionResult GetByMerchant(int merchantId)
+        {
+            var result = _commissionService.GetCommissionsByMerchant(merchantId);
+            return Ok(result);
+        }
+
+
         [HttpPut("{id}/status")]
         public IActionResult UpdateStatus(int id, [FromBody] CommissionStatus status)
         {

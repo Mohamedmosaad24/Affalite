@@ -17,9 +17,10 @@ namespace AffaliteBL.Services
         {
             _repo = repo;
         }
+
         public IEnumerable<Affiliate> GetAllAffiliates()
         {
-            return _repo.GetAll();
+            return _repo.GetAllAffiliates();
         }
 
         public Affiliate? GetAffiliateById(int id)
@@ -45,7 +46,7 @@ namespace AffaliteBL.Services
 
             if (existingAffiliate != null)
             {
-                existingAffiliate.Balance = affiliate.Balance;
+                //existingAffiliate.Balance = affiliate.Balance;
 
                 _repo.Update(existingAffiliate);
                 _repo.SaveChanges();

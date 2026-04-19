@@ -11,6 +11,8 @@ namespace AffaliteBL.DTOs.AffiliateDTOs
         public int Id { get; set; }
         public decimal Balance { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string FullName { get; set; }
+        public bool IsActive { get; set; } = true;
 
     }
 }

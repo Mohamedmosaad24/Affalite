@@ -200,5 +200,11 @@ namespace AffaliteBL.Services
         {
             return _orderRepoo.GetByAffId(affId);
         }
+
+       public List<Order>getOrdersByMer(int merId)
+        {
+            return _orderRepoo.GetByMerId(merId);
+
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace AffaliteDAL.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         //public List<Merchant> Merchants { get; set; }
+        [JsonIgnore]
         public ICollection<MerchantOrder> MerchantOrder { get; set; }
         [JsonIgnore]
         public Affiliate? Affiliate { get; set; }

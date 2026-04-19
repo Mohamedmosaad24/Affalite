@@ -26,11 +26,12 @@ namespace AffaliteBL.Mapping
         public MappingProfile()
         {
             //Affiliate
-            CreateMap<Affiliate, GetAffiliateDTO>().ReverseMap();
+            CreateMap<Affiliate, GetAffiliateDTO>()
+                .ForMember( dest => dest.FullName, opt => opt.MapFrom(src => src.AppUser.FullName)).ReverseMap();
             CreateMap<Affiliate, CreateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, UpdateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, AffiliateBalanceDTO>().ReverseMap();
-            CreateMap<Order, OrderReadDTO>().ReverseMap();
+            //CreateMap<Order, OrderReadDTO>().ReverseMap();
             CreateMap<Commission, CommissionReadDTO>().ReverseMap();
             //Cart
             CreateMap<Cart, CartDTO>().ReverseMap();
@@ -72,8 +73,10 @@ namespace AffaliteBL.Mapping
             CreateMap<Order, OrderReadDTO>()
                     .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
             CreateMap<OrderItem, OrderItemDTO>()
-        .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Product.Images)).ReverseMap();
+        .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Product.Images)).ForMember(dest => dest.ProductName,
+              opt => opt.MapFrom(src => src.Product.Name)).ReverseMap();
 
+          
             CreateMap<OrderCreateDTO, Order>();
                 CreateMap<Commission, CommissionReadDTO>()
                     .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
@@ -122,9 +125,13 @@ namespace AffaliteBL.Mapping
 
 
             // Merchant
-            CreateMap<Merchant, GetMerchantDTO>().ReverseMap();
+            CreateMap<Merchant, GetMerchantDTO>()
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.AppUser.FullName))
+                .ReverseMap();
             CreateMap<Merchant, CreateMerchantDTO>().ReverseMap();
-            CreateMap<Merchant, UpdateMerchantDTO>().ReverseMap();
+            CreateMap<Merchant, UpdateMerchantDTO>()
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.AppUser.FullName))
+                .ReverseMap();
             CreateMap<Merchant, MerchantBalanceDTO>().ReverseMap();
 
             //Category
@@ -132,11 +139,9 @@ namespace AffaliteBL.Mapping
             CreateMap<Category, CreateCategoryDTO>().ReverseMap();
             CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
 
-            CreateMap<OrderItem, OrderItemDTO>()
-           .ForMember(dest => dest.ProductName,
-              opt => opt.MapFrom(src => src.Product.Name));
 
-            CreateMap<Order, OrderReadDTO>();
+            //CreateMap<Order, OrderReadDTO>();
+
 
 
 

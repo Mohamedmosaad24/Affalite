@@ -20,6 +20,13 @@ namespace AffaliteDAL.Repo
             _context = context;
         }
 
+        public IEnumerable<Merchant> GetAllMerchants()
+        {
+            return _context.Merchants
+                .Include(m => m.AppUser) // Include related AppUser data if needed
+                .ToList();
+        }
+
         public IEnumerable<Product> GetMerchantProducts(int merchantId)
         {
             return _context.Products
