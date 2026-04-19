@@ -12,4 +12,5 @@ public interface INotificationService
     ApiResponseDTO<object> MarkAsRead(int id, string userId);
     ApiResponseDTO<object> MarkAllAsRead(string userId);
     ApiResponseDTO<object> DeleteNotification(int id, string userId);
+
 }

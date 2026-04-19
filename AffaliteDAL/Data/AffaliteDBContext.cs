@@ -192,7 +192,7 @@ namespace AffaliteDAL.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             ///seeeding
-            ///
+            
             // ---------------- ROLES ----------------
             modelBuilder.Entity<IdentityRole>().HasData(
                 new IdentityRole { Id = "role-admin", Name = "Admin", NormalizedName = "ADMIN" },
@@ -267,7 +267,7 @@ namespace AffaliteDAL.Data
 
             // 8️⃣ ProductImages
             modelBuilder.Entity<ProductImage>().HasData(
-                new ProductImage { Id = 1, ProductId = 1, ImageUrl = "p5.png", FileName = "iphone14.jpg" },
+                new ProductImage { Id = 1, ProductId = 1, ImageUrl = "p1.jpg", FileName = "iphone14.jpg" },
                 new ProductImage { Id = 2, ProductId = 1, ImageUrl = "p4.jpg", FileName = "iphone14.jpg" },
                 new ProductImage { Id = 3, ProductId = 2, ImageUrl = "p2.png", FileName = "harrypotter.jpg" },
                 new ProductImage { Id = 4, ProductId = 2, ImageUrl = "p3.jpg", FileName = "harrypotter.jpg" }

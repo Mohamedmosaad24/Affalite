@@ -65,7 +65,9 @@ namespace AffalitePL.Controllers
             try
             {
                 _cartService.CreateItem(userId, addCartItemDTO, affilaiteCommission);
-                return Ok("done");
+                var cart = _cartService.GetCartByUserId(userId);
+                var res = _mapper.Map<CartDTO>(cart);
+                return Ok(res);
             }
             catch (Exception ex)
             {
@@ -110,7 +112,9 @@ namespace AffalitePL.Controllers
             try
             {
                 _cartService.DeleteItemByProductId(userId, productId);
-                return Ok("Done");
+                var cart = _cartService.GetCartByUserId(userId);
+                var res = _mapper.Map <CartDTO>(cart);
+                return Ok(res);
             }
             catch (Exception ex)
             {
