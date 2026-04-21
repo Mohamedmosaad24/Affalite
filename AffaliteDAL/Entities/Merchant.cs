@@ -18,5 +18,6 @@ namespace AffaliteDAL.Entities
         public AppUser AppUser { get; set; } = null!;
         public ICollection<MerchantOrder> MerchantOrder { get; set; }
 
+
     }
 }

@@ -21,13 +21,15 @@ using System.Threading.Tasks;
 
 namespace AffaliteBL.Mapping
 {
-    public class MappingProfile :Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
             //Affiliate
             CreateMap<Affiliate, GetAffiliateDTO>()
-                .ForMember( dest => dest.FullName, opt => opt.MapFrom(src => src.AppUser.FullName)).ReverseMap();
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.AppUser.FullName))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.AppUser.Email))
+                .ReverseMap();
             CreateMap<Affiliate, CreateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, UpdateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, AffiliateBalanceDTO>().ReverseMap();
@@ -38,7 +40,7 @@ namespace AffaliteBL.Mapping
             CreateMap<CartItem, CartItemDTO>().ReverseMap();
 
             CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
-                //.ForMember(dest => dest.im, opt => opt.MapFrom<ImageUrlResolver>())
+            //.ForMember(dest => dest.im, opt => opt.MapFrom<ImageUrlResolver>())
 
 
             //review
@@ -70,16 +72,18 @@ namespace AffaliteBL.Mapping
             CreateMap<UpdateProductDto, Product>();
 
             // Ordera  and commissions
-            CreateMap<Order, OrderReadDTO>()
+            CreateMap<Order, OrderReadDTO>().ForMember(dest => dest.AffiliateName,
+               opt => opt.MapFrom(src => src.Affiliate.AppUser.FullName))
                     .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
+
             CreateMap<OrderItem, OrderItemDTO>()
         .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Product.Images)).ForMember(dest => dest.ProductName,
               opt => opt.MapFrom(src => src.Product.Name)).ReverseMap();
 
-          
+
             CreateMap<OrderCreateDTO, Order>();
-                CreateMap<Commission, CommissionReadDTO>()
-                    .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
+            CreateMap<Commission, CommissionReadDTO>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
 
 
 
@@ -127,6 +131,7 @@ namespace AffaliteBL.Mapping
             // Merchant
             CreateMap<Merchant, GetMerchantDTO>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.AppUser.FullName))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.AppUser.Email))
                 .ReverseMap();
             CreateMap<Merchant, CreateMerchantDTO>().ReverseMap();
             CreateMap<Merchant, UpdateMerchantDTO>()
