@@ -41,6 +41,10 @@ namespace AffaliteDAL.Repo
                         .ThenInclude(mo => mo.Merchant)
                 .Where(c => c.MerchantCommissions.Any(m => m.MerchantId == merchantId))
                 .ToList();
+
+
+
+
         }
     }
 }

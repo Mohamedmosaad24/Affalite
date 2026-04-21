@@ -76,17 +76,35 @@ namespace AffalitePL.Controllers
         }
 
 
+        //[HttpGet]
+        //public IActionResult GetAll()
+        //{
+        //    var orders = _orderRepo.GetAllQueryable()
+        //    .AsNoTracking()
+        //    .Include(o => o.Items)
+        //    .ThenInclude(i => i.Product)  // ← علشان ياخد اسم المنتج
+        //    .ThenInclude(m =>m.Merchant)
+        //    .ThenInclude(s => s.AppUser)
+        //    .FirstOrDefault(o => o.Affiliate.AppUser.FullName == AppUser.FullName)
+        //    .ToList();
+        //    return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
+        //}
+
         [HttpGet]
         public IActionResult GetAll()
         {
             var orders = _orderRepo.GetAllQueryable()
-            .AsNoTracking()
-            .Include(o => o.Items)
-            .ThenInclude(i => i.Product)  // ← علشان ياخد اسم المنتج
-            .ToList();
+                .AsNoTracking()
+                .Include(o => o.Items)
+                    .ThenInclude(i => i.Product)
+                        .ThenInclude(p => p.Merchant)
+                            .ThenInclude(m => m.AppUser)
+                .Include(o => o.Affiliate)
+                    .ThenInclude(a => a.AppUser)  // ← بس كده، مش أكتر
+                .ToList();
+
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
-
 
         [HttpGet("merchant/{merchantId}")]
         public IActionResult GetByMerchant(int merchantId)
