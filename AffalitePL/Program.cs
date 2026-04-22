@@ -1,4 +1,4 @@
-using AffaliteBL.IServices;
+﻿using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
 using AffaliteBLL.Services;
@@ -44,6 +44,35 @@ namespace AffalitePL
             builder.Services.AddScoped<IAuthServices, AuthServices>();
             builder.Services.AddScoped<IJwtServices, JwtServices>();
             builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+
+
+            //Ai Services
+            // ============================================================
+            //  أضيف الـ 3 sections دي في Program.cs بتاعك
+            // ============================================================
+
+            // ── 1. Claude HTTP Client ────────────────────────────────────
+            builder.Services.AddHttpClient<ClaudeAiClient>();
+
+            // ── 2. Marketing Service ─────────────────────────────────────
+            builder.Services.AddScoped<IMarketingService, MarketingService>();
+
+            // ── 3. Redis Distributed Cache ───────────────────────────────
+            //  لو Redis مش مثبّت بعد:  dotnet add package Microsoft.Extensions.Caching.StackExchangeRedis
+            var redisConnection = builder.Configuration.GetConnectionString("Redis");
+            if (!string.IsNullOrWhiteSpace(redisConnection))
+            {
+                builder.Services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = redisConnection;
+                    options.InstanceName = "AffiliatePosts_";
+                });
+            }
+            else
+            {
+                builder.Services.AddDistributedMemoryCache();
+            }
+
 
 
             //Merchant
