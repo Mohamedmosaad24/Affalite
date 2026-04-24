@@ -30,15 +30,6 @@ public class OrderRepo : IOrderRepo
                               .ToList();
 
     }
-    //public IEnumerable<Order> GetByMerId(int id)
-    //{
-    //    return _context.Orders
-    //        .Include(o => o.Commission).ThenInclude(c => c.MerchantCommissions)
-    //        .Include(o => o.MerchantOrder).ThenInclude(m => m.Merchant)
-    //        .Include(o => o.Items).ThenInclude(i => i.Product).ThenInclude(p => p.Images)
-    //        .Where(o => o.MerchantOrder.Any(m => m.MerchantId == id)) // ← Any() لأنها Collection
-    //        .ToList();
-    //}
     public Order GetById(int id)
     {
         return _context.Orders.Include(o => o.Commission).ThenInclude(c=>c.MerchantCommissions)
@@ -50,13 +41,16 @@ public class OrderRepo : IOrderRepo
                              
     }
 
-   public List<Order> GetByMerId(int id)
+   
+    public List<Order> GetByMerId(int id)
     {
         return _context.Orders
+            .AsNoTracking()
             .Include(o => o.Commission).ThenInclude(c => c.MerchantCommissions)
             .Include(o => o.MerchantOrder).ThenInclude(m => m.Merchant)
+            .Include(o => o.Affiliate).ThenInclude(a => a.AppUser)
             .Include(o => o.Items).ThenInclude(i => i.Product).ThenInclude(p => p.Images)
-            .Where(o => o.MerchantOrder.Any(m => m.MerchantId == id)) // ← Any() لأنها Collection
+            .Where(o => o.MerchantOrder.Any(m => m.MerchantId == id))
             .ToList();
     }
 }

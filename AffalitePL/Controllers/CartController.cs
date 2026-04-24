@@ -34,44 +34,44 @@ namespace AffalitePL.Controllers
         public IActionResult Get(int userId)
         {
             var cart = _cartService.GetCartByUserId(userId);
-            var res = _mapper.Map<CartDTO> (cart);
+
             if (cart == null)
                 return NotFound($"Cart with id: {userId} not found");
 
-            return Ok(res);
+            return Ok(cart);
         }
 
-        //[HttpPost]
-        //public IActionResult CreateCart(int userId)
+  
+        //[HttpPost("{userId:int}/items")]
+        //public IActionResult CreateItem(int userId, [FromBody] AddCartItemDTO? addCartItemDTO,decimal? affilaiteCommission)
         //{
-        //    var cart = _cartService.CreateCart(userId);
-        //    return Ok(CartUiMapper.Map(cart, _imagesBaseUrl));
-        //}
-
-        //[HttpDelete("{cartId:int}")]
-        //public IActionResult DeleteCart(int cartId)
-        //{
-        //    var cart = _cartService.GetCartById(cartId);
-        //    if (cart == null)
-        //        return NotFound($"Cart with id: {cartId} not found");
-
-        //    _cartService.DeleteCart(cartId);
-        //    return Ok("Cart deleted successfully");
+        //    try
+        //    {
+        //        _cartService.CreateItem(userId, addCartItemDTO, affilaiteCommission);
+        //        var cart = _cartService.GetCartByUserId(userId);
+        //        var res = _mapper.Map<CartDTO>(cart);
+        //        return Ok(res);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
         //}
 
         [HttpPost("{userId:int}/items")]
-        public IActionResult CreateItem(int userId, [FromBody] AddCartItemDTO? addCartItemDTO,decimal? affilaiteCommission)
+        public IActionResult CreateItem(int userId, [FromBody] AddCartItemDTO? addCartItemDTO, decimal? affilaiteCommission)
         {
             try
             {
                 _cartService.CreateItem(userId, addCartItemDTO, affilaiteCommission);
+
                 var cart = _cartService.GetCartByUserId(userId);
-                var res = _mapper.Map<CartDTO>(cart);
-                return Ok(res);
+
+                return Ok(cart);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -115,6 +115,7 @@ namespace AffalitePL.Controllers
                 var cart = _cartService.GetCartByUserId(userId);
                 var res = _mapper.Map <CartDTO>(cart);
                 return Ok(res);
+
             }
             catch (Exception ex)
             {

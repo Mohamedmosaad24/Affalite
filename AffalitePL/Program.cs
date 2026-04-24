@@ -1,6 +1,7 @@
-using AffaliteBL.IServices;
+﻿using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
+using AffaliteBL.Services.AI.Marketing;
 using AffaliteBLL.Services;
 using AffaliteBLL.Services.Interfaces;
 using AffaliteDAL.Data;
@@ -44,6 +45,40 @@ namespace AffalitePL
             builder.Services.AddScoped<IAuthServices, AuthServices>();
             builder.Services.AddScoped<IJwtServices, JwtServices>();
             builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+
+
+            //Ai Services
+            // ============================================================
+            //  أضيف الـ 3 sections دي في Program.cs بتاعك
+            // ============================================================
+
+            // ── 1. Claude HTTP Client ────────────────────────────────────
+            builder.Services.AddHttpClient<ClaudeAiClient>();
+
+            // ── 2. Marketing Service ─────────────────────────────────────
+            builder.Services.AddScoped<IMarketingService, MarketingService>();
+            builder.Services.AddScoped<IMarketingContextBuilder, MarketingContextBuilder>();
+            builder.Services.AddScoped<IMarketingPromptFactory, MarketingPromptFactory>();
+            builder.Services.AddScoped<IMarketingResponseParser, MarketingResponseParser>();
+            builder.Services.AddScoped<IMarketingFallbackBuilder, MarketingFallbackBuilder>();
+            builder.Services.AddScoped<IMarketingAiGenerator, MarketingAiGenerator>();
+
+            // ── 3. Redis Distributed Cache ───────────────────────────────
+            //  لو Redis مش مثبّت بعد:  dotnet add package Microsoft.Extensions.Caching.StackExchangeRedis
+            var redisConnection = builder.Configuration.GetConnectionString("Redis");
+            if (!string.IsNullOrWhiteSpace(redisConnection))
+            {
+                builder.Services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = redisConnection;
+                    options.InstanceName = "AffiliatePosts_";
+                });
+            }
+            else
+            {
+                builder.Services.AddDistributedMemoryCache();
+            }
+
 
 
             //Merchant
@@ -100,13 +135,16 @@ namespace AffalitePL
             });
 
 
-            builder.Services.AddControllers();
-
             builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-    });
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
+            //        builder.Services.AddControllers()
+            //.AddJsonOptions(options =>
+            //{
+            //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            //});
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
