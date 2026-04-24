@@ -1,6 +1,7 @@
 ﻿using AffaliteBL.IServices;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
+using AffaliteBL.Services.AI.Marketing;
 using AffaliteBLL.Services;
 using AffaliteBLL.Services.Interfaces;
 using AffaliteDAL.Data;
@@ -56,6 +57,11 @@ namespace AffalitePL
 
             // ── 2. Marketing Service ─────────────────────────────────────
             builder.Services.AddScoped<IMarketingService, MarketingService>();
+            builder.Services.AddScoped<IMarketingContextBuilder, MarketingContextBuilder>();
+            builder.Services.AddScoped<IMarketingPromptFactory, MarketingPromptFactory>();
+            builder.Services.AddScoped<IMarketingResponseParser, MarketingResponseParser>();
+            builder.Services.AddScoped<IMarketingFallbackBuilder, MarketingFallbackBuilder>();
+            builder.Services.AddScoped<IMarketingAiGenerator, MarketingAiGenerator>();
 
             // ── 3. Redis Distributed Cache ───────────────────────────────
             //  لو Redis مش مثبّت بعد:  dotnet add package Microsoft.Extensions.Caching.StackExchangeRedis
@@ -129,13 +135,16 @@ namespace AffalitePL
             });
 
 
-            builder.Services.AddControllers();
-
             builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-    });
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
+            //        builder.Services.AddControllers()
+            //.AddJsonOptions(options =>
+            //{
+            //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            //});
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
