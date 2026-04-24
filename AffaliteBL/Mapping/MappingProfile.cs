@@ -6,6 +6,7 @@ using AffaliteBL.DTOs.CommissionDTOs;
 using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.DTOs.ReviewDTOs;
+using AffaliteBL.DTOs.WithdrawalDto;
 using AffaliteBL.Helpers;
 using AffaliteBLL.DTOs;
 using AffaliteBLL.DTOs.Products;
@@ -127,7 +128,11 @@ namespace AffaliteBL.Mapping
 
             //CreateMap<Order, OrderReadDTO>();
 
+            //WithdrawalRepo
 
+            CreateMap<WithdrawRequest, CreateWithdrawalDto>().ReverseMap();
+            CreateMap<WithdrawRequest, UpdateWithdrawalDto>().ReverseMap();
+            CreateMap<WithdrawRequest, WithdrawRequestDto>().ReverseMap();
 
 
 

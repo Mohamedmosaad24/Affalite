@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AffaliteBL.DTOs.WithdrawalDto;
+using AffaliteDAL.Entities;
+
+namespace AffaliteBL.IServices
+{
+    public interface IWithdrawalService
+    {
+        IEnumerable<WithdrawRequest> GetAll();
+        WithdrawRequest Add(string userId, CreateWithdrawalDto dto);
+        WithdrawRequest Update(UpdateWithdrawalDto dto);
+        Task<IEnumerable<WithdrawRequest>> GetByAffiliateId(string affiliateId);
+        Task<IEnumerable<WithdrawRequest>> GetByMerchantId(string merchantId);
+    }
+}

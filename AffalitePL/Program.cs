@@ -45,6 +45,8 @@ namespace AffalitePL
             builder.Services.AddScoped<IAuthServices, AuthServices>();
             builder.Services.AddScoped<IJwtServices, JwtServices>();
             builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+            builder.Services.AddScoped<IWithdrawalRepo, WithdrawalRepo>();
+            builder.Services.AddScoped<IWithdrawalService, WithdrawalService>();
 
 
             //Ai Services
