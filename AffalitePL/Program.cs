@@ -1,4 +1,5 @@
 using AffaliteBL.IServices;
+using AffaliteBL.Mapper;
 using AffaliteBL.Mapping;
 using AffaliteBL.Services;
 using AffaliteBLL.Services;
@@ -64,7 +65,13 @@ namespace AffalitePL
             //Notifications
             builder.Services.AddScoped<INotificationRepo, NotificationRepo>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
-
+            // ai
+            builder.Services.AddScoped<IAiContentRepo, AiContentRepo>();
+            builder.Services.AddScoped<IMatchingRepo, MatchingRepo>();
+            builder.Services.AddScoped<IAiContentService, AiContentService>();
+            builder.Services.AddScoped<IMatchingService, MatchingService>();
+            builder.Services.AddAutoMapper(typeof(AffaliteBL.Mapper.AiMappingProfile).Assembly);
+           
             //Commissions 
             builder.Services.AddScoped<ICommissionRepo, CommissionRepo>();
             builder.Services.AddScoped<ICommissionService, CommissionService>();
@@ -85,7 +92,14 @@ namespace AffalitePL
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            //ai 
+            builder.Services.AddHttpClient("OpenAI", client =>
+            {
+                client.BaseAddress = new Uri("https://api.openai.com/v1/");
+            });
 
+            //// 4️⃣ تسجيل الـ Background Job (اختياري)
+            //builder.Services.AddHostedService<MatchingBackgroundJob>();
 
 
             builder.Services.AddCors(options =>

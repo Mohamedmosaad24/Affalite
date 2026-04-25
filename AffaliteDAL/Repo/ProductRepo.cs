@@ -29,5 +29,11 @@ namespace AffaliteDAL.Repo
                 .Include(p=>p.Reviews)
                 .AsQueryable();
         }
+        public async Task<Product?> GetByIdAsync(int id)
+        {
+            return await _context.Products.FindAsync(id);
+            //  GenericRepository:
+            // return await Task.FromResult(GetById(id));
+        }
     }
 }
