@@ -30,15 +30,43 @@ namespace AffaliteBL.Services
             _merchantRepo = merchantRepo;
         }
 
-        public IEnumerable<WithdrawRequest> GetAll()
-        {
-            return  _repo.GetAll();
-        }
+        
+        //   public IEnumerable<WithdrawRequestDto> GetAl()
+        //{
+            //var requests = _repo.GetAll();
 
-        // ✅ ADD REQUEST
+            //return requests.Select(r =>
+            //{
+            //    string name = "";
+
+            //    if (r.UserType == UserType.Affiliate)
+            //    {
+            //        var aff = _affiliateRepo.GetById(r.UserRefId);
+        //            name = aff?.FullName ?? "Unknown";
+        //        }
+        //        else
+        //        {
+        //            var mer = _merchantRepo.GetById(r.UserRefId);
+        //            name = mer?.FullName ?? "Unknown";
+        //        }
+
+        //        return new WithdrawRequestDto
+        //        {
+        //            Number = r.Number,
+        //            Amount = r.Amount,
+        //            PaymentMethod = r.PaymentMethod,
+        //            UserType = r.UserType,
+        //            UserRefId = r.UserRefId,
+        //            Status = r.Status,
+        //            CreatedAt = r.CreatedAt,
+        //            UserName = name 
+        //        };
+        //    });
+        //}
+        
+
         public WithdrawRequest Add(string userId, CreateWithdrawalDto dto)
         {
-            // نحدد هل هو affiliate ولا merchant
             var affiliate = _affiliateRepo.GetAffiliateUserId(userId);
             var merchant = _merchantRepo.GetMerchantByUserId(userId);
 
@@ -65,12 +93,7 @@ namespace AffaliteBL.Services
             if (dto.Amount > balance)
                 throw new Exception("Insufficient balance");
 
-            // ✅ خصم الرصيد أول ما يعمل طلب
-            if (userType == UserType.Affiliate)
-                affiliate.Balance -= dto.Amount;
-            else
-                merchant.Balance -= dto.Amount;
-
+            // ✅ مش بنخصم هنا — بس بنحفظ الطلب
             var request = new WithdrawRequest
             {
                 Amount = dto.Amount,
@@ -78,59 +101,104 @@ namespace AffaliteBL.Services
                 Number = dto.Number,
                 UserRefId = entityId,
                 UserType = userType,
-                Status = WithdrawalStatus.Pending
+                Status = WithdrawalStatus.Pending  // ← Pending دايماً
             };
 
-             _repo.Add(request);
-             _repo.SaveChanges();
+            _repo.Add(request);
+            _repo.SaveChanges();
 
             return request;
         }
 
-        // ✅ UPDATE STATUS
+        // ✅ UPDATE — الخصم بيحصل هنا بس
         public WithdrawRequest Update(UpdateWithdrawalDto dto)
         {
-            var request =  _repo.GetById(dto.Id);
+            var request = _repo.GetById(dto.Id);
 
             if (request == null)
                 throw new Exception("Request not found");
 
+            // ❌ منع التعديل لو مش Pending
+            if (request.Status != WithdrawalStatus.Pending)
+                throw new Exception("Request already processed");
+
             request.Status = dto.Status;
 
-            // ❌ لو اترفض → رجع الفلوس
-            if (dto.Status == WithdrawalStatus.Rejected)
+            if (dto.Status == WithdrawalStatus.Approved)
             {
+                // ✅ Approved → اخصم الرصيد دلوقتي
                 if (request.UserType == UserType.Affiliate)
                 {
-                    var aff =  _affiliateRepo.GetById(request.UserRefId);
-                    aff.Balance += request.Amount;
+                    var aff = _affiliateRepo.GetById(request.UserRefId);
+                    if (aff.Balance < request.Amount)
+                        throw new Exception("Insufficient balance");
+                    aff.Balance -= request.Amount;
                 }
                 else
                 {
-                    var mer =  _merchantRepo.GetById(request.UserRefId);
-                    mer.Balance += request.Amount;
+                    var mer = _merchantRepo.GetById(request.UserRefId);
+                    if (mer.Balance < request.Amount)
+                        throw new Exception("Insufficient balance");
+                    mer.Balance -= request.Amount;
                 }
             }
+            // ✅ Rejected → مفيش خصم ومفيش رجوع (الرصيد لم يتخصم أصلاً)
 
-            // ✅ لو Approved → خلاص مفيش حاجة
-             _repo.Update(request);
-             _repo.SaveChanges();
+            _repo.Update(request);
+            _repo.SaveChanges();
 
             return request;
         }
 
-        public async Task<IEnumerable<WithdrawRequest>> GetByAffiliateId(string affiliateId)
+        public async Task<IEnumerable<WithdrawRequest>> GetByAffiliateId(int affiliateId)
         {
-            var affiliate = _affiliateRepo.GetAffiliateUserId(affiliateId);
+            //var affiliate = _affiliateRepo.GetAffiliateUserId(affiliateId);
 
-            return await withdrawalRepo.GetByUserAsync(affiliate.Id, UserType.Affiliate);
+            return await withdrawalRepo.GetByUserAsync(affiliateId, UserType.Affiliate);
         }
 
-        public async Task<IEnumerable<WithdrawRequest>> GetByMerchantId(string merchantId)
+        public async Task<IEnumerable<WithdrawRequest>> GetByMerchantId(int merchantId)
         {
-            var merchant = _merchantRepo.GetMerchantByUserId(merchantId);
+            //var merchant = _merchantRepo.GetMerchantByUserId(merchantId);
 
-            return await withdrawalRepo.GetByUserAsync(merchant.Id, UserType.Merchant);
+            return await withdrawalRepo.GetByUserAsync(merchantId, UserType.Merchant);
         }
+
+        public IEnumerable<WithdrawRequestDto> GetAll()
+        {
+            var requests = _repo.GetAll();
+
+            return requests.Select(r =>
+            {
+                string name = "";
+
+                if (r.UserType == UserType.Affiliate)
+                {
+                    var aff = _affiliateRepo.GetByIdWithUser(r.UserRefId); 
+                    name = aff?.AppUser?.FullName ?? aff?.AppUser?.UserName ?? "Unknown";
+                }
+                else
+                {
+                    var mer = _merchantRepo.GetByIdWithUser(r.UserRefId); 
+                    name = mer?.AppUser?.FullName ?? mer?.AppUser?.UserName ?? "Unknown";
+                }
+
+                return new WithdrawRequestDto
+                {
+                   
+                    Number = r.Number,
+                    Amount = r.Amount,
+                    PaymentMethod = r.PaymentMethod,
+                    UserType = r.UserType,
+                    UserRefId = r.UserRefId,
+                    Status = r.Status,
+                    CreatedAt = r.CreatedAt,
+                    UserName = name
+                };
+            });
+        }
+
+
     }
-}
+    }
+

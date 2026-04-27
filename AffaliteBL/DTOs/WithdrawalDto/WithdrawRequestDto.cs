@@ -22,5 +22,7 @@ namespace AffaliteBL.DTOs.WithdrawalDto
         public WithdrawalStatus Status { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public string UserName { get; set; }
     }
 }

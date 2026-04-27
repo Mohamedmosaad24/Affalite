@@ -67,12 +67,12 @@ namespace AffalitePL.Controllers
             return Ok(result);
         }
 
-        [HttpGet("merchant/")]
-        public IActionResult GetByMerchant()
+        [HttpGet("merchant/{merchantid}")]
+        public IActionResult GetByMerchant(int merchantid)
         {
-            var merchantId = User.FindFirst("uid")?.Value;
-            var merchant = merchantService.GetMerchantByUserId(merchantId);
-            var result = _commissionService.GetCommissionsByMerchant(merchant.Id);
+            //var merchantId = User.FindFirst("uid")?.Value;
+            //var merchant = merchantService.GetMerchantByUserId(merchantId);
+            var result = _commissionService.GetCommissionsByMerchant(merchantid);
             return Ok(result);
         }
 

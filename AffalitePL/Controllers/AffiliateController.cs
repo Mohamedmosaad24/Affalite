@@ -45,10 +45,8 @@ namespace AffalitePL.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateAffiliate(int id, UpdateAffiliateDTO updateAffiliateDTO)
         {
-            var affiliate = _mapper.Map<Affiliate>(updateAffiliateDTO);
-            affiliate.Id = id;
-            _affiliateService.UpdateAffiliate(affiliate);
-            return Ok(affiliate);
+            _affiliateService.UpdateAffiliate(updateAffiliateDTO, id); 
+            return Ok();
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteAffiliate(int id)
