@@ -33,6 +33,7 @@ namespace AffaliteBL.Mapping
                 .ReverseMap();
             CreateMap<Affiliate, CreateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, UpdateAffiliateDTO>().ReverseMap();
+
             CreateMap<Affiliate, AffiliateBalanceDTO>().ReverseMap();
             //CreateMap<Order, OrderReadDTO>().ReverseMap();
             CreateMap<Commission, CommissionReadDTO>().ReverseMap();

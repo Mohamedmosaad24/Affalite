@@ -8,6 +8,7 @@ namespace AffaliteDAL.IRepo
         decimal? GetAffiliateBalance(int affiliateId);
         Affiliate? GetAffiliateUserId(string userId);
         public IEnumerable<Affiliate> GetAllAffiliates();
+        Affiliate? GetByIdWithUser(int id);
 
 
     }

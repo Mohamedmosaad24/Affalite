@@ -111,13 +111,13 @@ namespace AffaliteAPI.Controllers
         }
 
         // GET /api/products/merchant/{merchantId}
-        [HttpGet("merchant")]
-        public IActionResult GetByMerchant( [FromQuery] ProductQueryParams query)
+        [HttpGet("merchant/{merchantId}")]
+        public IActionResult GetByMerchant(int merchantId, [FromQuery] ProductQueryParams query)
         {
             // ننسخ query عشان نضيف MerchantId
-            var merchantId = User.FindFirst("uid")?.Value;
-           var merchant= merchantService.GetMerchantByUserId(merchantId);
-            query.MerchantId = merchant.Id;
+            //var merchantId = User.FindFirst("uid")?.Value;
+           //var merchant= merchantService.GetMerchantByUserId(merchantId);
+            query.MerchantId = merchantId;
 
             var products = _service.GetAll(query);
             var result = _mapper.Map<IEnumerable<ProductDto>>(products);

@@ -56,5 +56,11 @@ namespace AffaliteDAL.Repo
         {
             return _context.Merchants.Where(m => m.AppUserId == userId).FirstOrDefault();
         }
+        public Merchant? GetByIdWithUser(int id)
+        {
+            return _context.Merchants
+                .Include(m => m.AppUser)
+                .FirstOrDefault(m => m.Id == id);
+        }
     }
 }

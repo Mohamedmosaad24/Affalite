@@ -53,7 +53,7 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AppUserId = "user2",
                             Balance = 1500m,
-                            CreatedAt = new DateTime(2026, 4, 25, 3, 29, 22, 554, DateTimeKind.Utc).AddTicks(5631)
+                            CreatedAt = new DateTime(2026, 4, 26, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(1502)
                         });
                 });
 
@@ -130,17 +130,17 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = "user1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6fd8069b-b217-45b6-8e55-4b82fb8c9001",
+                            ConcurrencyStamp = "7e7899c1-c11d-4b1a-ac2a-cfecac3041c1",
                             Email = "merchant1@affalite.com",
                             EmailConfirmed = true,
                             FullName = "Ahmed Hassan",
                             LockoutEnabled = false,
                             NormalizedEmail = "MERCHANT1@AFFALITE.COM",
                             NormalizedUserName = "MERCHANT1@AFFALITE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBp1xzwnXTKPp6UtkmggrtJMsIRtTRgyPcycfZ80uWo9urDzqxEw/glHWqKoU629fQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKC2M9hIjoaSe95FhEQjVYPDGI+ezs5AiLOxrnFRbIef7njrJ/RbPi7KVKwVs1acfg==",
                             PhoneNumber = "01001234567",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f97edc35-cf2a-43ae-a1f1-d0d51b1184e9",
+                            SecurityStamp = "d5c9de55-f4cf-403d-a0d3-8fc2047dffbf",
                             TwoFactorEnabled = false,
                             UserName = "merchant1"
                         },
@@ -148,17 +148,17 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = "user2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8b28d93c-0280-47a7-a4c4-16958889a900",
+                            ConcurrencyStamp = "fd292f54-db2f-4d4f-b748-553aab7a313f",
                             Email = "affiliate1@affalite.com",
                             EmailConfirmed = true,
                             FullName = "Youssef Ali",
                             LockoutEnabled = false,
                             NormalizedEmail = "AFFILIATE1@AFFALITE.COM",
                             NormalizedUserName = "AFFILIATE1@AFFALITE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEObbrPAJSBr1PxEDqNZVtlP8Ps69GVELrraPCJiHmvDlmDMO9BX3J48qcKzUzJFhcA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH7t+s+sKA/H546/pUfX6SUxXdsOUw1Yr1Rn84yjIZUNvFhK39bpKKHldZ+5qMgzrg==",
                             PhoneNumber = "01001112233",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ce56224f-f5a1-47e5-983f-80d9bea1785e",
+                            SecurityStamp = "49abb0c2-9ee3-453a-b937-4064c74d39c2",
                             TwoFactorEnabled = false,
                             UserName = "affiliate1"
                         },
@@ -166,17 +166,17 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = "user3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc828ad1-2db2-4343-b3d9-55e076805964",
+                            ConcurrencyStamp = "5b79eecd-2065-423e-ab9e-e111e40bca05",
                             Email = "customer1@affalite.com",
                             EmailConfirmed = true,
                             FullName = "Hana Adel",
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER1@AFFALITE.COM",
                             NormalizedUserName = "CUSTOMER1@AFFALITE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG65IYr7qBXWHWia+GP0N8+Z3YW2l6yN+zMOkRVBmj1d3ZN9zhD85eLPvu+K7AmGzQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM4XMTJW5Z3wxVNFs66DbWm6ux8xxb+7BoeHG4Y8tqB/lV7s7Z1zHZX1tbjLB5qq5Q==",
                             PhoneNumber = "01002223344",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf0cde45-8166-4067-aff2-87f72d94fca8",
+                            SecurityStamp = "3a8a03df-e023-4ea8-b84a-ef5ec1571dec",
                             TwoFactorEnabled = false,
                             UserName = "customer1"
                         });
@@ -221,7 +221,7 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AffilaiteCommission = 0m,
                             AffiliateId = 1,
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6150),
+                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1810),
                             Shiping = 10m,
                             SubTotal = 0m,
                             Total = 0m
@@ -261,7 +261,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 1,
                             CartId = 1,
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6223),
+                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1861),
                             ProductId = 1,
                             Quantity = 2
                         },
@@ -269,7 +269,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 2,
                             CartId = 1,
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6233),
+                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1870),
                             ProductId = 2,
                             Quantity = 1
                         });
@@ -305,14 +305,14 @@ namespace AffaliteDAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 4, 25, 3, 29, 22, 554, DateTimeKind.Utc).AddTicks(5417),
+                            CreatedAt = new DateTime(2026, 4, 26, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(1389),
                             Name = "Electronics",
                             Slug = "electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 4, 25, 3, 29, 22, 554, DateTimeKind.Utc).AddTicks(5421),
+                            CreatedAt = new DateTime(2026, 4, 26, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(1392),
                             Name = "Fashion",
                             Slug = "fashion"
                         });
@@ -356,7 +356,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 1,
                             AffiliateAmount = 578.99m,
-                            CreatedAt = new DateTime(2026, 3, 27, 3, 29, 22, 554, DateTimeKind.Utc).AddTicks(6536),
+                            CreatedAt = new DateTime(2026, 3, 28, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(2209),
                             MerchantAmount = 17756.00m,
                             OrderId = 1,
                             PlatformAmount = 964.99m,
@@ -438,7 +438,7 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AppUserId = "user1",
                             Balance = 5000m,
-                            CreatedAt = new DateTime(2026, 4, 25, 3, 29, 22, 554, DateTimeKind.Utc).AddTicks(5525)
+                            CreatedAt = new DateTime(2026, 4, 26, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(1449)
                         });
                 });
 
@@ -583,7 +583,7 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AffiliateCommissionPct = 5m,
                             AffiliateId = 1,
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6320),
+                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1927),
                             CustomerAddress = "123 Street",
                             CustomerName = "David",
                             CustomerPhone = "01000000004",
@@ -627,7 +627,7 @@ namespace AffaliteDAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6453),
+                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(2150),
                             OrderId = 1,
                             Price = 999m,
                             ProductId = 1,
@@ -636,7 +636,7 @@ namespace AffaliteDAL.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6457),
+                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(2156),
                             OrderId = 1,
                             Price = 20m,
                             ProductId = 2,
@@ -701,7 +701,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(5798),
+                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1605),
                             Description = "Latest Apple iPhone",
                             Details = "Details here",
                             MerchantId = 1,
@@ -716,7 +716,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(5888),
+                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1662),
                             Description = "Fantasy novel",
                             Details = "Details here",
                             MerchantId = 1,
@@ -823,7 +823,7 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AffiliateId = 1,
                             Comment = "Great phone!",
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6039),
+                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1754),
                             ProductId = 1,
                             Rating = 5
                         },
@@ -831,8 +831,9 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 2,
                             AffiliateId = 1,
-                            Comment = "Loved the book",
+                            Comment = "Loved 
                             CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6044),
+
                             ProductId = 2,
                             Rating = 4
                         });
