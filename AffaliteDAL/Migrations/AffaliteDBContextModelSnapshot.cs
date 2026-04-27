@@ -831,8 +831,9 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 2,
                             AffiliateId = 1,
-                            Comment = "Loved the book",
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1758),
+                            Comment = "Loved 
+                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6044),
+
                             ProductId = 2,
                             Rating = 4
                         });
