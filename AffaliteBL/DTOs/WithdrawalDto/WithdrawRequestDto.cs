@@ -9,7 +9,7 @@ namespace AffaliteBL.DTOs.WithdrawalDto
 {
     public class WithdrawRequestDto
     {
-
+        public int Id { get; set; }
         public string Number { get; set; }
         public decimal Amount { get; set; }
 
