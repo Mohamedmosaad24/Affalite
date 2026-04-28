@@ -27,7 +27,7 @@ namespace AffalitePL.Controllers
         [HttpGet("affiliates/{id}/recommendations")]
         public async Task<IActionResult> GetAffiliateRecommendations(int id)
         {
-            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst("uid")?.Value;
             var affiliate = _affiliateService.GetAffiliateUserId(userId);
 
             if (affiliate?.Id != id) return Forbid();
