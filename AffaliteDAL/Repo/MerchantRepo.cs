@@ -53,5 +53,7 @@ namespace AffaliteDAL.Repo
         {
             return _context.Merchants.Where(m => m.AppUserId == userId).FirstOrDefault();
         }
+
+      
     }
 }

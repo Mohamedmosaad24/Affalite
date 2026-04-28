@@ -17,6 +17,7 @@ namespace AffaliteDAL.Data
         public AffaliteDBContext(DbContextOptions<AffaliteDBContext> options) : base(options)
         {
         }
+        public DbSet<WithdrawRequest> WithdrawRequests { get; set; }
         public DbSet<Affiliate> Affiliates { get; set; }
         public DbSet<Merchant> Merchants { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -34,10 +35,44 @@ namespace AffaliteDAL.Data
 
         public DbSet<Notification> Notifications { get; set; }
 
+        public DbSet<AiContentHistory> AiContentHistories { get; set; }
+        public DbSet<AffiliateMerchantMatch> AffiliateMerchantMatches { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            //ai 
+            modelBuilder.Entity<AiContentHistory>(entity =>
+            {
+                entity.HasIndex(e => e.AffiliateId);
+                entity.HasIndex(e => e.ProductId);
+                entity.HasOne(e => e.Affiliate)
+                      .WithMany()
+                      .HasForeignKey(e => e.AffiliateId)
+                      .OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(e => e.Product)
+                      .WithMany()
+                      .HasForeignKey(e => e.ProductId)
+                      .OnDelete(DeleteBehavior.NoAction);
+            });
+
+            modelBuilder.Entity<AffiliateMerchantMatch>(entity =>
+            {
+                entity.HasIndex(e => new { e.Status, e.CreatedAt });
+                entity.HasOne(e => e.Merchant)
+                      .WithMany()
+                      .HasForeignKey(e => e.MerchantId)
+                      .OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(e => e.Affiliate)
+                      .WithMany()
+                      .HasForeignKey(e => e.AffiliateId)
+                      .OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(e => e.Product)
+                      .WithMany()
+                      .HasForeignKey(e => e.ProductId)
+                      .OnDelete(DeleteBehavior.NoAction);
+            });
+
 
             modelBuilder.Entity<Category>()
        .HasIndex(c => c.Slug)
