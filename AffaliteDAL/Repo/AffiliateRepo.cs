@@ -61,5 +61,8 @@ namespace AffaliteDAL.Repo
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
+          
+
+
     }
 }

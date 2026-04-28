@@ -39,7 +39,7 @@ namespace AffaliteBL.Services
 
         public async Task<List<MatchRecommendationDTO>> GetRecommendationsForAffiliateAsync(int affiliateId, int topN = 10)
         {
-            var affiliate = await _affiliateRepo.GetByIdAsync(affiliateId)
+            var affiliate = _affiliateRepo.GetById(affiliateId)
                 ?? throw new Exception("Affiliate not found");
 
             var activeProducts = await _context.Products
@@ -48,7 +48,7 @@ namespace AffaliteBL.Services
                 .Where(p => p.Status == ProductStatus.Active && p.Stock > 0)
                 .ToListAsync();
 
-            // تحويل اهتمامات المسوق إلى متجه (Vector)
+           // terns affalite to vector
             float[] affiliateVector = await GetEmbeddingAsync(
                 $"{affiliate.AppUser?.FullName} {string.Join(" ", activeProducts.Select(p => p.Category?.Name))}");
 
@@ -56,11 +56,11 @@ namespace AffaliteBL.Services
 
             foreach (var product in activeProducts)
             {
-                // تحويل بيانات المنتج إلى متجه (Vector)
+                // terns to vector
                 float[] productVector = await GetEmbeddingAsync(
                     $"{product.Name} {product.Description} {product.Category?.Name} {product.Details}");
 
-                // حساب نسبة التطابق باستخدام Cosine Similarity
+               // casion semilarity
                 float similarity = TensorPrimitives.CosineSimilarity(affiliateVector.AsSpan(), productVector.AsSpan());
                 double score = CalculateHybridScore(similarity, affiliate, product);
 
@@ -92,7 +92,7 @@ namespace AffaliteBL.Services
                 }).ToList();
         }
 
-        // دالة التحدث مع Cohere API لتوليد الـ Embeddings
+       //Empiding
         private async Task<float[]> GetEmbeddingAsync(string text)
         {
             var apiKey = _config["AiSettings:CohereApiKey"]
@@ -106,7 +106,7 @@ namespace AffaliteBL.Services
             {
                 texts = new[] { text },
                 model = model,
-                input_type = "search_document" // مطلوب للإصدار الثالث من Cohere
+                input_type = "search_document" // Cohere
             };
 
             var response = await client.PostAsJsonAsync("https://api.cohere.ai/v1/embed", payload);
@@ -159,7 +159,7 @@ namespace AffaliteBL.Services
             public string Reason { get; set; } = string.Empty;
         }
 
-        // كلاسات مساعدة لقراءة رد منصة Cohere
+        // S Cohere
         private class CohereEmbedResponse
         {
             public float[][] Embeddings { get; set; } = Array.Empty<float[]>();

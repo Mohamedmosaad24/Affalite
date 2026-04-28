@@ -16,5 +16,8 @@ namespace AffaliteDAL.IRepo
         Merchant? GetMerchantByUserId(string userId);
         public IEnumerable<Merchant> GetAllMerchants();
 
+    
+
+
     }
 }

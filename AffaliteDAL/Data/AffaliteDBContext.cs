@@ -17,6 +17,7 @@ namespace AffaliteDAL.Data
         public AffaliteDBContext(DbContextOptions<AffaliteDBContext> options) : base(options)
         {
         }
+        public DbSet<WithdrawRequest> WithdrawRequests { get; set; }
         public DbSet<Affiliate> Affiliates { get; set; }
         public DbSet<Merchant> Merchants { get; set; }
         public DbSet<Product> Products { get; set; }

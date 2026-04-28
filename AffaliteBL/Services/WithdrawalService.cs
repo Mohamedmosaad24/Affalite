@@ -174,12 +174,12 @@ namespace AffaliteBL.Services
 
                 if (r.UserType == UserType.Affiliate)
                 {
-                    var aff = _affiliateRepo.GetByIdWithUser(r.UserRefId); 
+                    var aff = _affiliateRepo.GetById(r.UserRefId); 
                     name = aff?.AppUser?.FullName ?? aff?.AppUser?.UserName ?? "Unknown";
                 }
                 else
                 {
-                    var mer = _merchantRepo.GetByIdWithUser(r.UserRefId); 
+                    var mer = _merchantRepo.GetById(r.UserRefId); 
                     name = mer?.AppUser?.FullName ?? mer?.AppUser?.UserName ?? "Unknown";
                 }
 
