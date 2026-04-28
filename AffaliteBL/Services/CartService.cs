@@ -23,7 +23,7 @@ namespace AffaliteBL.Services
 
             var cartDto = mapper.Map<CartDTO>(cart);
             if (cart == null)
-                return null;
+                return cartDto;
             cartDto.SubTotal = cart.Items.Sum(i => i.Quantity * i.Product.Price);
             cartDto.AffilaiteCommission = cart.AffilaiteCommission;
             cartDto.Shiping = 10;

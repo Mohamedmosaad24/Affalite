@@ -1,6 +1,5 @@
 ﻿using AffaliteBL.DTOs.CommissionDTOs;
 using AffaliteBL.IServices;
-using AffaliteBL.Services;
 using AffaliteDAL.Entities;
 using AffaliteDAL.Entities.Enums;
 using AffaliteDAL.IRepo;
@@ -15,19 +14,16 @@ namespace AffalitePL.Controllers
     {
         private readonly ICommissionService _commissionService;
         private readonly IGenericRepository<Commission> _commissionRepo;
-        private readonly IMerchantService merchantService;
         private readonly IMapper _mapper;
 
 
         public CommissionsController(
             ICommissionService commissionService,
             IGenericRepository<Commission> commissionRepo,
-            IMerchantService merchantService,
             IMapper mapper)
         {
             _commissionService = commissionService;
             _commissionRepo = commissionRepo;
-            this.merchantService = merchantService;
             _mapper = mapper;
         }
 
@@ -67,12 +63,10 @@ namespace AffalitePL.Controllers
             return Ok(result);
         }
 
-        [HttpGet("merchant/{merchantid}")]
-        public IActionResult GetByMerchant(int merchantid)
+        [HttpGet("merchant/{merchantId}")]
+        public IActionResult GetByMerchant(int merchantId)
         {
-            //var merchantId = User.FindFirst("uid")?.Value;
-            //var merchant = merchantService.GetMerchantByUserId(merchantId);
-            var result = _commissionService.GetCommissionsByMerchant(merchantid);
+            var result = _commissionService.GetCommissionsByMerchant(merchantId);
             return Ok(result);
         }
 

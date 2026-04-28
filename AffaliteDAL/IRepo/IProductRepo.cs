@@ -10,5 +10,6 @@ namespace AffaliteDAL.IRepo
     public interface IProductRepository : IGenericRepository<Product>
     {
         IQueryable<Product> GetQueryable();
+        Task<Product?> GetByIdAsync(int id);
     }
 }

@@ -1,10 +1,9 @@
-﻿using AffaliteBL.DTOs.MerchantDTOs;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.IServices;
-using AffaliteBL.Services;
 using AffaliteDAL.Entities;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AffalitePL.Controllers
 {
@@ -77,29 +76,25 @@ namespace AffalitePL.Controllers
         }
 
         // GET: /api/merchants/{id}/orders
-        [HttpGet("orders")]
-        public IActionResult GetMerchantOrders()
+        [HttpGet("{id}/orders")]
+        public IActionResult GetMerchantOrders(int id)
         {
-            var merchantId = User.FindFirst("uid")?.Value;
-            var merchant = _merchantService.GetMerchantByUserId(merchantId);
-            var result = _merchantService.GetMerchantOrders(merchant.Id);
+            var result = _merchantService.GetMerchantOrders(id);
             return Ok(result);
         }
 
         // GET: /api/merchants/{id}/balance
-        [HttpGet("balance")]
-        public IActionResult GetMerchantBalance()
+        [HttpGet("{id}/balance")]
+        public IActionResult GetMerchantBalance(int id)
         {
-            var merchantId = User.FindFirst("uid")?.Value;
-            var merchant = _merchantService.GetMerchantByUserId(merchantId);
-            var result = _merchantService.GetMerchantBalance(merchant.Id);
+            var result = _merchantService.GetMerchantBalance(id);
 
             if (result == null)
                 return NotFound();
 
             return Ok(result);
         }
-        [HttpGet("{userId}/merchant")]
+        [HttpGet("${userId}/merchant")]
         public  IActionResult GetMerchantByUserId(string userId)
         {
             var res= _merchantService.GetMerchantByUserId(userId);

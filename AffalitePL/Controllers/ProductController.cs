@@ -1,7 +1,6 @@
 ﻿using AffaliteBL.DTOs;
 using AffaliteBL.Helpers;
 using AffaliteBL.IServices;
-using AffaliteBL.Services;
 using AffaliteBLL.DTOs.Products;
 using AffaliteDAL.Entities;
 using AutoMapper;
@@ -15,13 +14,11 @@ namespace AffaliteAPI.Controllers
     {
         private readonly IProductService _service;
         private readonly IMapper _mapper;
-        private readonly IMerchantService merchantService;
 
-        public ProductsController(IProductService service, IMapper mapper,IMerchantService merchantService)
+        public ProductsController(IProductService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
-            this.merchantService = merchantService;
         }
 
         // GET /api/products
@@ -115,8 +112,6 @@ namespace AffaliteAPI.Controllers
         public IActionResult GetByMerchant(int merchantId, [FromQuery] ProductQueryParams query)
         {
             // ننسخ query عشان نضيف MerchantId
-            //var merchantId = User.FindFirst("uid")?.Value;
-           //var merchant= merchantService.GetMerchantByUserId(merchantId);
             query.MerchantId = merchantId;
 
             var products = _service.GetAll(query);

@@ -6,7 +6,6 @@ using AffaliteBL.DTOs.CommissionDTOs;
 using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.DTOs.ReviewDTOs;
-using AffaliteBL.DTOs.WithdrawalDto;
 using AffaliteBL.Helpers;
 using AffaliteBLL.DTOs;
 using AffaliteBLL.DTOs.Products;
@@ -30,26 +29,18 @@ namespace AffaliteBL.Mapping
             CreateMap<Affiliate, GetAffiliateDTO>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.AppUser.FullName))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.AppUser.Email))
-                .ForMember(dest => dest.AppUserId, opt => opt.MapFrom(src => src.AppUserId))
                 .ReverseMap();
             CreateMap<Affiliate, CreateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, UpdateAffiliateDTO>().ReverseMap();
-
             CreateMap<Affiliate, AffiliateBalanceDTO>().ReverseMap();
             //CreateMap<Order, OrderReadDTO>().ReverseMap();
             CreateMap<Commission, CommissionReadDTO>().ReverseMap();
-
-
-
             //Cart
-            CreateMap<Cart, CartDTO>();
+            CreateMap<Cart, CartDTO>().ReverseMap();
+            CreateMap<CartItem, CartItemDTO>().ReverseMap();
 
-            CreateMap<CartItem, CartItemDTO>()
-                .ForMember(dest => dest.ProductName,
-                    opt => opt.MapFrom(src => src.Product.Name))
-                .ForMember(dest => dest.Price,
-                    opt => opt.MapFrom(src => src.Product.Price));
-
+            CreateMap<CartItem, UpdateCartItemDTO>().ReverseMap();
+            //.ForMember(dest => dest.im, opt => opt.MapFrom<ImageUrlResolver>())
 
 
             //review
@@ -86,12 +77,8 @@ namespace AffaliteBL.Mapping
                     .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
 
             CreateMap<OrderItem, OrderItemDTO>()
-      .ForMember(dest => dest.Images,
-          opt => opt.MapFrom<OrderItemImageUrlResolver>())
-      .ForMember(dest => dest.ProductName,
-          opt => opt.MapFrom(src => src.Product.Name))
-      .ForMember(dest => dest.TotalPrice,
-          opt => opt.MapFrom(src => src.Price * src.Quantity));
+        .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Product.Images)).ForMember(dest => dest.ProductName,
+              opt => opt.MapFrom(src => src.Product.Name)).ReverseMap();
 
 
             CreateMap<OrderCreateDTO, Order>();
@@ -100,6 +87,36 @@ namespace AffaliteBL.Mapping
 
 
 
+            //// User
+            //CreateMap<AppUser, UserDTO>().ReverseMap();
+            //CreateMap<CartItem, CartItemDTO>()
+            //    .ForMember(d => d.ProductName,
+            //        o => o.MapFrom(s => s.Product.Name))
+            //    .ForMember(d => d.Price,
+            //        o => o.MapFrom(s => s.Product.Price))
+            //    .ForMember(d => d.TotalPrice,
+            //    o => o.MapFrom(s => (s.Product.Price * s.Quantity)))
+            //    .ForMember(d => d.PictureUrl,
+            //        o => o.MapFrom<CartItemImageUrlResolver>()); // 👈 هنا بدل MapFrom مباشرة
+            //// OrderItem
+            //CreateMap<OrderItem, OrderItemDTO>()
+            //    .ForMember(d => d.ProductName,
+            //        o => o.MapFrom(s => s.Product.Name))
+            //    .ForMember(d => d.Price,
+            //        o => o.MapFrom(s => s.Product.Price));
+
+            //// Cart
+            //CreateMap<Cart, CartDTO>()
+            //    .ForMember(d => d.TotalPrice,
+            //        o => o.MapFrom(s => s.Items.Sum(i => i.Product.Price * i.Quantity)));
+
+            //// Order
+            //CreateMap<Order, OrderDTO>().ReverseMap();
+            //CreateMap<Order, CreateOrderDTO>().ReverseMap();
+
+            //CreateMap<OrderItem, OrderItemDTO>()
+            //    .ForMember(dest => dest.ProductName,
+            //               opt => opt.MapFrom(src => src.Product.Name));
 
             // Register -> AppUser
             CreateMap<RegisterDTO, AppUser>()
@@ -130,11 +147,7 @@ namespace AffaliteBL.Mapping
 
             //CreateMap<Order, OrderReadDTO>();
 
-            //WithdrawalRepo
 
-            CreateMap<WithdrawRequest, CreateWithdrawalDto>().ReverseMap();
-            CreateMap<WithdrawRequest, UpdateWithdrawalDto>().ReverseMap();
-            CreateMap<WithdrawRequest, WithdrawRequestDto>().ReverseMap();
 
 
 
