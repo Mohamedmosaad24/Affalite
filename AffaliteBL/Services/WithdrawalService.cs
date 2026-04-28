@@ -185,7 +185,7 @@ namespace AffaliteBL.Services
 
                 return new WithdrawRequestDto
                 {
-                   
+                    Id=r.Id,
                     Number = r.Number,
                     Amount = r.Amount,
                     PaymentMethod = r.PaymentMethod,

@@ -30,6 +30,7 @@ namespace AffaliteBL.Mapping
             CreateMap<Affiliate, GetAffiliateDTO>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.AppUser.FullName))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.AppUser.Email))
+                .ForMember(dest => dest.AppUserId, opt => opt.MapFrom(src => src.AppUserId))
                 .ReverseMap();
             CreateMap<Affiliate, CreateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, UpdateAffiliateDTO>().ReverseMap();
