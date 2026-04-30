@@ -83,5 +83,14 @@ namespace AffalitePL.Controllers
             _commissionService.UpdateCommissionStatus(id, status);
             return NoContent();
         }
+
+        [HttpGet("merchant")]
+        public IActionResult GetByMerchant()
+        {
+            var merchantId = User.FindFirst("uid")?.Value;
+            var merchant = merchantService.GetMerchantByUserId(merchantId);
+            var result = _commissionService.GetCommissionsByMerchant(merchant.Id);
+            return Ok(result);
+        }
     }
 }

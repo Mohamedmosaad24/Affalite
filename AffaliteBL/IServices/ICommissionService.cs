@@ -13,7 +13,6 @@ namespace AffaliteBL.IServices
     {
         IEnumerable<CommissionReadDTO> GetCommissionsByAffiliate(int affiliateId);
         IEnumerable<CommissionReadDTO> GetCommissionsByMerchant(int merchantId);
-
         CommissionReadDTO GetCommissionByOrderId(int orderId);
 
         void UpdateCommissionStatus(int id, CommissionStatus status);

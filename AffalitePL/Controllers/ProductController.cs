@@ -124,6 +124,19 @@ namespace AffaliteAPI.Controllers
 
             return Ok(result);
         }
+        [HttpGet("merchant")]
+        public IActionResult GetByMerchant([FromQuery] ProductQueryParams query)
+        {
+            // ننسخ query عشان نضيف MerchantId
+            var merchantId = User.FindFirst("uid")?.Value;
+            var merchant = merchantService.GetMerchantByUserId(merchantId);
+            query.MerchantId = merchant.Id;
+
+            var products = _service.GetAll(query);
+            var result = _mapper.Map<IEnumerable<ProductDto>>(products);
+
+            return Ok(result);
+        }
 
     }
 }
