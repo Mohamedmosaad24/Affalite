@@ -42,11 +42,11 @@ namespace AffaliteBL.Services
             var prompt = BuildPrompt(product, request);
 
 
-            //var client = _httpClientFactory.CreateClient();
+          
 
             var client = _httpClientFactory.CreateClient();
 
-            // ✅ ضبط الـ BaseAddress والـ Headers من الـ Configuration
+           
             var baseUrl = _config["AiSettings:BaseUrl"] ?? "https://openrouter.ai/api/v1/";
             var apiKey = _config["AiSettings:OpenAiApiKey"];
 
@@ -54,7 +54,7 @@ namespace AffaliteBL.Services
             client.DefaultRequestHeaders.Remove("Authorization");
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
 
-            // هيدرز إضافية لـ OpenRouter (اختياري)
+          
             if (baseUrl.Contains("openrouter"))
             {
                 client.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost:4200");

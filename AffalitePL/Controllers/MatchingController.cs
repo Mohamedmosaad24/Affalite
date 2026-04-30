@@ -39,7 +39,7 @@ namespace AffalitePL.Controllers
         [HttpGet("merchants/{id}/recommendations")]
         public async Task<IActionResult> GetMerchantRecommendations(int id)
         {
-            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst("uid")?.Value;
             var merchant = _merchantService.GetMerchantByUserId(userId);
 
             if (merchant?.Id != id) return Forbid();
@@ -55,7 +55,7 @@ namespace AffalitePL.Controllers
             return Ok(new { success });
         }
 
-        // Endpoint للـ Admin فقط لتشغيل الـ Job يدوي
+       
         [HttpPost("run-job")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RunMatchingJob()
