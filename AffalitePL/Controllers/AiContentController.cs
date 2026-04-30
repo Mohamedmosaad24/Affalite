@@ -26,12 +26,13 @@ namespace AffalitePL.Controllers
         {
             try
             {
-                // تحقق من الصلاحيات
-                //var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-                //var affiliate = _affiliateService.GetAffiliateUserId(userId);
 
-                //if (affiliate?.Id != request.AffiliateId)
-                //    return Forbid();
+                var userId = User.FindFirst("uid")?.Value
+                   ?? User.FindFirst("sub")?.Value;
+                var affiliate = _affiliateService.GetAffiliateUserId(userId);
+
+                if (affiliate?.Id != request.AffiliateId)
+                    return Forbid();
 
                 var result = await _aiService.GenerateContentAsync(request);
                 return Ok(new { success = true, data = result });
@@ -45,7 +46,7 @@ namespace AffalitePL.Controllers
         [HttpGet("history")]
         public async Task<IActionResult> GetHistory([FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         {
-            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst("uid")?.Value;
             var affiliate = _affiliateService.GetAffiliateUserId(userId);
 
             if (affiliate == null) return Unauthorized();
@@ -57,7 +58,7 @@ namespace AffalitePL.Controllers
         [HttpPost("save")]
         public async Task<IActionResult> SaveContent([FromBody] SaveContentRequest request)
         {
-            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst("uid")?.Value;
             var affiliate = _affiliateService.GetAffiliateUserId(userId);
 
             if (affiliate?.Id != request.AffiliateId)
