@@ -87,16 +87,32 @@ namespace AffalitePL.Controllers
         }
 
         // GET: /api/merchants/{id}/balance
+        //[HttpGet("balance")]
+        //public IActionResult GetMerchantBalance()
+        //{
+        //    var merchantId = User.FindFirst("uid")?.Value;
+        //    var merchant = _merchantService.GetMerchantByUserId(merchantId);
+        //    var result = _merchantService.GetMerchantBalance(merchant.Id);
+
+        //    if (result == null)
+        //        return NotFound();
+
+        //    return Ok(result);
+        //}
         [HttpGet("balance")]
         public IActionResult GetMerchantBalance()
         {
-            var merchantId = User.FindFirst("uid")?.Value;
-            var merchant = _merchantService.GetMerchantByUserId(merchantId);
+            var userId = User.FindFirst("uid")?.Value
+                      ?? User.FindFirst("sub")?.Value
+                      ?? User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null) return Unauthorized();
+
+            var merchant = _merchantService.GetMerchantByUserId(userId);
+            if (merchant == null) return NotFound("Merchant not found");
+
             var result = _merchantService.GetMerchantBalance(merchant.Id);
-
-            if (result == null)
-                return NotFound();
-
+            if (result == null) return NotFound();
             return Ok(result);
         }
         [HttpGet("{userId}/merchant")]
@@ -105,6 +121,12 @@ namespace AffalitePL.Controllers
             var res= _merchantService.GetMerchantByUserId(userId);
            var merchant= _mapper.Map<GetMerchantDTO>(res);
             return Ok(merchant);
+        }
+        [HttpGet("merchantDetials")]
+        public IActionResult GetAllMerchantsDetails()
+        {
+            var result = _merchantService.GetAllMerchantsWithDetails();
+            return Ok(result);
         }
     }
 }
