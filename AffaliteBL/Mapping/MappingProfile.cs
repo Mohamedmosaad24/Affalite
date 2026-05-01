@@ -6,6 +6,7 @@ using AffaliteBL.DTOs.CommissionDTOs;
 using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.DTOs.ReviewDTOs;
+using AffaliteBL.DTOs.WithdrawalDto;
 using AffaliteBL.Helpers;
 using AffaliteBLL.DTOs;
 using AffaliteBLL.DTOs.Products;
@@ -29,9 +30,11 @@ namespace AffaliteBL.Mapping
             CreateMap<Affiliate, GetAffiliateDTO>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.AppUser.FullName))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.AppUser.Email))
+                .ForMember(dest => dest.AppUserId, opt => opt.MapFrom(src => src.AppUserId))
                 .ReverseMap();
             CreateMap<Affiliate, CreateAffiliateDTO>().ReverseMap();
             CreateMap<Affiliate, UpdateAffiliateDTO>().ReverseMap();
+
             CreateMap<Affiliate, AffiliateBalanceDTO>().ReverseMap();
             //CreateMap<Order, OrderReadDTO>().ReverseMap();
             CreateMap<Commission, CommissionReadDTO>().ReverseMap();
@@ -127,7 +130,11 @@ namespace AffaliteBL.Mapping
 
             //CreateMap<Order, OrderReadDTO>();
 
+            //WithdrawalRepo
 
+            CreateMap<WithdrawRequest, CreateWithdrawalDto>().ReverseMap();
+            CreateMap<WithdrawRequest, UpdateWithdrawalDto>().ReverseMap();
+            CreateMap<WithdrawRequest, WithdrawRequestDto>().ReverseMap();
 
 
 

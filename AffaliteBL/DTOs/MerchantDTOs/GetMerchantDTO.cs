@@ -14,6 +14,8 @@ namespace AffaliteBL.DTOs.MerchantDTOs
         public string FullName { get; set; }
         public bool IsActive { get; set; } = true;
         public string? Email { get; set; }
+        public int ProductsCount { get; set; }    
+        public decimal TotalSales { get; set; }
 
     }
 }

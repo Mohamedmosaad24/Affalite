@@ -15,6 +15,7 @@ namespace AffaliteBL.DTOs.AffiliateDTOs
         public string FullName { get; set; }
         public bool IsActive { get; set; } = true;
         public string? Email { get; set; }
+        public string? AppUserId { get; set; }
 
 
 

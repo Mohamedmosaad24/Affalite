@@ -45,6 +45,8 @@ namespace AffalitePL
             builder.Services.AddScoped<IAuthServices, AuthServices>();
             builder.Services.AddScoped<IJwtServices, JwtServices>();
             builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+            builder.Services.AddScoped<IWithdrawalRepo, WithdrawalRepo>();
+            builder.Services.AddScoped<IWithdrawalService, WithdrawalService>();
 
 
             //Ai Services
@@ -100,6 +102,12 @@ namespace AffalitePL
             builder.Services.AddScoped<INotificationRepo, NotificationRepo>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
 
+            //ai
+            builder.Services.AddScoped<IAiContentRepo, AiContentRepo>();
+            builder.Services.AddScoped<IMatchingRepo, MatchingRepo>();
+            builder.Services.AddScoped<IAiContentService, AiContentService>();
+            builder.Services.AddScoped<IMatchingService, MatchingService>();
+            builder.Services.AddAutoMapper(typeof(AffaliteBL.Mapper.AiMappingProfile).Assembly);
             //Commissions 
             builder.Services.AddScoped<ICommissionRepo, CommissionRepo>();
             builder.Services.AddScoped<ICommissionService, CommissionService>();
@@ -121,6 +129,23 @@ namespace AffalitePL
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
+            //builder.Services.AddHttpClient("OpenAI", client =>
+            //{
+            //    client.BaseAddress = new Uri("https://api.openai.com/v1/");
+            //});
+
+            builder.Services.AddHttpClient();
+
+            //builder.Services.AddHttpClient(client =>
+            //{
+            //    client.BaseAddress = new Uri("https://openrouter.ai/api/v1/");
+            //    // هيدرز اختيارية لكنها مهمة عشان OpenRouter يعرف مصدر الطلب
+            //    client.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost:4200");
+            //    client.DefaultRequestHeaders.Add("X-Title", "Affalite Platform");
+            //});
+
+            //// 4️⃣ تسجيل الـ Background Job (اختياري)
+            //builder.Services.AddHostedService<MatchingBackgroundJob>();
 
 
             builder.Services.AddCors(options =>
