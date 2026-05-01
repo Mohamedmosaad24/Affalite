@@ -150,20 +150,7 @@ namespace AffaliteBL.Services
             return request;
         }
 
-        public async Task<IEnumerable<WithdrawRequest>> GetByAffiliateId(int affiliateId)
-        {
-            //var affiliate = _affiliateRepo.GetAffiliateUserId(affiliateId);
-
-            return await withdrawalRepo.GetByUserAsync(affiliateId, UserType.Affiliate);
-        }
-
-        public async Task<IEnumerable<WithdrawRequest>> GetByMerchantId(int merchantId)
-        {
-            //var merchant = _merchantRepo.GetMerchantByUserId(merchantId);
-
-            return await withdrawalRepo.GetByUserAsync(merchantId, UserType.Merchant);
-        }
-
+      
         public IEnumerable<WithdrawRequestDto> GetAll()
         {
             var requests = _repo.GetAll();
@@ -351,4 +338,3 @@ namespace AffaliteBL.Services
 //        }
 //    }
 //}
-

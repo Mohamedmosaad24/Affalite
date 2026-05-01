@@ -85,15 +85,17 @@ namespace AffalitePL.Controllers
 
             return Ok(result);
         }
-        [HttpGet("{userId}/Affilaite")]
-        public IActionResult GetAffiliateBalance(string userId)
+        
+        [HttpGet("user/{userId}")]
+        public IActionResult GetAffiliateByUserId(string userId)
         {
             var result = _affiliateService.GetAffiliateUserId(userId);
-            var affilaite = _mapper.Map<GetAffiliateDTO>(result);
+
             if (result == null)
                 return NotFound();
 
-            return Ok(result);
+            var affiliate = _mapper.Map<GetAffiliateDTO>(result);
+            return Ok(affiliate);  // ✅ رجع affiliate مش result
         }
     }
 }

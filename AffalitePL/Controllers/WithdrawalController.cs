@@ -21,10 +21,10 @@ namespace AffalitePL.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var data =  _service.GetAll();
+            var data = _service.GetAll();
             return Ok(data);
         }
-        //  Get by AffiliateId
+       
         //[HttpGet("affiliate/{affiliateId}")]
         //public async Task<IActionResult> GetByAffiliateId(int affiliateId)
         //{
@@ -33,15 +33,8 @@ namespace AffalitePL.Controllers
         //    return Ok(result);
         //}
 
-        //  Get by MerchantId
-        //[HttpGet("merchant/{merchantId}")]
-        //public async Task<IActionResult> GetByMerchantId(int merchantId)
-        //{
-        //    //var merchantId = User.FindFirst("uid")?.Value;
-
-        //    var result = await _service.GetByMerchantId(merchantId);
-        //    return Ok(result);
-        //}
+      
+      
 
         [HttpPost]
         public async Task<IActionResult> Add(CreateWithdrawalDto dto)
@@ -49,7 +42,7 @@ namespace AffalitePL.Controllers
             // ال userId ييجي من التوكن مش من الفرونت
             var userId = User.FindFirst("uid")?.Value;
 
-            var result =  _service.Add(userId, dto);
+            var result = _service.Add(userId, dto);
 
             return Ok(result);
         }
@@ -57,7 +50,7 @@ namespace AffalitePL.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(UpdateWithdrawalDto dto)
         {
-            var result =  _service.Update(dto);
+            var result = _service.Update(dto);
             return Ok(result);
         }
         //  Get by AffiliateId

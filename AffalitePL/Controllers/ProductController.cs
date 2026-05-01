@@ -1,6 +1,7 @@
 ﻿using AffaliteBL.DTOs;
 using AffaliteBL.Helpers;
 using AffaliteBL.IServices;
+using AffaliteBL.Services;
 using AffaliteBLL.DTOs.Products;
 using AffaliteDAL.Entities;
 using AutoMapper;
@@ -14,11 +15,13 @@ namespace AffaliteAPI.Controllers
     {
         private readonly IProductService _service;
         private readonly IMapper _mapper;
+        private readonly IMerchantService merchantService;
 
         public ProductsController(IProductService service, IMapper mapper, IMerchantService merchantService)
         {
             _service = service;
             _mapper = mapper;
+            this.merchantService = merchantService;
         }
 
         // GET /api/products

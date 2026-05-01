@@ -14,6 +14,7 @@ namespace AffaliteDAL.IRepo
         IEnumerable<Order> GetMerchantOrders(int merchantId);
         decimal? GetMerchantBalance(int merchantId);
         Merchant? GetMerchantByUserId(string userId);
+        Merchant? GetByIdWithUser(int id);
         public IEnumerable<Merchant> GetAllMerchants();
         IEnumerable<Merchant> GetAllMerchantsWithDetails();
         decimal GetMerchantCommissionTotal(int merchantId);
