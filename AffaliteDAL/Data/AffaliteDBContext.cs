@@ -34,7 +34,7 @@ namespace AffaliteDAL.Data
         public DbSet<ProductReviews> ProductReviews { get; set; }
 
         public DbSet<Notification> Notifications { get; set; }
-        public DbSet<WithdrawRequest> WithdrawRequests { get; set; }
+        
 
 
         public DbSet<AiContentHistory> AiContentHistories { get; set; }

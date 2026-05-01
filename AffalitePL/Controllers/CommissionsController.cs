@@ -15,16 +15,18 @@ namespace AffalitePL.Controllers
         private readonly ICommissionService _commissionService;
         private readonly IGenericRepository<Commission> _commissionRepo;
         private readonly IMapper _mapper;
+        private readonly IMerchantService _merchantService;
 
 
         public CommissionsController(
             ICommissionService commissionService,
             IGenericRepository<Commission> commissionRepo,
-            IMapper mapper)
+            IMapper mapper, IMerchantService merchantService)
         {
             _commissionService = commissionService;
             _commissionRepo = commissionRepo;
             _mapper = mapper;
+            _merchantService = merchantService;
         }
 
    
@@ -84,7 +86,7 @@ namespace AffalitePL.Controllers
         public IActionResult GetByMerchant()
         {
             var merchantId = User.FindFirst("uid")?.Value;
-            var merchant = merchantService.GetMerchantByUserId(merchantId);
+            var merchant = _merchantService.GetMerchantByUserId(merchantId);
             var result = _commissionService.GetCommissionsByMerchant(merchant.Id);
             return Ok(result);
         }

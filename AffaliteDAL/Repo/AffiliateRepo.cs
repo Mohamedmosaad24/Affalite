@@ -61,8 +61,11 @@ namespace AffaliteDAL.Repo
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
-          
-
-
+        public Affiliate? GetByIdWithUser(int id)
+        {
+            return _context.Affiliates
+                 .Include(m => m.AppUser)
+                 .FirstOrDefault(m => m.Id == id);
+        }
     }
 }
