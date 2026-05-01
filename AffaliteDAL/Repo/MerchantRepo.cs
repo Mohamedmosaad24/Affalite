@@ -53,7 +53,30 @@ namespace AffaliteDAL.Repo
         {
             return _context.Merchants.Where(m => m.AppUserId == userId).FirstOrDefault();
         }
+        public Merchant? GetByIdWithUser(int id)
+        {
+            return _context.Merchants
+                .Include(m => m.AppUser)
+                .FirstOrDefault(m => m.Id == id);
+        }
+        public IEnumerable<Merchant> GetAllMerchantsWithDetails()
+        {
+            return _context.Merchants
+                .Include(m => m.AppUser)
+                .Include(m => m.Products)
+                .Include(m => m.MerchantOrder)
+                .ToList();
+        }
+        public decimal GetMerchantCommissionTotal(int merchantId)
+        {
+            var orderIds = _context.Set<MerchantOrder>()
+                .Where(mo => mo.MerchantId == merchantId)
+                .Select(mo => mo.OrderId)
+                .ToList();
 
-      
+            return _context.Commissions
+                .Where(c => orderIds.Contains(c.OrderId))
+                .Sum(c => (decimal?)c.MerchantAmount) ?? 0;
+        }
     }
 }

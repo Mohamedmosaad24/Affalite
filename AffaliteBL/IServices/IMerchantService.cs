@@ -17,6 +17,7 @@ namespace AffaliteBL.IServices
         void CreateMerchant(Merchant merchant);
         void UpdateMerchant(Merchant merchant);
         void DeleteMerchant(int id);
+        IEnumerable<GetMerchantDTO> GetAllMerchantsWithDetails();
 
         // Relations
         IEnumerable<OrderReadDTO> GetMerchantOrders(int merchantId);

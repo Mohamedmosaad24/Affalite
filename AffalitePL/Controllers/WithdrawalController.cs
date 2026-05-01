@@ -25,23 +25,23 @@ namespace AffalitePL.Controllers
             return Ok(data);
         }
         //  Get by AffiliateId
-        [HttpGet("affiliate/{affiliateId}")]
-        public async Task<IActionResult> GetByAffiliateId(int affiliateId)
-        {
-            //var affiliateId = User.FindFirst("uid")?.Value;
-            var result = await _service.GetByAffiliateId(affiliateId);
-            return Ok(result);
-        }
+        //[HttpGet("affiliate/{affiliateId}")]
+        //public async Task<IActionResult> GetByAffiliateId(int affiliateId)
+        //{
+        //    //var affiliateId = User.FindFirst("uid")?.Value;
+        //    var result = await _service.GetByAffiliateId(affiliateId);
+        //    return Ok(result);
+        //}
 
         //  Get by MerchantId
-        [HttpGet("merchant/{merchantId}")]
-        public async Task<IActionResult> GetByMerchantId(int merchantId)
-        {
-            //var merchantId = User.FindFirst("uid")?.Value;
+        //[HttpGet("merchant/{merchantId}")]
+        //public async Task<IActionResult> GetByMerchantId(int merchantId)
+        //{
+        //    //var merchantId = User.FindFirst("uid")?.Value;
 
-            var result = await _service.GetByMerchantId(merchantId);
-            return Ok(result);
-        }
+        //    var result = await _service.GetByMerchantId(merchantId);
+        //    return Ok(result);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Add(CreateWithdrawalDto dto)
@@ -58,6 +58,24 @@ namespace AffalitePL.Controllers
         public async Task<IActionResult> Update(UpdateWithdrawalDto dto)
         {
             var result =  _service.Update(dto);
+            return Ok(result);
+        }
+        //  Get by AffiliateId
+        [HttpGet("affiliate/")]
+        public async Task<IActionResult> GetByAffiliateId()
+        {
+            var affiliateId = User.FindFirst("uid")?.Value;
+            var result = await _service.GetByAffiliateId(affiliateId);
+            return Ok(result);
+        }
+
+        //  Get by MerchantId
+        [HttpGet("merchant")]
+        public async Task<IActionResult> GetByMerchantId()
+        {
+            var merchantId = User.FindFirst("uid")?.Value;
+
+            var result = await _service.GetByMerchantId(merchantId);
             return Ok(result);
         }
     }

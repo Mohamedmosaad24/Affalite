@@ -63,12 +63,14 @@ namespace AffalitePL.Controllers
             return Ok(result);
         }
 
-        [HttpGet("merchant/{merchantId}")]
-        public IActionResult GetByMerchant(int merchantId)
-        {
-            var result = _commissionService.GetCommissionsByMerchant(merchantId);
-            return Ok(result);
-        }
+        //[HttpGet("merchant/{merchantid}")]
+        //public IActionResult GetByMerchant(int merchantid)
+        //{
+        //    //var merchantId = User.FindFirst("uid")?.Value;
+        //    //var merchant = merchantService.GetMerchantByUserId(merchantId);
+        //    var result = _commissionService.GetCommissionsByMerchant(merchantid);
+        //    return Ok(result);
+        //}
 
 
         [HttpPut("{id}/status")]
@@ -76,6 +78,15 @@ namespace AffalitePL.Controllers
         {
             _commissionService.UpdateCommissionStatus(id, status);
             return NoContent();
+        }
+
+        [HttpGet("merchant")]
+        public IActionResult GetByMerchant()
+        {
+            var merchantId = User.FindFirst("uid")?.Value;
+            var merchant = merchantService.GetMerchantByUserId(merchantId);
+            var result = _commissionService.GetCommissionsByMerchant(merchant.Id);
+            return Ok(result);
         }
     }
 }

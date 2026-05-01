@@ -15,7 +15,7 @@ namespace AffaliteAPI.Controllers
         private readonly IProductService _service;
         private readonly IMapper _mapper;
 
-        public ProductsController(IProductService service, IMapper mapper)
+        public ProductsController(IProductService service, IMapper mapper, IMerchantService merchantService)
         {
             _service = service;
             _mapper = mapper;
@@ -108,11 +108,26 @@ namespace AffaliteAPI.Controllers
         }
 
         // GET /api/products/merchant/{merchantId}
-        [HttpGet("merchant/{merchantId}")]
-        public IActionResult GetByMerchant(int merchantId, [FromQuery] ProductQueryParams query)
+        //[HttpGet("merchant/{merchantId}")]
+        //public IActionResult GetByMerchant(int merchantId, [FromQuery] ProductQueryParams query)
+        //{
+        //    // ننسخ query عشان نضيف MerchantId
+        //    //var merchantId = User.FindFirst("uid")?.Value;
+        //   //var merchant= merchantService.GetMerchantByUserId(merchantId);
+        //    query.MerchantId = merchantId;
+
+        //    var products = _service.GetAll(query);
+        //    var result = _mapper.Map<IEnumerable<ProductDto>>(products);
+
+        //    return Ok(result);
+        //}
+        [HttpGet("merchant")]
+        public IActionResult GetByMerchant([FromQuery] ProductQueryParams query)
         {
             // ننسخ query عشان نضيف MerchantId
-            query.MerchantId = merchantId;
+            var merchantId = User.FindFirst("uid")?.Value;
+            var merchant = merchantService.GetMerchantByUserId(merchantId);
+            query.MerchantId = merchant.Id;
 
             var products = _service.GetAll(query);
             var result = _mapper.Map<IEnumerable<ProductDto>>(products);

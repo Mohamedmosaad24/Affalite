@@ -15,6 +15,8 @@ namespace AffaliteDAL.IRepo
         decimal? GetMerchantBalance(int merchantId);
         Merchant? GetMerchantByUserId(string userId);
         public IEnumerable<Merchant> GetAllMerchants();
+        IEnumerable<Merchant> GetAllMerchantsWithDetails();
+        decimal GetMerchantCommissionTotal(int merchantId);
 
     
 

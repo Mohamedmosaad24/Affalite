@@ -15,5 +15,7 @@ namespace AffaliteBL.IServices
         WithdrawRequest Update(UpdateWithdrawalDto dto);
         Task<IEnumerable<WithdrawRequest>> GetByAffiliateId(int affiliateId);
         Task<IEnumerable<WithdrawRequest>> GetByMerchantId(int merchantId);
+        Task<IEnumerable<WithdrawRequest>> GetByAffiliateId(string affiliateId);
+        Task<IEnumerable<WithdrawRequest>> GetByMerchantId(string merchantId);
     }
 }
