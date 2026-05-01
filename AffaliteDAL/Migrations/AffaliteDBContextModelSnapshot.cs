@@ -53,8 +53,121 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AppUserId = "user2",
                             Balance = 1500m,
-                            CreatedAt = new DateTime(2026, 4, 26, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(1502)
+                            CreatedAt = new DateTime(2026, 5, 1, 1, 13, 23, 583, DateTimeKind.Utc).AddTicks(5955)
                         });
+                });
+
+            modelBuilder.Entity("AffaliteDAL.Entities.AffiliateMerchantMatch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AffiliateId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ExpiredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MatchReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("MatchScore")
+                        .HasColumnType("decimal(5,4)");
+
+                    b.Property<int>("MerchantId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AffiliateId");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("Status", "CreatedAt");
+
+                    b.ToTable("AffiliateMerchantMatches");
+                });
+
+            modelBuilder.Entity("AffaliteDAL.Entities.AiContentHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AffiliateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal?>("Cost")
+                        .HasColumnType("decimal(10,6)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GeneratedContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Platform")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PromptText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int?>("TokensUsed")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AffiliateId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("AiContentHistory");
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.AppUser", b =>
@@ -130,17 +243,17 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = "user1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7e7899c1-c11d-4b1a-ac2a-cfecac3041c1",
+                            ConcurrencyStamp = "ef38be54-7b5c-4782-913f-289a35310e25",
                             Email = "merchant1@affalite.com",
                             EmailConfirmed = true,
                             FullName = "Ahmed Hassan",
                             LockoutEnabled = false,
                             NormalizedEmail = "MERCHANT1@AFFALITE.COM",
                             NormalizedUserName = "MERCHANT1@AFFALITE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKC2M9hIjoaSe95FhEQjVYPDGI+ezs5AiLOxrnFRbIef7njrJ/RbPi7KVKwVs1acfg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENa4ZL8YAhFrAu+xD/KsAeaPpWvXHFPjzbpCAqugb0QaW4ydNksADs+C/rfqzddoMw==",
                             PhoneNumber = "01001234567",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d5c9de55-f4cf-403d-a0d3-8fc2047dffbf",
+                            SecurityStamp = "37980ad0-1b31-48d0-9d28-2c355cff9505",
                             TwoFactorEnabled = false,
                             UserName = "merchant1"
                         },
@@ -148,17 +261,17 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = "user2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fd292f54-db2f-4d4f-b748-553aab7a313f",
+                            ConcurrencyStamp = "f108706e-480c-4790-a4a9-f8ebf7a280c9",
                             Email = "affiliate1@affalite.com",
                             EmailConfirmed = true,
                             FullName = "Youssef Ali",
                             LockoutEnabled = false,
                             NormalizedEmail = "AFFILIATE1@AFFALITE.COM",
                             NormalizedUserName = "AFFILIATE1@AFFALITE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEH7t+s+sKA/H546/pUfX6SUxXdsOUw1Yr1Rn84yjIZUNvFhK39bpKKHldZ+5qMgzrg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHx6Ja1OO9xxGU0FsNmiUsPDestRrNgN7ZY6dxnwcBTnroFcKWnU+11Z77WiKCM+Zw==",
                             PhoneNumber = "01001112233",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "49abb0c2-9ee3-453a-b937-4064c74d39c2",
+                            SecurityStamp = "c509310e-0546-444c-9eba-c92df12d1e72",
                             TwoFactorEnabled = false,
                             UserName = "affiliate1"
                         },
@@ -166,17 +279,17 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = "user3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5b79eecd-2065-423e-ab9e-e111e40bca05",
+                            ConcurrencyStamp = "2e546fa9-8a33-4096-b58a-d54357ae592e",
                             Email = "customer1@affalite.com",
                             EmailConfirmed = true,
                             FullName = "Hana Adel",
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER1@AFFALITE.COM",
                             NormalizedUserName = "CUSTOMER1@AFFALITE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM4XMTJW5Z3wxVNFs66DbWm6ux8xxb+7BoeHG4Y8tqB/lV7s7Z1zHZX1tbjLB5qq5Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAGMSMnPSYQ67DDhhSeTSLJKO/UKQTQgXdiYRmIZSRcJltiX68MPKPfAR0NfBEuqiQ==",
                             PhoneNumber = "01002223344",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3a8a03df-e023-4ea8-b84a-ef5ec1571dec",
+                            SecurityStamp = "4985d10a-70ed-406f-8c9f-ea8b08bd91a7",
                             TwoFactorEnabled = false,
                             UserName = "customer1"
                         });
@@ -221,7 +334,7 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AffilaiteCommission = 0m,
                             AffiliateId = 1,
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1810),
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(6652),
                             Shiping = 10m,
                             SubTotal = 0m,
                             Total = 0m
@@ -261,7 +374,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 1,
                             CartId = 1,
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1861),
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(6786),
                             ProductId = 1,
                             Quantity = 2
                         },
@@ -269,7 +382,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 2,
                             CartId = 1,
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1870),
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(6809),
                             ProductId = 2,
                             Quantity = 1
                         });
@@ -305,14 +418,14 @@ namespace AffaliteDAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 4, 26, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(1389),
+                            CreatedAt = new DateTime(2026, 5, 1, 1, 13, 23, 583, DateTimeKind.Utc).AddTicks(5662),
                             Name = "Electronics",
                             Slug = "electronics"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 4, 26, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(1392),
+                            CreatedAt = new DateTime(2026, 5, 1, 1, 13, 23, 583, DateTimeKind.Utc).AddTicks(5667),
                             Name = "Fashion",
                             Slug = "fashion"
                         });
@@ -356,7 +469,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 1,
                             AffiliateAmount = 578.99m,
-                            CreatedAt = new DateTime(2026, 3, 28, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(2209),
+                            CreatedAt = new DateTime(2026, 4, 2, 1, 13, 23, 583, DateTimeKind.Utc).AddTicks(7312),
                             MerchantAmount = 17756.00m,
                             OrderId = 1,
                             PlatformAmount = 964.99m,
@@ -438,7 +551,7 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AppUserId = "user1",
                             Balance = 5000m,
-                            CreatedAt = new DateTime(2026, 4, 26, 22, 38, 32, 126, DateTimeKind.Utc).AddTicks(1449)
+                            CreatedAt = new DateTime(2026, 5, 1, 1, 13, 23, 583, DateTimeKind.Utc).AddTicks(5804)
                         });
                 });
 
@@ -583,7 +696,7 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AffiliateCommissionPct = 5m,
                             AffiliateId = 1,
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1927),
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(6974),
                             CustomerAddress = "123 Street",
                             CustomerName = "David",
                             CustomerPhone = "01000000004",
@@ -627,7 +740,7 @@ namespace AffaliteDAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(2150),
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(7167),
                             OrderId = 1,
                             Price = 999m,
                             ProductId = 1,
@@ -636,7 +749,7 @@ namespace AffaliteDAL.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(2156),
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(7181),
                             OrderId = 1,
                             Price = 20m,
                             ProductId = 2,
@@ -701,7 +814,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1605),
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(6146),
                             Description = "Latest Apple iPhone",
                             Details = "Details here",
                             MerchantId = 1,
@@ -716,7 +829,7 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1662),
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(6250),
                             Description = "Fantasy novel",
                             Details = "Details here",
                             MerchantId = 1,
@@ -823,7 +936,7 @@ namespace AffaliteDAL.Migrations
                             Id = 1,
                             AffiliateId = 1,
                             Comment = "Great phone!",
-                            CreatedAt = new DateTime(2026, 4, 27, 1, 38, 32, 126, DateTimeKind.Local).AddTicks(1754),
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(6486),
                             ProductId = 1,
                             Rating = 5
                         },
@@ -831,9 +944,8 @@ namespace AffaliteDAL.Migrations
                         {
                             Id = 2,
                             AffiliateId = 1,
-                            Comment = "Loved",
-                            CreatedAt = new DateTime(2026, 4, 25, 6, 29, 22, 554, DateTimeKind.Local).AddTicks(6044),
-
+                            Comment = "Loved the book",
+                            CreatedAt = new DateTime(2026, 5, 1, 4, 13, 23, 583, DateTimeKind.Local).AddTicks(6501),
                             ProductId = 2,
                             Rating = 4
                         });
@@ -1083,6 +1195,51 @@ namespace AffaliteDAL.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("AffaliteDAL.Entities.AffiliateMerchantMatch", b =>
+                {
+                    b.HasOne("AffaliteDAL.Entities.Affiliate", "Affiliate")
+                        .WithMany()
+                        .HasForeignKey("AffiliateId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("AffaliteDAL.Entities.Merchant", "Merchant")
+                        .WithMany()
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("AffaliteDAL.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Affiliate");
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("AffaliteDAL.Entities.AiContentHistory", b =>
+                {
+                    b.HasOne("AffaliteDAL.Entities.Affiliate", "Affiliate")
+                        .WithMany()
+                        .HasForeignKey("AffiliateId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("AffaliteDAL.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Affiliate");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("AffaliteDAL.Entities.AppUser", b =>
