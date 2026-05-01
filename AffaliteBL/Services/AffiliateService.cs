@@ -4,7 +4,6 @@ using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.IServices;
 using AffaliteDAL.Entities;
 using AffaliteDAL.IRepo;
-using AutoMapper;
 
 
 
@@ -13,12 +12,10 @@ namespace AffaliteBL.Services
     public class AffiliateService : IAffiliateService
     {
         private readonly IAffiliateRepo _repo;
-        private readonly IMapper _mapper;
 
-        public AffiliateService(IAffiliateRepo repo, IMapper mapper)
+        public AffiliateService(IAffiliateRepo repo)
         {
             _repo = repo;
-            _mapper = mapper;
         }
 
         public IEnumerable<Affiliate> GetAllAffiliates()
@@ -40,15 +37,17 @@ namespace AffaliteBL.Services
             _repo.SaveChanges();
         }
 
-        public void UpdateAffiliate(UpdateAffiliateDTO affiliateDTO, int id)
+        public void UpdateAffiliate(Affiliate affiliate)
         {
-            if (affiliateDTO == null)
-                throw new ArgumentNullException(nameof(affiliateDTO));
+            if (affiliate == null)
+                throw new ArgumentNullException(nameof(affiliate));
 
-            var existingAffiliate = _repo.GetById(id);
+            var existingAffiliate = _repo.GetById(affiliate.Id);
+
             if (existingAffiliate != null)
             {
-                _mapper.Map(affiliateDTO, existingAffiliate); 
+                //existingAffiliate.Balance = affiliate.Balance;
+
                 _repo.Update(existingAffiliate);
                 _repo.SaveChanges();
             }

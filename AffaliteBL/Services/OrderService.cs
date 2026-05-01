@@ -69,7 +69,6 @@ namespace AffaliteBL.Services
 
             decimal totalPrice = 0;
 
-            // ✅ Loop واحد بس للحساب
             foreach (var item in cart.Items)
             {
                 var itemTotal = item.Product.Price * item.Quantity;
@@ -77,7 +76,7 @@ namespace AffaliteBL.Services
                 totalPrice += itemTotal;
             }
 
-            // ✅ إنشاء الـ Order
+            
             Order order = new Order
             {
                 AffiliateId = cart.AffiliateId,
@@ -93,11 +92,11 @@ namespace AffaliteBL.Services
             _orderRepo.Add(order);
             _orderRepo.SaveChanges();
 
-            // ✅ إضافة الـ OrderItems وتحديث الـ Stock
+            
             foreach (var item in cart.Items)
             {
-                item.Product.SaleCount += item.Quantity; // ← مرة واحدة بس
-                item.Product.Stock -= item.Quantity;      // ← كان بيطرح 1 بس، صح يطرح الـ quantity
+                item.Product.SaleCount += item.Quantity; 
+                item.Product.Stock -= item.Quantity;      
 
                 order.Items.Add(new OrderItem
                 {
@@ -108,7 +107,7 @@ namespace AffaliteBL.Services
             }
             _orderRepo.SaveChanges();
 
-            // ✅ إنشاء الـ Commission
+           
             
             var commission = new Commission
             {
@@ -121,7 +120,7 @@ namespace AffaliteBL.Services
             _commissionRepo.Add(commission);
             _commissionRepo.SaveChanges();
 
-            // ✅ MerchantCommissions
+         
             foreach (var item in cart.Items)
             {
                 var itemTotal = item.Product.Price * item.Quantity;
@@ -134,7 +133,7 @@ namespace AffaliteBL.Services
             }
             _merchantCommissions.SaveChanges();
 
-            // ✅ MerchantOrder - Distinct عشان منكررش
+           
             var merchantIds = cart.Items
                 .Select(i => i.Product.MerchantId)
                 .Distinct();
@@ -149,7 +148,7 @@ namespace AffaliteBL.Services
             }
             _merchantOrder.SaveChanges();
 
-            // ✅ امسح الـ Cart
+            
             _cartRepo.Delete(cart);
             _cartRepo.SaveChanges();
 

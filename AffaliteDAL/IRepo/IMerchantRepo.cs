@@ -18,7 +18,8 @@ namespace AffaliteDAL.IRepo
         IEnumerable<Merchant> GetAllMerchantsWithDetails();
         decimal GetMerchantCommissionTotal(int merchantId);
 
-        Merchant? GetByIdWithUser(int id);
+    
+
 
     }
 }

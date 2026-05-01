@@ -52,11 +52,17 @@ namespace AffaliteDAL.Repo
     .Where(a => a.AppUserId == userId)
     .FirstOrDefault();
         }
-        public Affiliate? GetByIdWithUser(int id)
+
+        //ai
+        public async Task<Affiliate?> GetByIdAsync(int id)
         {
-            return _context.Affiliates
+            return await _context.Affiliates
                 .Include(a => a.AppUser)
-                .FirstOrDefault(a => a.Id == id);
+                .FirstOrDefaultAsync(a => a.Id == id);
         }
+
+          
+
+
     }
 }

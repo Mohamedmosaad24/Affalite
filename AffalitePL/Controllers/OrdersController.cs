@@ -65,44 +65,15 @@ namespace AffalitePL.Controllers
         public IActionResult GetById(int id)
         {
             var order = _orderRepo.GetAllQueryable()
-                .AsNoTracking()
-
-                .Include(o => o.Affiliate)
-                    .ThenInclude(a => a.AppUser)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Images)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Reviews)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Merchant)
-                            .ThenInclude(m => m.AppUser)
-
-                .FirstOrDefault(o => o.Id == id);
+             .AsNoTracking()
+             .Include(o => o.Items)
+             .ThenInclude(i => i.Product)
+             .ThenInclude(p=>p.Images)
+             .FirstOrDefault(o => o.Id == id);
 
             if (order == null) return NotFound();
-
             return Ok(_mapper.Map<OrderReadDTO>(order));
         }
-
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var order = _orderRepo.GetAllQueryable()
-        //     .AsNoTracking()
-        //     .Include(o => o.Items)
-        //     .ThenInclude(i => i.Product)
-        //     .ThenInclude(p=>p.Images)
-        //     .FirstOrDefault(o => o.Id == id);
-
-        //    if (order == null) return NotFound();
-        //    return Ok(_mapper.Map<OrderReadDTO>(order));
-        //}
 
 
         //[HttpGet]
@@ -124,66 +95,34 @@ namespace AffalitePL.Controllers
         {
             var orders = _orderRepo.GetAllQueryable()
                 .AsNoTracking()
-
                 .Include(o => o.Items)
                     .ThenInclude(i => i.Product)
                         .ThenInclude(p => p.Merchant)
                             .ThenInclude(m => m.AppUser)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Images)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Reviews)
-
                 .Include(o => o.Affiliate)
-                    .ThenInclude(a => a.AppUser)
-
+                    .ThenInclude(a => a.AppUser)  // ← بس كده، مش أكتر
                 .ToList();
 
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
 
-        //[HttpGet("merchant/{merchantId}")]
-        //public IActionResult GetByMerchant(int merchantId)
-        //{
-        //    var orders = _orderService.getOrdersByMer(merchantId); // ← استخدم الـ Service
-        //    if (orders == null || !orders.Any())
-        //        return NotFound();
-
-        //    return Ok(orders);
-        //}
-
         [HttpGet("merchant/{merchantId}")]
         public IActionResult GetByMerchant(int merchantId)
         {
-            var orders = _orderService.getOrdersByMer(merchantId);
-
+            var orders = _orderService.getOrdersByMer(merchantId); // ← استخدم الـ Service
             if (orders == null || !orders.Any())
                 return NotFound();
 
-            return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
+            return Ok(orders);
         }
-
-        //[HttpGet("affiliate/{affiliateId}")]
-        //public IActionResult GetByAffiliate(int affiliateId)
-        //{
-        //    var orders = _orderRepo.GetAll().Where(o => o.AffiliateId == affiliateId);
-        //    return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
-        //}
 
         [HttpGet("affiliate/{affiliateId}")]
         public IActionResult GetByAffiliate(int affiliateId)
         {
-            var orders = _orderRepo1.GetByAffId(affiliateId);
-
-            if (orders == null || !orders.Any())
-                return NotFound();
-
+            var orders = _orderRepo.GetAll().Where(o => o.AffiliateId == affiliateId);
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
+
 
         [HttpPut("{id}/status")]
         public IActionResult UpdateStatus(int id, [FromBody] OrderStatus status)

@@ -16,12 +16,10 @@ namespace AffaliteBL.Services
     public class MerchantService : IMerchantService
     {
         private readonly IMerchantRepo _repo;
-        private readonly IMapper mapper;
 
-        public MerchantService(IMerchantRepo repo,IMapper mapper)
+        public MerchantService(IMerchantRepo repo)
         {
             _repo = repo;
-            this.mapper = mapper;
         }
       
 
@@ -74,16 +72,15 @@ namespace AffaliteBL.Services
         public IEnumerable<OrderReadDTO> GetMerchantOrders(int merchantId)
         {
             var orders = _repo.GetMerchantOrders(merchantId);
-            var dataDto = mapper.Map<IEnumerable<OrderReadDTO>>(orders);
-            return dataDto;
-            //return orders.Select(o => new OrderReadDTO
-            //{
-            //    Id = o.Id,
-            //    TotalPrice = o.TotalPrice,
-            //    AffiliateCommissionPct = o.AffiliateCommissionPct,
-            //    Status = o.Status.ToString(),
-            //    CreatedAt = o.CreatedAt
-            //});
+
+            return orders.Select(o => new OrderReadDTO
+            {
+                Id = o.Id,
+                TotalPrice = o.TotalPrice,
+                AffiliateCommissionPct = o.AffiliateCommissionPct,
+                Status = o.Status.ToString(),
+                CreatedAt = o.CreatedAt
+            });
         }
 
         public MerchantBalanceDTO? GetMerchantBalance(int merchantId)

@@ -48,7 +48,7 @@ namespace AffaliteBL.Services
                 .Where(p => p.Status == ProductStatus.Active && p.Stock > 0)
                 .ToListAsync();
 
-            // terns affalite to vector
+           // terns affalite to vector
             float[] affiliateVector = await GetEmbeddingAsync(
                 $"{affiliate.AppUser?.FullName} {string.Join(" ", activeProducts.Select(p => p.Category?.Name))}");
 
@@ -60,7 +60,7 @@ namespace AffaliteBL.Services
                 float[] productVector = await GetEmbeddingAsync(
                     $"{product.Name} {product.Description} {product.Category?.Name} {product.Details}");
 
-                // casion semilarity
+               // casion semilarity
                 float similarity = TensorPrimitives.CosineSimilarity(affiliateVector.AsSpan(), productVector.AsSpan());
                 double score = CalculateHybridScore(similarity, affiliate, product);
 
@@ -92,7 +92,7 @@ namespace AffaliteBL.Services
                 }).ToList();
         }
 
-        //Empiding
+       //Empiding
         private async Task<float[]> GetEmbeddingAsync(string text)
         {
             var apiKey = _config["AiSettings:CohereApiKey"]
