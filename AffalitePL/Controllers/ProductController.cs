@@ -50,6 +50,11 @@ namespace AffaliteAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateProductDto dto)
         {
+            var userId = User.FindFirst("uid")?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var merchant = merchantService.GetMerchantByUserId(userId);
+            dto.MerchantId = merchant.Id;
             // تحويل الخصائص البسيطة فقط
             var product = _mapper.Map<Product>(dto);
 

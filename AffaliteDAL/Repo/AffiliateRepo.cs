@@ -25,7 +25,7 @@ namespace AffaliteDAL.Repo
         }
         public IEnumerable<Order> GetAffiliateOrders(int affiliateId)
         {
-            return _context.Orders
+            return _context.Orders.Include(o=>o.Items).ThenInclude(i=>i.Product)
                 .Where(o => o.AffiliateId == affiliateId)
                 .ToList();
         }

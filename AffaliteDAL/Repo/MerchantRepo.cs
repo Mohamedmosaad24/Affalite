@@ -36,8 +36,11 @@ namespace AffaliteDAL.Repo
 
         public IEnumerable<Order> GetMerchantOrders(int merchantId)
         {
-            return _context.Orders.Include(m=>m.Items).ThenInclude(o=>o.Product)
-                .Where(o => o.Id == merchantId)
+            return _context.Orders
+                .Include(o => o.Items)
+                    .ThenInclude(i => i.Product)
+                .Include(o => o.MerchantOrder)
+                .Where(o => o.MerchantOrder.Any(mo => mo.MerchantId == merchantId))
                 .ToList();
         }
 
