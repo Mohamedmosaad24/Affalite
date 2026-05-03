@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AffaliteBL.DTOs.MerchantDTOs;
+﻿using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.IServices;
 using AffaliteDAL.Entities;
 using AffaliteDAL.IRepo;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AffaliteBL.Services
 {
@@ -73,16 +74,8 @@ namespace AffaliteBL.Services
         public IEnumerable<OrderReadDTO> GetMerchantOrders(int merchantId)
         {
             var orders = _repo.GetMerchantOrders(merchantId);
-            var dataDto = mapper.Map<IEnumerable<OrderReadDTO>>(orders);
-            return dataDto;
-            //return orders.Select(o => new OrderReadDTO
-            //{
-            //    Id = o.Id,
-            //    TotalPrice = o.TotalPrice,
-            //    AffiliateCommissionPct = o.AffiliateCommissionPct,
-            //    Status = o.Status.ToString(),
-            //    CreatedAt = o.CreatedAt
-            //});
+            var res = mapper.Map<List<OrderReadDTO>>(orders);
+            return res;
         }
 
         public MerchantBalanceDTO? GetMerchantBalance(int merchantId)
@@ -101,6 +94,21 @@ namespace AffaliteBL.Services
         public Merchant? GetMerchantByUserId(string userId)
         {
             return _repo.GetMerchantByUserId(userId);
+        }
+        public IEnumerable<GetMerchantDTO> GetAllMerchantsWithDetails()
+        {
+            var merchants = _repo.GetAllMerchantsWithDetails();
+
+            return merchants.Select(m => new GetMerchantDTO
+            {
+                Id = m.Id,
+                FullName = m.AppUser?.FullName ?? m.AppUser?.UserName ?? "",
+                Email = m.AppUser?.Email,
+                Balance = m.Balance,
+                CreatedAt = m.CreatedAt,
+                ProductsCount = m.Products?.Count ?? 0,
+                TotalSales = _repo.GetMerchantCommissionTotal(m.Id)
+            });
         }
 
     }

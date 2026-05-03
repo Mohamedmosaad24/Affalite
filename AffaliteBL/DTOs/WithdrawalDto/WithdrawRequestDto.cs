@@ -9,7 +9,7 @@ namespace AffaliteBL.DTOs.WithdrawalDto
 {
     public class WithdrawRequestDto
     {
-
+        public int Id { get; set; }
         public string Number { get; set; }
         public decimal Amount { get; set; }
 
@@ -22,5 +22,7 @@ namespace AffaliteBL.DTOs.WithdrawalDto
         public WithdrawalStatus Status { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public string UserName { get; set; }
     }
 }

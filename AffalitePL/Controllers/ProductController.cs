@@ -17,7 +17,7 @@ namespace AffaliteAPI.Controllers
         private readonly IMapper _mapper;
         private readonly IMerchantService merchantService;
 
-        public ProductsController(IProductService service, IMapper mapper,IMerchantService merchantService)
+        public ProductsController(IProductService service, IMapper mapper, IMerchantService merchantService)
         {
             _service = service;
             _mapper = mapper;
@@ -50,6 +50,11 @@ namespace AffaliteAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateProductDto dto)
         {
+            var userId = User.FindFirst("uid")?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var merchant = merchantService.GetMerchantByUserId(userId);
+            dto.MerchantId = merchant.Id;
             // تحويل الخصائص البسيطة فقط
             var product = _mapper.Map<Product>(dto);
 
@@ -111,12 +116,25 @@ namespace AffaliteAPI.Controllers
         }
 
         // GET /api/products/merchant/{merchantId}
+        //[HttpGet("merchant/{merchantId}")]
+        //public IActionResult GetByMerchant(int merchantId, [FromQuery] ProductQueryParams query)
+        //{
+        //    // ننسخ query عشان نضيف MerchantId
+        //    //var merchantId = User.FindFirst("uid")?.Value;
+        //   //var merchant= merchantService.GetMerchantByUserId(merchantId);
+        //    query.MerchantId = merchantId;
+
+        //    var products = _service.GetAll(query);
+        //    var result = _mapper.Map<IEnumerable<ProductDto>>(products);
+
+        //    return Ok(result);
+        //}
         [HttpGet("merchant")]
-        public IActionResult GetByMerchant( [FromQuery] ProductQueryParams query)
+        public IActionResult GetByMerchant([FromQuery] ProductQueryParams query)
         {
             // ننسخ query عشان نضيف MerchantId
             var merchantId = User.FindFirst("uid")?.Value;
-           var merchant= merchantService.GetMerchantByUserId(merchantId);
+            var merchant = merchantService.GetMerchantByUserId(merchantId);
             query.MerchantId = merchant.Id;
 
             var products = _service.GetAll(query);

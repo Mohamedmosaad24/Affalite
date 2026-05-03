@@ -1,6 +1,7 @@
 ﻿using AffaliteBL.DTOs.WithdrawalDto;
 using AffaliteBL.IServices;
 using AffaliteBL.Services;
+using AffaliteDAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,8 +21,37 @@ namespace AffalitePL.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var data =  _service.GetAll();
+            var data = _service.GetAll();
             return Ok(data);
+        }
+       
+        //[HttpGet("affiliate/{affiliateId}")]
+        //public async Task<IActionResult> GetByAffiliateId(int affiliateId)
+        //{
+        //    //var affiliateId = User.FindFirst("uid")?.Value;
+        //    var result = await _service.GetByAffiliateId(affiliateId);
+        //    return Ok(result);
+        //}
+
+      
+      
+
+        [HttpPost]
+        public async Task<IActionResult> Add(CreateWithdrawalDto dto)
+        {
+            // ال userId ييجي من التوكن مش من الفرونت
+            var userId = User.FindFirst("uid")?.Value;
+
+            var result = _service.Add(userId, dto);
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateWithdrawalDto dto)
+        {
+            var result = _service.Update(dto);
+            return Ok(result);
         }
         //  Get by AffiliateId
         [HttpGet("affiliate/")]
@@ -39,24 +69,6 @@ namespace AffalitePL.Controllers
             var merchantId = User.FindFirst("uid")?.Value;
 
             var result = await _service.GetByMerchantId(merchantId);
-            return Ok(result);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Add(CreateWithdrawalDto dto)
-        {
-            // ال userId ييجي من التوكن مش من الفرونت
-            var userId = User.FindFirst("uid")?.Value;
-
-            var result =  _service.Add(userId, dto);
-
-            return Ok(result);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Update(UpdateWithdrawalDto dto)
-        {
-            var result =  _service.Update(dto);
             return Ok(result);
         }
     }

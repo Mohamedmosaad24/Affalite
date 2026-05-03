@@ -1,10 +1,9 @@
-﻿using AffaliteBL.DTOs.MerchantDTOs;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using AffaliteBL.DTOs.MerchantDTOs;
 using AffaliteBL.IServices;
-using AffaliteBL.Services;
 using AffaliteDAL.Entities;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AffalitePL.Controllers
 {
@@ -76,35 +75,64 @@ namespace AffalitePL.Controllers
             return Ok($"Delete merchant with id: {id}");
         }
 
-        // GET: /api/merchants/{id}/orders
         [HttpGet("orders")]
         public IActionResult GetMerchantOrders()
         {
-            var merchantId = User.FindFirst("uid")?.Value;
-            var merchant = _merchantService.GetMerchantByUserId(merchantId);
+            var userId = User.FindFirst("uid")?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var merchant = _merchantService.GetMerchantByUserId(userId);
+            if (merchant == null) return NotFound("Merchant not found");
+
             var result = _merchantService.GetMerchantOrders(merchant.Id);
             return Ok(result);
         }
 
         // GET: /api/merchants/{id}/balance
+        //[HttpGet("balance")]
+        //public IActionResult GetMerchantBalance()
+        //{
+        //    var merchantId = User.FindFirst("uid")?.Value;
+        //    var merchant = _merchantService.GetMerchantByUserId(merchantId);
+        //    var result = _merchantService.GetMerchantBalance(merchant.Id);
+
+        //    if (result == null)
+        //        return NotFound();
+
+        //    return Ok(result);
+        //}
         [HttpGet("balance")]
         public IActionResult GetMerchantBalance()
         {
-            var merchantId = User.FindFirst("uid")?.Value;
-            var merchant = _merchantService.GetMerchantByUserId(merchantId);
+            var userId = User.FindFirst("uid")?.Value
+                      ?? User.FindFirst("sub")?.Value
+                      ?? User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null) return Unauthorized();
+
+            var merchant = _merchantService.GetMerchantByUserId(userId);
+            if (merchant == null) return NotFound("Merchant not found");
+
             var result = _merchantService.GetMerchantBalance(merchant.Id);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+        [HttpGet("user/{userId}")]
+        public IActionResult GetMerchantByUserId(string userId)
+        {
+            var result = _merchantService.GetMerchantByUserId(userId);
 
             if (result == null)
                 return NotFound();
 
-            return Ok(result);
-        }
-        [HttpGet("${userId}/merchant")]
-        public  IActionResult GetMerchantByUserId(string userId)
-        {
-            var res= _merchantService.GetMerchantByUserId(userId);
-           var merchant= _mapper.Map<GetMerchantDTO>(res);
+            var merchant = _mapper.Map<GetMerchantDTO>(result);
             return Ok(merchant);
+        }
+        [HttpGet("merchantDetials")]
+        public IActionResult GetAllMerchantsDetails()
+        {
+            var result = _merchantService.GetAllMerchantsWithDetails();
+            return Ok(result);
         }
     }
 }

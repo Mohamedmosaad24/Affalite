@@ -10,7 +10,7 @@ namespace AffaliteBL.IServices
 {
     public interface IWithdrawalService
     {
-        IEnumerable<WithdrawRequest> GetAll();
+        IEnumerable<WithdrawRequestDto> GetAll();
         WithdrawRequest Add(string userId, CreateWithdrawalDto dto);
         WithdrawRequest Update(UpdateWithdrawalDto dto);
         Task<IEnumerable<WithdrawRequest>> GetByAffiliateId(string affiliateId);

@@ -1,4 +1,4 @@
-using AffaliteBL.DTOs.NotificationDTOs;
+﻿using AffaliteBL.DTOs.NotificationDTOs;
 using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.IServices;
 using AffaliteBL.Services;
@@ -65,90 +65,82 @@ namespace AffalitePL.Controllers
         public IActionResult GetById(int id)
         {
             var order = _orderRepo.GetAllQueryable()
-                .AsNoTracking()
-
-                .Include(o => o.Affiliate)
-                    .ThenInclude(a => a.AppUser)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Images)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Reviews)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Merchant)
-                            .ThenInclude(m => m.AppUser)
-
-                .FirstOrDefault(o => o.Id == id);
+             .AsNoTracking()
+             .Include(o => o.Items)
+             .ThenInclude(i => i.Product)
+             .ThenInclude(p=>p.Images)
+             .FirstOrDefault(o => o.Id == id);
 
             if (order == null) return NotFound();
-
             return Ok(_mapper.Map<OrderReadDTO>(order));
         }
 
-        //     .ThenInclude(i => i.Product)
+
+        //[HttpGet]
+        //public IActionResult GetAll()
+        //{
+        //    var orders = _orderRepo.GetAllQueryable()
+        //    .AsNoTracking()
+        //    .Include(o => o.Items)
+        //    .ThenInclude(i => i.Product)  // ← علشان ياخد اسم المنتج
+        //    .ThenInclude(m =>m.Merchant)
+        //    .ThenInclude(s => s.AppUser)
+        //    .FirstOrDefault(o => o.Affiliate.AppUser.FullName == AppUser.FullName)
+        //    .ToList();
+        //    return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
+        //}
+
         [HttpGet]
         public IActionResult GetAll()
         {
             var orders = _orderRepo.GetAllQueryable()
                 .AsNoTracking()
-
                 .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Merchant)
-                            .ThenInclude(m => m.AppUser)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Images)
-
-                .Include(o => o.Items)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Reviews)
-
+                    .ThenInclude(i => i.Product).ThenInclude(o => o.Images)
+                        //.ThenInclude(p => p.Merchant)
+                        //    .ThenInclude(m => m.AppUser)
                 .Include(o => o.Affiliate)
-                    .ThenInclude(a => a.AppUser)
-
+                    .ThenInclude(a => a.AppUser)  // â† Ø¨Ø³ ÙƒØ¯Ù‡ØŒ Ù…Ø´ Ø£ÙƒØªØ±
                 .ToList();
 
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
 
-     
-
         [HttpGet("merchant/{merchantId}")]
         public IActionResult GetByMerchant(int merchantId)
         {
-            var orders = _orderService.getOrdersByMer(merchantId);
-
+            var orders = _orderService.getOrdersByMer(merchantId); // â† Ø§Ø³ØªØ®Ø¯Ù… Ø§Ù„Ù€ Service
             if (orders == null || !orders.Any())
                 return NotFound();
 
-            return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
+            return Ok(orders);
         }
 
-     
-
-        [HttpGet("affiliate/{affiliateId}")]
-        public IActionResult GetByAffiliate(int affiliateId)
+        [HttpGet("affiliate")]
+        public IActionResult GetByAffiliate()
         {
-            var orders = _orderRepo1.GetByAffId(affiliateId);
+            var userId = User.FindFirst("uid")?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
 
-            if (orders == null || !orders.Any())
-                return NotFound();
+            var aff = _affiliateService.GetAffiliateUserId(userId);
 
+            var orders = _affiliateService.GetAffiliateOrders(aff.Id);
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
+        [HttpGet("affiliate/{id}")]
+        public IActionResult GetByAffiliate(int id)
+        {
+            var orders = _affiliateService.GetAffiliateOrders(id);
+            return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
+        }
+
 
         [HttpPut("{id}/status")]
         public IActionResult UpdateStatus(int id, [FromBody] OrderStatus status)
         {
             var order = _orderRepo1.GetById(id);
             if (order == null) return NotFound();
+
 
 
             Affiliate affilaite = _affiliateService.GetAffiliateById((int)order.AffiliateId);
@@ -169,6 +161,7 @@ namespace AffalitePL.Controllers
             {
                 order.Commission.Status = CommissionStatus.Failed;
             }
+
 
 
 

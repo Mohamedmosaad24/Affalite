@@ -4,6 +4,7 @@ using AffaliteBL.DTOs.OrderDTOs;
 using AffaliteBL.IServices;
 using AffaliteDAL.Entities;
 using AffaliteDAL.IRepo;
+using AutoMapper;
 
 
 
@@ -12,10 +13,12 @@ namespace AffaliteBL.Services
     public class AffiliateService : IAffiliateService
     {
         private readonly IAffiliateRepo _repo;
+        private readonly IMapper mapper;
 
-        public AffiliateService(IAffiliateRepo repo)
+        public AffiliateService(IAffiliateRepo repo,IMapper mapper)
         {
             _repo = repo;
+            this.mapper = mapper;
         }
 
         public IEnumerable<Affiliate> GetAllAffiliates()
@@ -67,15 +70,8 @@ namespace AffaliteBL.Services
         public IEnumerable<OrderReadDTO> GetAffiliateOrders(int affiliateId)
         {
             var orders = _repo.GetAffiliateOrders(affiliateId);
-
-            return orders.Select(o => new OrderReadDTO
-            {
-                Id = o.Id,
-                TotalPrice = o.TotalPrice,
-                AffiliateCommissionPct = o.AffiliateCommissionPct,
-                Status = o.Status.ToString(),
-                CreatedAt = o.CreatedAt
-            });
+            var res = mapper.Map<List<OrderReadDTO>>(orders);
+            return res;
         }
 
         public IEnumerable<CommissionReadDTO> GetAffiliateCommissions(int affiliateId)

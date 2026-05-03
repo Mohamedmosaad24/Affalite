@@ -9,6 +9,11 @@
         public DateTime CreatedAt { get; set; }
         public string AffiliateName { get; set; }  // ← أضف ده
 
+        public string CustomerName { get; set; } = string.Empty;
+        public string CustomerPhone { get; set; } = string.Empty;
+        public string CustomerAddress { get; set; } = string.Empty;
+
         public List<OrderItemDTO> Items { get; set; } = new();
+
     }
 }

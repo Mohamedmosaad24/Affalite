@@ -25,7 +25,7 @@ namespace AffaliteDAL.Repo
         }
         public IEnumerable<Order> GetAffiliateOrders(int affiliateId)
         {
-            return _context.Orders
+            return _context.Orders.Include(o=>o.Items).ThenInclude(i=>i.Product)
                 .Where(o => o.AffiliateId == affiliateId)
                 .ToList();
         }
@@ -51,6 +51,21 @@ namespace AffaliteDAL.Repo
             return _context.Affiliates
     .Where(a => a.AppUserId == userId)
     .FirstOrDefault();
+        }
+
+        //ai
+        public async Task<Affiliate?> GetByIdAsync(int id)
+        {
+            return await _context.Affiliates
+                .Include(a => a.AppUser)
+                .FirstOrDefaultAsync(a => a.Id == id);
+        }
+
+        public Affiliate? GetByIdWithUser(int id)
+        {
+            return _context.Affiliates
+                 .Include(m => m.AppUser)
+                 .FirstOrDefault(m => m.Id == id);
         }
     }
 }
