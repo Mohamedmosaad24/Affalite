@@ -129,7 +129,8 @@ namespace AffalitePL
             {
                 options.AddPolicy("AllowAngular", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000", "http://localhost:4300")
+                    //policy.AllowAnyHeader();
+                    policy.WithOrigins("http://localhost:4200", "http://localhost:55000", "http://localhost:4300", "https://affilliate-front.vercel.app")
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
@@ -213,11 +214,11 @@ namespace AffalitePL
             IdentitySeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
+            //if (app.Environment.IsDevelopment())
+            //{
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+            //}
             app.UseCors("AllowAngular");
             //app.UseHttpsRedirection();
             app.UseStaticFiles();

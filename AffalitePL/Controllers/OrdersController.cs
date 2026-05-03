@@ -90,35 +90,7 @@ namespace AffalitePL.Controllers
             return Ok(_mapper.Map<OrderReadDTO>(order));
         }
 
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var order = _orderRepo.GetAllQueryable()
-        //     .AsNoTracking()
-        //     .Include(o => o.Items)
         //     .ThenInclude(i => i.Product)
-        //     .ThenInclude(p=>p.Images)
-        //     .FirstOrDefault(o => o.Id == id);
-
-        //    if (order == null) return NotFound();
-        //    return Ok(_mapper.Map<OrderReadDTO>(order));
-        //}
-
-
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    var orders = _orderRepo.GetAllQueryable()
-        //    .AsNoTracking()
-        //    .Include(o => o.Items)
-        //    .ThenInclude(i => i.Product)  // ← علشان ياخد اسم المنتج
-        //    .ThenInclude(m =>m.Merchant)
-        //    .ThenInclude(s => s.AppUser)
-        //    .FirstOrDefault(o => o.Affiliate.AppUser.FullName == AppUser.FullName)
-        //    .ToList();
-        //    return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
-        //}
-
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -146,15 +118,7 @@ namespace AffalitePL.Controllers
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
 
-        //[HttpGet("merchant/{merchantId}")]
-        //public IActionResult GetByMerchant(int merchantId)
-        //{
-        //    var orders = _orderService.getOrdersByMer(merchantId); // ← استخدم الـ Service
-        //    if (orders == null || !orders.Any())
-        //        return NotFound();
-
-        //    return Ok(orders);
-        //}
+     
 
         [HttpGet("merchant/{merchantId}")]
         public IActionResult GetByMerchant(int merchantId)
@@ -167,12 +131,7 @@ namespace AffalitePL.Controllers
             return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
         }
 
-        //[HttpGet("affiliate/{affiliateId}")]
-        //public IActionResult GetByAffiliate(int affiliateId)
-        //{
-        //    var orders = _orderRepo.GetAll().Where(o => o.AffiliateId == affiliateId);
-        //    return Ok(_mapper.Map<IEnumerable<OrderReadDTO>>(orders));
-        //}
+     
 
         [HttpGet("affiliate/{affiliateId}")]
         public IActionResult GetByAffiliate(int affiliateId)
