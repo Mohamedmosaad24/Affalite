@@ -24,27 +24,21 @@ namespace AffalitePL.Controllers
             _merchantService = merchantService;
         }
 
-        [HttpGet("affiliates/{id}/recommendations")]
-        public async Task<IActionResult> GetAffiliateRecommendations(int id)
+        [HttpGet("affiliates/recommendations")]
+        public async Task<IActionResult> GetAffiliateRecommendations()
         {
             var userId = User.FindFirst("uid")?.Value;
             var affiliate = _affiliateService.GetAffiliateUserId(userId);
-
-            if (affiliate?.Id != id) return Forbid();
-
-            var recommendations = await _matchingService.GetRecommendationsForAffiliateAsync(id);
+            var recommendations = await _matchingService.GetRecommendationsForAffiliateAsync(affiliate.Id);
             return Ok(recommendations);
         }
 
-        [HttpGet("merchants/{id}/recommendations")]
-        public async Task<IActionResult> GetMerchantRecommendations(int id)
+        [HttpGet("merchants/recommendations")]
+        public async Task<IActionResult> GetMerchantRecommendations()
         {
             var userId = User.FindFirst("uid")?.Value;
             var merchant = _merchantService.GetMerchantByUserId(userId);
-
-            if (merchant?.Id != id) return Forbid();
-
-            var recommendations = await _matchingService.GetRecommendationsForMerchantAsync(id);
+            var recommendations = await _matchingService.GetRecommendationsForMerchantAsync(merchant.Id);
             return Ok(recommendations);
         }
 

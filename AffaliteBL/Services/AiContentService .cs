@@ -55,7 +55,7 @@ namespace AffaliteBL.Services
 
             if (baseUrl.Contains("openrouter"))
             {
-                client.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost:4200");
+                client.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost:4300");
                 client.DefaultRequestHeaders.Add("X-Title", "Affalite Platform");
             }
 

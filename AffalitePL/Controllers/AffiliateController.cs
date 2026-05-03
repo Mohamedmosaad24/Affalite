@@ -1,5 +1,6 @@
 ﻿using AffaliteBL.DTOs.AffiliateDTOs;
 using AffaliteBL.IServices;
+using AffaliteBL.Services;
 using AffaliteDAL.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -61,39 +62,64 @@ namespace AffalitePL.Controllers
             _affiliateService.DeleteAffiliate(id);
             return Ok($"Delete affiliate with id: {id}");
         }
-        [HttpGet("{id}/orders")]
-        public IActionResult GetAffiliateOrders(int id)
+        [HttpGet("orders")]
+        public IActionResult GetAffiliateOrders()
         {
-            var result = _affiliateService.GetAffiliateOrders(id);
+            var userId = User.FindFirst("uid")?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var aff = _affiliateService.GetAffiliateUserId(userId);
+            var result = _affiliateService.GetAffiliateOrders(aff.Id);
             return Ok(result);
         }
 
         [HttpGet("{id}/commissions")]
         public IActionResult GetAffiliateCommissions(int id)
         {
+            //var userId = User.FindFirst("uid")?.Value;
+            //if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            //var aff = _affiliateService.GetAffiliateUserId(userId);
+
             var result = _affiliateService.GetAffiliateCommissions(id);
             return Ok(result);
         }
-
-        [HttpGet("{id}/balance")]
-        public IActionResult GetAffiliateBalance(int id)
+        [HttpGet("commissions")]
+        public IActionResult GetAffiliateCommissions()
         {
-            var result = _affiliateService.GetAffiliateBalance(id);
+            var userId = User.FindFirst("uid")?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var aff = _affiliateService.GetAffiliateUserId(userId);
+
+            var result = _affiliateService.GetAffiliateCommissions(aff.Id);
+            return Ok(result);
+        }
+        [HttpGet("balance")]
+        public IActionResult GetAffiliateBalance()
+        {
+            var userId = User.FindFirst("uid")?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var aff = _affiliateService.GetAffiliateUserId(userId);
+            var result = _affiliateService.GetAffiliateBalance(aff.Id);
 
             if (result == null)
                 return NotFound();
 
             return Ok(result);
         }
-        [HttpGet("{userId}/Affilaite")]
-        public IActionResult GetAffiliateBalance(string userId)
+        
+        [HttpGet("user/{userId}")]
+        public IActionResult GetAffiliateByUserId(string userId)
         {
             var result = _affiliateService.GetAffiliateUserId(userId);
-            var affilaite = _mapper.Map<GetAffiliateDTO>(result);
+
             if (result == null)
                 return NotFound();
 
-            return Ok(result);
+            var affiliate = _mapper.Map<GetAffiliateDTO>(result);
+            return Ok(affiliate);  // ✅ رجع affiliate مش result
         }
     }
 }

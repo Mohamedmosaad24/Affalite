@@ -129,10 +129,10 @@ namespace AffaliteBL.Services
         private string GenerateMatchReason(float similarity, Affiliate affiliate, Product product)
         {
             return similarity > 0.8f
-                ? $"تطابق ممتاز! جمهورك مهتم بـ {product.Category?.Name} وهذا المنتج له تقييمات عالية."
+                ? $"Excellent match! Your audience is highly interested in {product.Category?.Name}, and this product has strong ratings."
                 : similarity > 0.6f
-                    ? $"المنتج مناسب لنيتشك في {product.Category?.Name} مع هامش ربح جيد."
-                    : $"فرصة تجريبية: المنتج جديد في فئة {product.Category?.Name}.";
+                    ? $"Good fit for your niche in {product.Category?.Name}, with solid profit potential."
+                    : $"Experimental opportunity: This is a new product in the {product.Category?.Name} category.";
         }
 
         public Task<List<MatchRecommendationDTO>> GetRecommendationsForMerchantAsync(int merchantId, int topN = 10)

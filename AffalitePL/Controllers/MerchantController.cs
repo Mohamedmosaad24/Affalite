@@ -75,11 +75,16 @@ namespace AffalitePL.Controllers
             return Ok($"Delete merchant with id: {id}");
         }
 
-        // GET: /api/merchants/{id}/orders
-        [HttpGet("{id}/orders")]
-        public IActionResult GetMerchantOrders(int id)
+        [HttpGet("orders")]
+        public IActionResult GetMerchantOrders()
         {
-            var result = _merchantService.GetMerchantOrders(id);
+            var userId = User.FindFirst("uid")?.Value;
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var merchant = _merchantService.GetMerchantByUserId(userId);
+            if (merchant == null) return NotFound("Merchant not found");
+
+            var result = _merchantService.GetMerchantOrders(merchant.Id);
             return Ok(result);
         }
 
@@ -112,11 +117,15 @@ namespace AffalitePL.Controllers
             if (result == null) return NotFound();
             return Ok(result);
         }
-        [HttpGet("${userId}/merchant")]
-        public  IActionResult GetMerchantByUserId(string userId)
+        [HttpGet("user/{userId}")]
+        public IActionResult GetMerchantByUserId(string userId)
         {
-            var res= _merchantService.GetMerchantByUserId(userId);
-           var merchant= _mapper.Map<GetMerchantDTO>(res);
+            var result = _merchantService.GetMerchantByUserId(userId);
+
+            if (result == null)
+                return NotFound();
+
+            var merchant = _mapper.Map<GetMerchantDTO>(result);
             return Ok(merchant);
         }
         [HttpGet("merchantDetials")]

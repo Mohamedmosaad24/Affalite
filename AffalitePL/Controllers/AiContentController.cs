@@ -31,9 +31,9 @@ namespace AffalitePL.Controllers
                    ?? User.FindFirst("sub")?.Value;
                 var affiliate = _affiliateService.GetAffiliateUserId(userId);
 
-                if (affiliate?.Id != request.AffiliateId)
-                    return Forbid();
-
+                //if (affiliate?.Id != request.AffiliateId)
+                //    return Forbid();
+                request.AffiliateId = affiliate.Id;
                 var result = await _aiService.GenerateContentAsync(request);
                 return Ok(new { success = true, data = result });
             }
